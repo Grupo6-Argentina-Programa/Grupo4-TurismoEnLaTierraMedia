@@ -321,7 +321,7 @@ public class Sistema {
         printWriter.close();
     }
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws Exception{
         Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv", "src/main/resources/promociones.csv");
         boolean salir = false;
         do{
