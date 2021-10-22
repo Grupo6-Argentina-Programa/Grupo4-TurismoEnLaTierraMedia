@@ -1,4 +1,4 @@
-package DAO;
+package main.java.DAO;
 
 import main.java.sugeribles.Atraccion;
 

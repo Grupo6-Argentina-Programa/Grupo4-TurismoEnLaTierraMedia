@@ -1,4 +1,4 @@
-package DAO;
+package main.java.DAO;
 
 public class MissingDataException extends RuntimeException {
 

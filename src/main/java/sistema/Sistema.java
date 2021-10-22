@@ -1,5 +1,7 @@
 package main.java.sistema;
 
+import main.java.DAO.AtraccionDAOImpl;
+import main.java.DAO.UsuarioDAOImpl;
 import main.java.comparadores.ComparadorAtraccion;
 import main.java.comparadores.ComparadorPromocion;
 import main.java.sugeribles.Atraccion;
@@ -319,7 +321,7 @@ public class Sistema {
         printWriter.close();
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args)  {
         Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv", "src/main/resources/promociones.csv");
         boolean salir = false;
         do{
@@ -408,4 +410,7 @@ public class Sistema {
     public List<IPromocion> getPromociones() {
         return promociones;
     }
+
+    
 }
+

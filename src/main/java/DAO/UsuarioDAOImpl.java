@@ -1,4 +1,4 @@
-package DAO;
+package main.java.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import jdbc.ConnectionProvider;
+
+import main.java.jdbc.ConnectionProvider;
 import main.java.usuarios.Usuario;
 
 public class UsuarioDAOImpl implements UsuarioDAO {

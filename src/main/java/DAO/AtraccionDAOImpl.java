@@ -1,11 +1,11 @@
-package DAO;
+package main.java.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 
-import jdbc.ConnectionProvider;
 import main.java.enumeradores.ENUMTIPO;
+import main.java.jdbc.ConnectionProvider;
 import main.java.sugeribles.Atraccion;
 
 
