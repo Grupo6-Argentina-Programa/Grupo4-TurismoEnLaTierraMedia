@@ -1,6 +1,6 @@
-package comparadores;
+package main.java.comparadores;
 
-import sugeribles.Atraccion;
+import main.java.sugeribles.Atraccion;
 
 import java.util.Comparator;
 

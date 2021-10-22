@@ -1,6 +1,6 @@
-package sugeribles.promociones;
+package main.java.sugeribles.promociones;
 
-import sugeribles.Atraccion;
+import main.java.sugeribles.Atraccion;
 
 import java.util.Objects;
 

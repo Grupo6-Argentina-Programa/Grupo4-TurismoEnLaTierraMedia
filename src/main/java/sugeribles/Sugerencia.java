@@ -1,6 +1,6 @@
-package sugeribles;
+package main.java.sugeribles;
 
-import sugeribles.promociones.IPromocion;
+import main.java.sugeribles.promociones.IPromocion;
 
 public class Sugerencia {
     private final Atraccion[] atracciones;

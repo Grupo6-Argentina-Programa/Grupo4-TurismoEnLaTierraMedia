@@ -1,4 +1,4 @@
-package sistema;
+package main.java.sistema;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

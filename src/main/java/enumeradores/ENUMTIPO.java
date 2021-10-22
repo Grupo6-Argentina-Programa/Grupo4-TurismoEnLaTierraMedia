@@ -1,4 +1,4 @@
-package enumeradores;
+package main.java.enumeradores;
 
 public enum ENUMTIPO {
     ADVENTURA("Adventura"),

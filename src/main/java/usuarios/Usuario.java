@@ -1,8 +1,8 @@
-package usuarios;
+package main.java.usuarios;
 
- import sugeribles.Sugerencia;
- import sugeribles.Atraccion;
- import enumeradores.ENUMTIPO;
+ import main.java.sugeribles.Sugerencia;
+ import main.java.sugeribles.Atraccion;
+ import main.java.enumeradores.ENUMTIPO;
 
  import java.util.*;
 

@@ -1,10 +1,11 @@
-package sugeribles;
+package main.java.sugeribles;
 
-import enumeradores.ENUMTIPO;
+import main.java.enumeradores.ENUMTIPO;
 
 import java.util.Objects;
 
 public class Atraccion implements Comparable<Atraccion> {
+	private int id;
     private String nombre;
     private int costo;
     private final double tiempo;
@@ -36,8 +37,38 @@ public class Atraccion implements Comparable<Atraccion> {
     public ENUMTIPO getTipo() {
         return tipo;
     }
+    
 
-    @Override
+    public double getId() {
+        return id;
+    }
+    
+    
+    public int getPuestosOcupados() {
+		return puestosOcupados;
+	}
+
+	public void setPuestosOcupados(int puestosOcupados) {
+		this.puestosOcupados = puestosOcupados;
+	}
+
+	public int getCupo() {
+		return cupo;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+
+	public void setTipo(ENUMTIPO tipo) {
+		this.tipo = tipo;
+	}
+
+	@Override
     public String toString() {
         return "Nombre: " + nombre + ", costo: " + costo + ", tiempo: " + tiempo + ", cupo: " + cupo + ", tipo: " + tipo ;
     }

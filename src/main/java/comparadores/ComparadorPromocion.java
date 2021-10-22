@@ -1,6 +1,6 @@
-package comparadores;
+package main.java.comparadores;
 
-import sugeribles.promociones.IPromocion;
+import main.java.sugeribles.promociones.IPromocion;
 
 import java.util.Comparator;
 

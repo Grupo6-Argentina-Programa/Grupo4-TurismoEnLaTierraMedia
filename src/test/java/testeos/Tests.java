@@ -1,16 +1,16 @@
-package testeos;
+package test.java.testeos;
 
-import comparadores.ComparadorAtraccion;
-import comparadores.ComparadorPromocion;
-import sugeribles.Atraccion;
-import enumeradores.ENUMTIPO;
-import sistema.Sistema;
-import sugeribles.promociones.PromocionPorcentaje;
-import usuarios.Usuario;
+import main.java.comparadores.ComparadorAtraccion;
+import main.java.comparadores.ComparadorPromocion;
+import main.java.sugeribles.Atraccion;
+import main.java.enumeradores.ENUMTIPO;
+import main.java.sistema.Sistema;
+import main.java.sugeribles.promociones.PromocionPorcentaje;
+import main.java.usuarios.Usuario;
 import org.junit.Test;
-import sugeribles.promociones.IPromocion;
-import sugeribles.promociones.PromocionAbsoluta;
-import sugeribles.promociones.PromocionAxB;
+import main.java.sugeribles.promociones.IPromocion;
+import main.java.sugeribles.promociones.PromocionAbsoluta;
+import main.java.sugeribles.promociones.PromocionAxB;
 
 import java.util.ArrayList;
 import java.util.List;
