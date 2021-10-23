@@ -322,7 +322,7 @@ public class Sistema {
     }
 
     public static void main(String[] args) throws Exception{
-        Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv", "src/main/resources/promociones.csv");
+        Sistema sistema = new Sistema("src/resources/usuarios.csv", "src/resources/atracciones.csv", "src/resources/promociones.csv");
         boolean salir = false;
         do{
             Scanner scannerInt = new Scanner(System.in);
