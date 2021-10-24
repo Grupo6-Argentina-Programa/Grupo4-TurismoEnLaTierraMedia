@@ -331,11 +331,11 @@ public class Sistema {
             int eleccion;
             do {
                 System.out.println("\n"
-                        + "Introduzca una de las opciones a continuacion para continuar."
-                        + "1- Agregar un usuario."
-                        + "2- Remover un usuario."
-                        + "3- Exportar los usuarios."
-                        + "4- Salir del sistema.");
+                        + "Introduzca una de las opciones a continuacion para continuar.\n"
+                        + "1- Agregar un usuario.\n"
+                        + "2- Remover un usuario.\n"
+                        + "3- Exportar los usuarios.\n"
+                        + "4- Salir del sistema.\n");
 
                 eleccion = ingresarDatoInt();
             }while (eleccion < 1 || eleccion > 4);
