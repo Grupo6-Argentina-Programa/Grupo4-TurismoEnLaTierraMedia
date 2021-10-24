@@ -14,7 +14,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int insert(Atraccion atraccion) {
 		try {
-			String sql = "INSERT INTO Atraccion (nombre, costo, tiempo, cupo, puestosOcupados, tipo) "
+			String sql = "INSERT INTO Atraccion (nombre, costo, tiempo, cupo, puestosOcupados, posicionX, posicionY) "
 					+ "VALUES (?,?,?,?,?,?)";
 			Connection conn = ConnectionProvider.getConnection();
 
@@ -24,9 +24,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setDouble(3, atraccion.getTiempo());
 			statement.setInt(4, atraccion.getCupo());
 			statement.setInt(5, atraccion.getPuestosOcupados());
-			statement.setString(6, atraccion.getTipo().toString());
-
-			int rows = statement.executeUpdate();
+			statement.setInt(6, atraccion.getPosicionX());
+            statement.setInt(7, atraccion.getPosicionY());			
+            int rows = statement.executeUpdate();
 
 			return rows;
 		} catch (Exception e) {

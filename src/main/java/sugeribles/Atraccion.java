@@ -12,8 +12,12 @@ public class Atraccion implements Comparable<Atraccion> {
     private final int cupo;
     private int puestosOcupados;
     private ENUMTIPO tipo;
+    private int posicionX;
+    private int posicionY;
 
-    public Atraccion(String nombre, int costo, double tiempo, int cupo, ENUMTIPO tipo) {
+    
+
+	public Atraccion(String nombre, int costo, double tiempo, int cupo, ENUMTIPO tipo) {
         this.nombre = nombre;
         this.costo = costo;
         this.tiempo = tiempo;
@@ -66,6 +70,13 @@ public class Atraccion implements Comparable<Atraccion> {
 
 	public void setTipo(ENUMTIPO tipo) {
 		this.tipo = tipo;
+	}
+	public int getPosicionX() {
+		return posicionX;
+	}
+
+	public int getPosicionY() {
+		return posicionY;
 	}
 
 	@Override
