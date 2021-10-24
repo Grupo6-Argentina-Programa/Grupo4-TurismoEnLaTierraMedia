@@ -9,12 +9,23 @@ package main.java.usuarios;
 public class Usuario {
     private final int DNI;
     private final ENUMTIPO tipoFavorito;
+    
+    //combinar
     private final int dineroInicial;
     private int dineroDisponible;
+    
+    //combinar
     private final double tiempoInicial;
     private double tiempoDisponible;
+    
     private final List<Atraccion> atracciones;
-    private int costoTotal;
+    private int costoTotal;	//??
+
+	//Nuevos añadidos
+    private String usuario;
+    private String contraseña;
+    private int posicionX;
+    private int posicionY;
 
     public Usuario(int DNI, ENUMTIPO tipoFavorito, int dineroInicial, double tiempoDisponible) {
         this.DNI = DNI;
@@ -42,6 +53,40 @@ public class Usuario {
     public double getTiempoDisponible() {
         return tiempoDisponible;
     }
+    
+    //Nuevos añadidos
+    public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
+	public int getPosicionX() {
+		return posicionX;
+	}
+
+	public void setPosicionX(int posicionX) {
+		this.posicionX = posicionX;
+	}
+
+	public int getPosicionY() {
+		return posicionY;
+	}
+
+	public void setPosicionY(int posicionY) {
+		this.posicionY = posicionY;
+	}
+	//fin Nuevos añadididos
 
     @Override
     public String toString() {
@@ -49,7 +94,6 @@ public class Usuario {
     }
 
     public void recibirSugerencia(Sugerencia sugerencia) {
-        Scanner in = new Scanner(System.in);
         System.out.println("\n\nSe ha hecho la siguiente sugerencia:\n");
         if (sugerencia.getPromocion() == null){
             System.out.println("La atraccion:\n" + sugerencia.getAtracciones()[0]
@@ -67,7 +111,8 @@ public class Usuario {
         String aceptar;
         do {
             System.out.println("\nÂ¿Desea aceptar la sugerencia?\nIngrese \"Si\" para aceptar, de lo contrario ingrese \"No\" para rechazarlo.");
-            aceptar = in.nextLine();
+            aceptar = ingresarDatoStr();
+            //aceptar = in.nextLine();
         }while (!aceptar.equalsIgnoreCase("Si") && !aceptar.equalsIgnoreCase("No"));
         if (aceptar.equalsIgnoreCase("Si")){
             dineroDisponible -= sugerencia.getTotal();
@@ -116,4 +161,10 @@ public class Usuario {
     public double getTiempoInicial() {
         return tiempoInicial;
     }
+    
+	private static String ingresarDatoStr() {
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+		return scan.nextLine();
+	}
 }

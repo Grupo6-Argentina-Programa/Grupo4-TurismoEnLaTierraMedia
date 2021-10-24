@@ -62,7 +62,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public Usuario findByDNI(Long dni) {
+	public Usuario findByDNI(int dni) {
 		// TODO Auto-generated method stub
 		return null;
 	}

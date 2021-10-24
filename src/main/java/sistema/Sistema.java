@@ -35,6 +35,7 @@ public class Sistema {
         atracciones.sort(new ComparadorAtraccion());
         promociones.sort(new ComparadorPromocion());
 
+        /*//Se Usa para sugerir de entrada
         for (Usuario usuario : usuarios) {
             System.out.println("\n"+"----------------------------------------------------"
                     +"----------------------------------------------------"
@@ -43,6 +44,7 @@ public class Sistema {
             sugerirPromociones(usuario);
             sugerirAtracciones(usuario);
         }
+        */
     }
 
     public Sistema(List<Usuario> usuarios, List<Atraccion> atracciones, List<IPromocion> promociones) throws IOException {
@@ -322,10 +324,10 @@ public class Sistema {
     }
 
     public static void main(String[] args) throws Exception{
-        Sistema sistema = new Sistema("src/resources/usuarios.csv", "src/resources/atracciones.csv", "src/resources/promociones.csv");
+    	
+    	Sistema sistema = new Sistema("src/resources/usuarios.csv", "src/resources/atracciones.csv", "src/resources/promociones.csv");
         boolean salir = false;
         do{
-            Scanner scannerInt = new Scanner(System.in);
             int eleccion;
             do {
                 System.out.println("\n"
@@ -335,19 +337,18 @@ public class Sistema {
                         + "3- Exportar los usuarios."
                         + "4- Salir del sistema.");
 
-                eleccion = scannerInt.nextInt();
+                eleccion = ingresarDatoInt();
             }while (eleccion < 1 || eleccion > 4);
 
             switch (eleccion){
                 case 1: {
-                    Scanner scannerString = new Scanner(System.in);
                     int tempDNI;
                     int tempMonedas;
                     double tempTiempo;
 
                     do{
                         System.out.print("Ingrese el DNI: ");
-                        tempDNI = scannerInt.nextInt();
+                        tempDNI = ingresarDatoInt();
                     }while (tempDNI < 0);
 
                     if (sistema.getUsuarios().contains(new Usuario(tempDNI, ENUMTIPO.ADVENTURA, 0 ,0))){
@@ -357,18 +358,19 @@ public class Sistema {
 
                     do {
                         System.out.print("\nIngrese las monedas del usuario: ");
-                        tempMonedas = scannerInt.nextInt();
+                        tempMonedas = ingresarDatoInt();
                     }while (tempMonedas < 0);
 
                     do{
                         System.out.print("\nIngrese el tiempo disponible del usuario: ");
-                        tempTiempo = scannerInt.nextDouble();
+                        tempTiempo = ingresarDatoInt();
                     }while(tempTiempo < 0);
 
                     String tempTipo;
                     do {
                         System.out.print("\nIngrese el tipo favorito del usuario (Adventura, Degustacion o Paisaje.): ");
-                        tempTipo = scannerString.nextLine();
+                        //
+                        tempTipo = ingresarDatoStr();
                     }while (!tempTipo.equalsIgnoreCase("Adventura") && !tempTipo.equalsIgnoreCase("Degustacion") && !tempTipo.equalsIgnoreCase("Paisaje"));
 
                     sistema.agregarUsuario(new Usuario(tempDNI, ENUMTIPO.valueOf(tempTipo.toUpperCase()), tempMonedas, tempTiempo));
@@ -377,7 +379,8 @@ public class Sistema {
 
                 case 2: {
                     System.out.print("Ingrese el DNI del usuario a remover: ");
-                    if (sistema.removerUsuario(scannerInt.nextInt())){
+                    int entradaI = ingresarDatoInt();//
+                    if (sistema.removerUsuario(entradaI)){//
                         System.out.println("\nUsuario removido con exito.");
                     }else{
                         System.out.println("\nEl usuario con ese DNI no existe.");
@@ -410,7 +413,18 @@ public class Sistema {
     public List<IPromocion> getPromociones() {
         return promociones;
     }
-
     
+	private static int ingresarDatoInt() {
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+		return scan.nextInt();
+	}
+	
+	private static String ingresarDatoStr() {
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+		return scan.nextLine();
+	}
+        
 }
 
