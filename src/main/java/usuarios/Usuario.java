@@ -38,9 +38,8 @@ public class Usuario {
 		atracciones = new ArrayList<>();
 	}
 	
-	public Usuario(int DNI, int dineroInicial, double tiempoDisponible) {
-		this.DNI = DNI;
-		this.tipoFavorito = tipoFavorito;
+	public Usuario(int ID_Usuario, int dineroInicial, double tiempoDisponible) {
+		this.DNI = ID_Usuario;
 		this.dineroInicial = dineroInicial;
 		this.dineroDisponible = dineroInicial;
 		this.tiempoInicial = tiempoDisponible;

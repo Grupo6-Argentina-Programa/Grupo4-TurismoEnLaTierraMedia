@@ -14,6 +14,51 @@ import main.java.usuarios.Usuario;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
+////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public int countAll() {
+		try {
+			String sql = "SELECT COUNT(1) AS TOTAL FROM '01_Usuarios'";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultados = statement.executeQuery();
+
+			resultados.next();
+			int total = resultados.getInt("TOTAL");
+
+			return total;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	@Override
+	public List<Usuario> findAll() {
+		try {
+			String sql = "SELECT * FROM '01_Usuarios'";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultados = statement.executeQuery();
+
+			List<Usuario> usuarios = new LinkedList<Usuario>();
+			while (resultados.next()) {
+				usuarios.add(toUsuarios(resultados));
+			}
+
+			return usuarios;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	private Usuario toUsuarios(ResultSet resultados) throws SQLException {
+		return new Usuario(resultados.getInt(1), resultados.getInt(4), resultados.getDouble(5));
+	}
+	
+////////////////////////////////////////////////////////////////////////////////	
+	
+	
 	@Override
 	public int insert(Usuario user) {
 		try {
@@ -38,22 +83,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	@Override
-	public int countAll() {
-		try {
-			String sql = "SELECT COUNT(1) AS TOTAL FROM USERS";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			ResultSet resultados = statement.executeQuery();
 
-			resultados.next();
-			int total = resultados.getInt("TOTAL");
-
-			return total;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
 
 	// solo esta haciendo un cambio de contraseña
 	@Override
@@ -90,25 +120,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public List<Usuario> findAll() {
-		try {
-			String sql = "SELECT * FROM USERS";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			ResultSet resultados = statement.executeQuery();
-
-			List<Usuario> usuarios = new LinkedList<Usuario>();
-			while (resultados.next()) {
-				usuarios.add(toUsuarios(resultados));
-			}
-
-			return usuarios;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
-
-	@Override
 	public Usuario findByDNI(int dni) {
 			try {
 				String sql = "SELECT * FROM USERS WHERE DNI = ?";
@@ -129,8 +140,4 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 	}
 
-	private Usuario toUsuarios(ResultSet resultados) throws SQLException {
-		//return new Usuario(resultados.getInt(1), resultados.getString(2));
-		return new Usuario(resultados.getInt(1), null, resultados.getInt(4), resultados.getDouble(5));
-	}
 }
