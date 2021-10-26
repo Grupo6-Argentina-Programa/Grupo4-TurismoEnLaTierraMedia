@@ -214,8 +214,8 @@ public class Sistema {
 	}
 
 	public boolean removerUsuario(int DNI) {
-		if (usuarios.contains(new Usuario(DNI, ENUMTIPO.ADVENTURA, 0, 0))) {
-			Usuario aux = usuarios.remove(usuarios.indexOf(new Usuario(DNI, ENUMTIPO.ADVENTURA, 0, 0)));
+		if (usuarios.contains(new Usuario(DNI, ENUMTIPO.AVENTURA, 0, 0))) {
+			Usuario aux = usuarios.remove(usuarios.indexOf(new Usuario(DNI, ENUMTIPO.AVENTURA, 0, 0)));
 			for (Atraccion atraccion : aux.getAtracciones()) {
 				atraccion.liberarUnLugar();
 			}
@@ -387,7 +387,7 @@ public class Sistema {
 					tempDNI = ingresarDatoInt();
 				} while (tempDNI < 0);
 
-				if (sistema.getUsuarios().contains(new Usuario(tempDNI, ENUMTIPO.ADVENTURA, 0, 0))) {
+				if (sistema.getUsuarios().contains(new Usuario(tempDNI, ENUMTIPO.AVENTURA, 0, 0))) {
 					System.out.println("Ya existe un usuario con este DNI");
 					break;
 				}
@@ -404,7 +404,7 @@ public class Sistema {
 
 				String tempTipo;
 				do {
-					System.out.print("\nIngrese el tipo favorito del usuario (Adventura, Degustacion o Paisaje.): ");
+					System.out.print("\nIngrese el tipo favorito del usuario (Aventura, Degustacion o Paisaje.): ");
 					//
 					tempTipo = ingresarDatoStr();
 				} while (!tempTipo.equalsIgnoreCase("Adventura") && !tempTipo.equalsIgnoreCase("Degustacion")

@@ -37,6 +37,18 @@ public class Usuario {
 		costoTotal = 0;
 		atracciones = new ArrayList<>();
 	}
+	
+	public Usuario(int DNI, int dineroInicial, double tiempoDisponible) {
+		this.DNI = DNI;
+		this.tipoFavorito = tipoFavorito;
+		this.dineroInicial = dineroInicial;
+		this.dineroDisponible = dineroInicial;
+		this.tiempoInicial = tiempoDisponible;
+		this.tiempoDisponible = tiempoDisponible;
+		this.tipoFavorito = ENUMTIPO.SinDefinir;
+		costoTotal = 0;
+		atracciones = new ArrayList<>();
+	}
 
 	public int getDNI() {
 		return DNI;
