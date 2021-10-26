@@ -42,8 +42,8 @@ public class Sistema {
 	public static void main(String[] args) throws Exception {
 
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-		System.out.println("Cantidad de Usuarios cargados = "+ userDAO.countAll()+".");
-		System.out.println(userDAO.findAll());
+		userDAO.countAll();
+		userDAO.findAll();
 
 	}
 

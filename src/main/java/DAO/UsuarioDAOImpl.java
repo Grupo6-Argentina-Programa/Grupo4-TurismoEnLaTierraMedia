@@ -27,6 +27,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			resultados.next();
 			int total = resultados.getInt("TOTAL");
 
+			System.out.println("Cantidad de Usuarios cargados = "+total+".");
+			
 			return total;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
@@ -45,6 +47,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			while (resultados.next()) {
 				usuarios.add(toUsuarios(resultados));
 			}
+			
+			//Muestra cada Usuario
+			for (Usuario usuario : usuarios) {
+				System.out.println(usuario.toString());
+			}
 
 			return usuarios;
 		} catch (Exception e) {
@@ -53,7 +60,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 	
 	private Usuario toUsuarios(ResultSet resultados) throws SQLException {
-		return new Usuario(resultados.getInt(1), resultados.getInt(4), resultados.getDouble(5));
+		return new Usuario(resultados.getInt(1),resultados.getString(2),resultados.getString(3),
+				resultados.getDouble(4),resultados.getDouble(5),resultados.getInt(6),resultados.getInt(7));
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////	
