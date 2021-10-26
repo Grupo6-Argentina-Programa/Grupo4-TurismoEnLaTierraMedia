@@ -7,35 +7,49 @@ import main.java.enumeradores.ENUMTIPO;
 import java.util.*;
 
 public class Usuario {
+	
 	private final int DNI;
-	private ENUMTIPO tipoFavorito;
-
-	// combinar
-	private final int dineroInicial;
-	private int dineroDisponible;
-
-	// combinar
-	private final double tiempoInicial;
-	private double tiempoDisponible;
-
-	private final List<Atraccion> atracciones;
-	private int costoTotal; // ??
-
-	// Nuevos añadidos
 	private String usuario;
 	private String contraseña;
+	private double dineroInicial;	//combinar
+	private double dineroDisponible;
+	private double tiempoInicial;	//combinar
+	private double tiempoDisponible;
+	
 	private int posicionX;
 	private int posicionY;
+	
+	private int costoTotal = 0;
+	private ENUMTIPO tipoFavorito = ENUMTIPO.SinDefinir;
+	private final List<Atraccion> atracciones = new ArrayList<>();
 
+	public Usuario(int ID_Usuario, String usuario, String contraseña, double dineroDisponible, double tiempoDisponible, int posicionX, int posicionY) {
+		this.DNI = ID_Usuario;
+		this.usuario = usuario;
+		this.contraseña = contraseña;
+		this.dineroInicial = dineroDisponible;
+		this.dineroDisponible = dineroDisponible;
+		this.tiempoInicial = tiempoDisponible;
+		this.tiempoDisponible = tiempoDisponible;
+		this.posicionX = posicionX;
+		this.posicionY = posicionY;
+	}
+	
 	public Usuario(int DNI, ENUMTIPO tipoFavorito, int dineroInicial, double tiempoDisponible) {
 		this.DNI = DNI;
 		this.tipoFavorito = tipoFavorito;
 		this.dineroInicial = dineroInicial;
 		this.dineroDisponible = dineroInicial;
 		this.tiempoInicial = tiempoDisponible;
+		this.tiempoDisponible = tiempoDisponible;	
+	}
+	
+	public Usuario(int ID_Usuario, int dineroInicial, double tiempoDisponible) {
+		this.DNI = ID_Usuario;
+		this.dineroInicial = dineroInicial;
+		this.dineroDisponible = dineroInicial;
+		this.tiempoInicial = tiempoDisponible;
 		this.tiempoDisponible = tiempoDisponible;
-		costoTotal = 0;
-		atracciones = new ArrayList<>();
 	}
 
 	public int getDNI() {
@@ -46,7 +60,7 @@ public class Usuario {
 		return tipoFavorito;
 	}
 
-	public int getDineroDisponible() {
+	public double getDineroDisponible() {
 		return dineroDisponible;
 	}
 
@@ -92,12 +106,8 @@ public class Usuario {
 	}
 
 	// fin Nuevos añadididos //
-
-	@Override
-	public String toString() {
-		return "Usuario" + "tipoFavorito=" + tipoFavorito + ", presupuesto=" + dineroDisponible + ", tiempoDisponible="
-				+ tiempoDisponible + '}';
-	}
+	
+	
 
 	public void recibirSugerencia(Sugerencia sugerencia) {
 		System.out.println("\n\nSe ha hecho la siguiente sugerencia:\n");
@@ -132,6 +142,8 @@ public class Usuario {
 		}
 	}
 
+
+
 	private int calcularDifereciaMonedas(Sugerencia sugerencia) {
 		int valorOriginal = 0;
 		for (int i = 0; i < sugerencia.getAtracciones().length; i++) {
@@ -163,7 +175,7 @@ public class Usuario {
 		return costoTotal;
 	}
 
-	public int getDineroInicial() {
+	public double getDineroInicial() {
 		return dineroInicial;
 	}
 
@@ -175,5 +187,14 @@ public class Usuario {
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		return scan.nextLine();
+	}
+	
+	@Override
+	public String toString() {
+		return "Usuario [DNI=" + DNI + ", usuario=" + usuario + ", contraseña=" + contraseña + ", dineroInicial="
+				+ dineroInicial + ", dineroDisponible=" + dineroDisponible + ", tiempoInicial=" + tiempoInicial
+				+ ", tiempoDisponible=" + tiempoDisponible + ", posicionX=" + posicionX + ", posicionY=" + posicionY
+				+ ", costoTotal=" + costoTotal + ", tipoFavorito=" + tipoFavorito + ", atracciones=" + atracciones
+				+ "]";
 	}
 }

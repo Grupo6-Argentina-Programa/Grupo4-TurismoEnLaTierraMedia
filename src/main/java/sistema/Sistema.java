@@ -1,7 +1,5 @@
 package main.java.sistema;
 
-import main.java.DAO.AtraccionDAOImpl;
-import main.java.DAO.UsuarioDAOImpl;
 import main.java.comparadores.ComparadorAtraccion;
 import main.java.comparadores.ComparadorPromocion;
 import main.java.sugeribles.Atraccion;
@@ -20,10 +18,36 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import main.java.DAO.*;
+
 public class Sistema {
 	private final List<Usuario> usuarios;
 	private final List<Atraccion> atracciones;
 	private final List<IPromocion> promociones;
+
+	private static int ingresarDatoInt() {
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+		return scan.nextInt();
+	}
+
+	private static String ingresarDatoStr() {
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+		return scan.nextLine();
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+	public static void main(String[] args) throws Exception {
+
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+		userDAO.countAll();
+		userDAO.findAll();
+
+	}
+
+////////////////////////////////////////////////////////////////////////////////
 
 	public Sistema(String directorioUsuariosCSV, String directorioAtraccionesCSV, String directorioPromocionesCSV)
 			throws Exception {
@@ -47,6 +71,8 @@ public class Sistema {
 		 */
 	}
 
+//----------------------------------------------------------------------------//
+
 	public Sistema(List<Usuario> usuarios, List<Atraccion> atracciones, List<IPromocion> promociones)
 			throws IOException {
 		this.usuarios = usuarios;
@@ -66,6 +92,8 @@ public class Sistema {
 
 		exportarUsuarios();
 	}
+
+//----------------------------------------------------------------------------//
 
 	private void sugerirPromociones(Usuario user) {
 		List<Atraccion> listaAtracciones = new ArrayList<>();
@@ -176,6 +204,8 @@ public class Sistema {
 		}
 	}
 
+//----------------------------------------------------------------------------//
+
 	private void sugerirAtracciones(Usuario user) {
 		int costoActual = 0;
 		double tiempoActual = 0;
@@ -199,6 +229,8 @@ public class Sistema {
 		}
 	}
 
+//----------------------------------------------------------------------------//
+
 	public boolean agregarUsuario(Usuario user) {
 		if (!usuarios.contains(user)) {
 			usuarios.add(user);
@@ -213,9 +245,11 @@ public class Sistema {
 		return false;
 	}
 
+//----------------------------------------------------------------------------//
+
 	public boolean removerUsuario(int DNI) {
-		if (usuarios.contains(new Usuario(DNI, ENUMTIPO.ADVENTURA, 0, 0))) {
-			Usuario aux = usuarios.remove(usuarios.indexOf(new Usuario(DNI, ENUMTIPO.ADVENTURA, 0, 0)));
+		if (usuarios.contains(new Usuario(DNI, ENUMTIPO.AVENTURA, 0, 0))) {
+			Usuario aux = usuarios.remove(usuarios.indexOf(new Usuario(DNI, ENUMTIPO.AVENTURA, 0, 0)));
 			for (Atraccion atraccion : aux.getAtracciones()) {
 				atraccion.liberarUnLugar();
 			}
@@ -233,6 +267,8 @@ public class Sistema {
 		}
 		return listaAtraccion.toArray(new Atraccion[0]);
 	}
+
+//----------------------------------------------------------------------------//
 
 	public void agregarUsuariosCSV(List<String> listaCSV) throws Exception {
 		Pattern patronRegex = Pattern.compile("(\\d*), ?(.*), ?(\\d*), ?(\\d*(?:.\\d*)?)");
@@ -257,8 +293,9 @@ public class Sistema {
 						Double.parseDouble(matcher.group(4))));
 			}
 		}
-
 	}
+
+//----------------------------------------------------------------------------//
 
 	public void agregarAtraccionesCSV(List<String> listaCSV) throws Exception {
 		Pattern patronRegex = Pattern.compile("(.*), ?(\\d*), ?(\\d*), ?(\\d*), ?(.*)");
@@ -276,6 +313,8 @@ public class Sistema {
 			}
 		}
 	}
+
+//----------------------------------------------------------------------------//
 
 	public void agregarPromocionesCSV(List<String> listaCSV) throws Exception {
 		Pattern patronRegex = Pattern.compile("(.*), ?(.*), ?(.*), ?(\\d*), ?(\\d*)");
@@ -344,6 +383,8 @@ public class Sistema {
 		}
 	}
 
+//----------------------------------------------------------------------------//
+
 	public void exportarUsuarios() throws IOException {
 		PrintWriter printWriter = new PrintWriter(new FileWriter("usuariosExportados.txt"));
 		for (Usuario usuario : usuarios) {
@@ -361,7 +402,9 @@ public class Sistema {
 		printWriter.close();
 	}
 
-	public static void main(String[] args) throws Exception {
+//----------------------------------------------------------------------------//
+
+	public static void main2(String[] args) throws Exception {
 
 		Sistema sistema = new Sistema("src/resources/usuarios.csv", "src/resources/atracciones.csv",
 				"src/resources/promociones.csv");
@@ -387,7 +430,7 @@ public class Sistema {
 					tempDNI = ingresarDatoInt();
 				} while (tempDNI < 0);
 
-				if (sistema.getUsuarios().contains(new Usuario(tempDNI, ENUMTIPO.ADVENTURA, 0, 0))) {
+				if (sistema.getUsuarios().contains(new Usuario(tempDNI, ENUMTIPO.AVENTURA, 0, 0))) {
 					System.out.println("Ya existe un usuario con este DNI");
 					break;
 				}
@@ -404,7 +447,7 @@ public class Sistema {
 
 				String tempTipo;
 				do {
-					System.out.print("\nIngrese el tipo favorito del usuario (Adventura, Degustacion o Paisaje.): ");
+					System.out.print("\nIngrese el tipo favorito del usuario (Aventura, Degustacion o Paisaje.): ");
 					//
 					tempTipo = ingresarDatoStr();
 				} while (!tempTipo.equalsIgnoreCase("Adventura") && !tempTipo.equalsIgnoreCase("Degustacion")
@@ -440,6 +483,8 @@ public class Sistema {
 		} while (!salir);
 	}
 
+//----------------------------------------------------------------------------//
+
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -451,17 +496,4 @@ public class Sistema {
 	public List<IPromocion> getPromociones() {
 		return promociones;
 	}
-
-	private static int ingresarDatoInt() {
-		@SuppressWarnings("resource")
-		Scanner scan = new Scanner(System.in);
-		return scan.nextInt();
-	}
-
-	private static String ingresarDatoStr() {
-		@SuppressWarnings("resource")
-		Scanner scan = new Scanner(System.in);
-		return scan.nextLine();
-	}
-
 }

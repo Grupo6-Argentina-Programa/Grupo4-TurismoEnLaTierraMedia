@@ -45,7 +45,7 @@ public class Tests {
     public void testUsuariosCSV() throws Exception {
         List<Usuario> usuarioList = new ArrayList<>();
         usuarioList.add(new Usuario(41456213, ENUMTIPO.PAISAJE, 7, 10));
-        usuarioList.add(new Usuario(41456214, ENUMTIPO.ADVENTURA, 9, 15));
+        usuarioList.add(new Usuario(41456214, ENUMTIPO.AVENTURA, 9, 15));
         usuarioList.add(new Usuario(41456215, ENUMTIPO.PAISAJE, 100, 123));
         usuarioList.add(new Usuario(35712346, ENUMTIPO.DEGUSTACION, 8, 15));
         Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv", "src/main/resources/promociones.csv");
@@ -57,8 +57,8 @@ public class Tests {
         List<Atraccion> atraccionList = new ArrayList<>();
         atraccionList.add(new Atraccion("Atraccion prueba 1", 12, 3, 5, ENUMTIPO.PAISAJE));
         atraccionList.add(new Atraccion("Atraccion prueba 2", 23, 8, 3, ENUMTIPO.PAISAJE));
-        atraccionList.add(new Atraccion("Atraccion prueba 3", 5, 6, 63, ENUMTIPO.ADVENTURA));
-        atraccionList.add(new Atraccion("Atraccion prueba 4", 12, 1, 6, ENUMTIPO.ADVENTURA));
+        atraccionList.add(new Atraccion("Atraccion prueba 3", 5, 6, 63, ENUMTIPO.AVENTURA));
+        atraccionList.add(new Atraccion("Atraccion prueba 4", 12, 1, 6, ENUMTIPO.AVENTURA));
         atraccionList.add(new Atraccion("Atraccion prueba 5", 7, 4, 32, ENUMTIPO.PAISAJE));
         atraccionList.add(new Atraccion("Atraccion prueba 6", 5, 4, 7, ENUMTIPO.DEGUSTACION));
         atraccionList.add(new Atraccion("Atraccion prueba 7", 10, 4, 7, ENUMTIPO.DEGUSTACION));
@@ -73,8 +73,8 @@ public class Tests {
         List<Atraccion> atraccionList = new ArrayList<>();
         atraccionList.add(new Atraccion("Atraccion prueba 1", 12, 3, 5, ENUMTIPO.PAISAJE));
         atraccionList.add(new Atraccion("Atraccion prueba 2", 23, 8, 3, ENUMTIPO.PAISAJE));
-        atraccionList.add(new Atraccion("Atraccion prueba 3", 5, 6, 63, ENUMTIPO.ADVENTURA));
-        atraccionList.add(new Atraccion("Atraccion prueba 4", 12, 1, 6, ENUMTIPO.ADVENTURA));
+        atraccionList.add(new Atraccion("Atraccion prueba 3", 5, 6, 63, ENUMTIPO.AVENTURA));
+        atraccionList.add(new Atraccion("Atraccion prueba 4", 12, 1, 6, ENUMTIPO.AVENTURA));
         atraccionList.add(new Atraccion("Atraccion prueba 5", 7, 4, 32, ENUMTIPO.PAISAJE));
         atraccionList.add(new Atraccion("Atraccion prueba 6", 5, 4, 7, ENUMTIPO.DEGUSTACION));
         atraccionList.add(new Atraccion("Atraccion prueba 7", 10, 4, 7, ENUMTIPO.DEGUSTACION));

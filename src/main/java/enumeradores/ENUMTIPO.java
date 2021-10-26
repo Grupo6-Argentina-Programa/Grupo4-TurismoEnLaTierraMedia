@@ -1,9 +1,10 @@
 package main.java.enumeradores;
 
 public enum ENUMTIPO {
-    ADVENTURA("Adventura"),
+    AVENTURA("Aventura"),
     PAISAJE("Paisaje"),
-    DEGUSTACION("Degustacion");
+    DEGUSTACION("Degustacion"),
+	SinDefinir("SinDefinir");
 
     private final String tipo;
 
