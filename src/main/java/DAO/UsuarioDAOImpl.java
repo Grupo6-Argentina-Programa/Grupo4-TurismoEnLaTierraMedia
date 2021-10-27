@@ -19,7 +19,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findByID_Usuario(int id_usuario){
 			try {
-				String sql = "SELECT * FROM '01_Usuario' WHERE DNI = ?";
+				String sql = "SELECT * FROM '01_Usuarios' WHERE ID_Usuario = ?";
 				Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setInt(1, id_usuario);
@@ -43,7 +43,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findByUsuario(String usuario){
 			try {
-				String sql = "SELECT * FROM '01_Usuario' WHERE usuario = ?";
+				String sql = "SELECT * FROM '01_Usuarios' WHERE usuario = ?";
 				Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setString(1, usuario);
