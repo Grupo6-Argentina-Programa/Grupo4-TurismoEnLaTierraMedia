@@ -42,8 +42,22 @@ public class Sistema {
 	public static void main(String[] args) throws Exception {
 
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-		userDAO.countAll();
-		userDAO.findAll();
+		
+		//Cuenta cantidad de usuarios cargados
+		System.out.println("Cantidad de Usuarios cargados = "+ userDAO.countAll()+".");
+		System.out.println("//---------------------------------------------//");
+		System.out.println(userDAO.findAll());
+		System.out.println("//---------------------------------------------//");
+		System.out.println(userDAO.findByID_Usuario(1));
+		System.out.println(userDAO.findByID_Usuario(5));
+		System.out.println("//---------------------------------------------//");
+		Usuario usuario1 = userDAO.findByID_Usuario(2);
+		System.out.println(usuario1);
+		System.out.println("//---------------------------------------------//");
+		Usuario usuario2 = userDAO.findByUsuario("hobbit3");
+		System.out.println(usuario2);
+		System.out.println("//---------------------------------------------//");
+
 
 	}
 
