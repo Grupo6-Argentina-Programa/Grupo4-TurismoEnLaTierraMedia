@@ -8,7 +8,8 @@ import java.util.*;
 
 public class Usuario {
 	
-	private final int DNI;
+	private int DNI;
+	//private final int DNI;
 	private String usuario;
 	private String contraseña;
 	private double dineroInicial;	//combinar
@@ -51,7 +52,11 @@ public class Usuario {
 		this.tiempoInicial = tiempoDisponible;
 		this.tiempoDisponible = tiempoDisponible;
 	}
-
+	
+	public Usuario() {
+		
+	}
+	
 	public int getDNI() {
 		return DNI;
 	}

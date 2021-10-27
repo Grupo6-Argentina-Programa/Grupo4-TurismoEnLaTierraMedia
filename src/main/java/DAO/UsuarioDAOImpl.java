@@ -17,6 +17,54 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 ////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
+	public Usuario findByID_Usuario(int id_usuario){
+			try {
+				String sql = "SELECT * FROM '01_Usuarios' WHERE ID_Usuario = ?";
+				Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setInt(1, id_usuario);
+				ResultSet resultados = statement.executeQuery();
+
+				Usuario user = null;
+
+				if (resultados.next()) {
+					user = toUsuarios(resultados);
+				}
+				
+				//DEPURAR
+				//System.out.println(user);
+
+				return user;
+			} catch (Exception e) {
+				throw new MissingDataException(e);
+			}
+	}
+	
+	@Override
+	public Usuario findByUsuario(String usuario){
+			try {
+				String sql = "SELECT * FROM '01_Usuarios' WHERE usuario = ?";
+				Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setString(1, usuario);
+				ResultSet resultados = statement.executeQuery();
+
+				Usuario user = null;
+
+				if (resultados.next()) {
+					user = toUsuarios(resultados);
+				}
+				
+				//DEPURAR
+				//System.out.println(user);
+
+				return user;
+			} catch (Exception e) {
+				throw new MissingDataException(e);
+			}
+	}
+	
+	@Override
 	public int countAll() {
 		try {
 			String sql = "SELECT COUNT(1) AS TOTAL FROM '01_Usuarios'";
@@ -27,7 +75,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			resultados.next();
 			int total = resultados.getInt("TOTAL");
 
-			System.out.println("Cantidad de Usuarios cargados = "+total+".");
+			//DEPURAR
+			//System.out.println("Cantidad de Usuarios cargados = "+total+".");
 			
 			return total;
 		} catch (Exception e) {
@@ -48,10 +97,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				usuarios.add(toUsuarios(resultados));
 			}
 			
-			//Muestra cada Usuario
-			for (Usuario usuario : usuarios) {
-				System.out.println(usuario.toString());
-			}
+			//DEPURAR
+			//for (Usuario usuario : usuarios) {System.out.println(usuario.toString());}
 
 			return usuarios;
 		} catch (Exception e) {
@@ -75,7 +122,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setLong(1, user.getDNI());
+			//statement.setLong(1, user.getDNI());
 			statement.setString(2, user.getUsuario().toString());
 			statement.setString(3, user.getContraseña().toString());
 			statement.setDouble(4, user.getDineroDisponible());
@@ -127,25 +174,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	@Override
-	public Usuario findByDNI(int dni) {
-			try {
-				String sql = "SELECT * FROM USERS WHERE DNI = ?";
-				Connection conn = ConnectionProvider.getConnection();
-				PreparedStatement statement = conn.prepareStatement(sql);
-				statement.setInt(1, dni);
-				ResultSet resultados = statement.executeQuery();
 
-				Usuario user = null;
-
-				if (resultados.next()) {
-					user = toUsuarios(resultados);
-				}
-
-				return user;
-			} catch (Exception e) {
-				throw new MissingDataException(e);
-			}
-	}
 
 }
