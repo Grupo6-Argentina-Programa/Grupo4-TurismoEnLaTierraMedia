@@ -19,7 +19,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findByID_Usuario(int id_usuario){
 			try {
-				String sql = "SELECT * FROM '01_Usuarios' WHERE ID_Usuario = ?";
+				String sql = "SELECT * FROM '01_Usuario' WHERE DNI = ?";
 				Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setInt(1, id_usuario);
@@ -43,7 +43,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findByUsuario(String usuario){
 			try {
-				String sql = "SELECT * FROM '01_Usuarios' WHERE usuario = ?";
+				String sql = "SELECT * FROM '01_Usuario' WHERE usuario = ?";
 				Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setString(1, usuario);
@@ -67,7 +67,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int countAll() {
 		try {
-			String sql = "SELECT COUNT(1) AS TOTAL FROM '01_Usuarios'";
+			String sql = "SELECT COUNT(1) AS TOTAL FROM '01_Usuario'";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -87,7 +87,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public List<Usuario> findAll() {
 		try {
-			String sql = "SELECT * FROM '01_Usuarios'";
+			String sql = "SELECT * FROM '01_Usuario'";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -144,7 +144,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int update(Usuario user) {
 		try {
-			String sql = "UPDATE USERS SET PASSWORD = ? WHERE USERNAME = ?";
+			String sql = "UPDATE 01_Usuario SET PASSWORD = ? WHERE USERNAME = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -161,7 +161,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	// Elimina Segun DNI
 	public int delete(Usuario user) {
 		try {
-			String sql = "DELETE FROM USERS WHERE DNI = ?";
+			String sql = "DELETE FROM 01_Usuario WHERE DNI = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
