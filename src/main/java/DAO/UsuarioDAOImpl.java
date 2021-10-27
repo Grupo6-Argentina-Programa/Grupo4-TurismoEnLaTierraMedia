@@ -67,7 +67,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int countAll() {
 		try {
-			String sql = "SELECT COUNT(1) AS TOTAL FROM '01_Usuario'";
+			String sql = "SELECT COUNT(1) AS TOTAL FROM '01_Usuarios'";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -87,7 +87,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public List<Usuario> findAll() {
 		try {
-			String sql = "SELECT * FROM '01_Usuario'";
+			String sql = "SELECT * FROM '01_Usuarios'";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -113,67 +113,19 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	
 ////////////////////////////////////////////////////////////////////////////////	
 	
+	//NO Implentadas Todavia
 	
 	@Override
 	public int insert(Usuario user) {
-		try {
-			String sql = "INSERT INTO Usuario (DNI, usuario, contraseña, dinero, tiempo, costoTotal, "
-					+ " posicionX, posicionY) VALUES (?,?,?,?,?,?,?,?)";
-			Connection conn = ConnectionProvider.getConnection();
-
-			PreparedStatement statement = conn.prepareStatement(sql);
-			//statement.setLong(1, user.getDNI());
-			statement.setString(2, user.getUsuario().toString());
-			statement.setString(3, user.getContraseña().toString());
-			statement.setDouble(4, user.getDineroDisponible());
-			statement.setDouble(5, user.getTiempoDisponible());
-			statement.setDouble(6, user.getCostoTotal());
-			statement.setInt(7, user.getPosicionX());
-			statement.setInt(8, user.getPosicionY());
-			int rows = statement.executeUpdate();
-
-			return rows;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
+		return 0;
 	}
 
-
-
-	// solo esta haciendo un cambio de contraseña
 	@Override
 	public int update(Usuario user) {
-		try {
-			String sql = "UPDATE 01_Usuario SET PASSWORD = ? WHERE USERNAME = ?";
-			Connection conn = ConnectionProvider.getConnection();
-
-			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, user.getContraseña().toString());
-			statement.setString(2, user.getUsuario().toString());
-			int rows = statement.executeUpdate();
-
-			return rows;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
+		return 0;
 	}
 
-	// Elimina Segun DNI
 	public int delete(Usuario user) {
-		try {
-			String sql = "DELETE FROM 01_Usuario WHERE DNI = ?";
-			Connection conn = ConnectionProvider.getConnection();
-
-			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setLong(1, user.getDNI());
-			int rows = statement.executeUpdate();
-
-			return rows;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
+		return 0;
 	}
-
-
-
 }
