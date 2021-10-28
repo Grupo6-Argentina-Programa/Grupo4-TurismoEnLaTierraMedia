@@ -57,7 +57,7 @@ public abstract class Promocion implements Comparable<IPromocion>, IPromocion{
         }
 
         if (this.getClass() == PromocionAxB.class) {
-            totalPromocionA = this.getAtraccionA().getCosto() + this.getAtraccionB().getCosto();
+            totalPromocionA = (int) (this.getAtraccionA().getCosto() + this.getAtraccionB().getCosto());
         }
 
 
@@ -71,7 +71,7 @@ public abstract class Promocion implements Comparable<IPromocion>, IPromocion{
         }
 
         if (promocion.getClass() == PromocionAxB.class) {
-            totalPromocionB = promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto();
+            totalPromocionB = (int) (promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto());
         }
 
         if (totalPromocionA == totalPromocionB){

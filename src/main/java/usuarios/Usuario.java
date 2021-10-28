@@ -38,7 +38,7 @@ public class Usuario {
 		this.posicionY = posicionY;
 
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-		this.id = userDAO.findNextID();
+		this.id = userDAO.findMaxID() + 1;
 	}
 
 	//Constructor unicamnete utilizado por el DB
@@ -67,7 +67,7 @@ public class Usuario {
 
 	public Usuario() {
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-		this.id = userDAO.findNextID();
+		this.id = userDAO.findMaxID() + 1;
 	}
 
 ////////////////////////////////////////////////////////////////////////////////

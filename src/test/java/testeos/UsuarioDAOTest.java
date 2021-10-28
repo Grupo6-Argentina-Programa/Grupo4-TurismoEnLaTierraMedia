@@ -32,6 +32,8 @@ public class UsuarioDAOTest {
 
 	@Test
 	public void test() {
+		
+		/*
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
 		
 		//Cuenta cantidad de usuarios cargados
@@ -88,7 +90,25 @@ public class UsuarioDAOTest {
 		System.out.println(userDAO.findByUsername("Insert2"));
 		System.out.println("//---------------------------------------------//");
 		
-		userDAO.findNextID();
+		System.out.println("ultimo ID añadido :" + userDAO.findMaxID());
+		*/
+	}
+	
+	@Test
+	public void colocacionCorrectaDeIdAlCrearUsuario() {
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+		System.out.println("ultimo ID añadido :" + userDAO.findMaxID());
+		System.out.println("//---------------------------------------------//");
+		
+		Usuario u = new Usuario("usuario", "cccc", 36, 12, 32, 32);
+		System.out.println("Crear Usuario local de ID"+ u.getId());
+		System.out.println(u);
+		System.out.println("//---------------------------------------------//");
+		
+		System.out.println("Se Inserta en base de datos");
+		userDAO.insert(u);
+		System.out.println("//---------------------------------------------//");
+		
 	}
 
 }

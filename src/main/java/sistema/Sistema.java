@@ -1,5 +1,7 @@
 package main.java.sistema;
 
+import main.java.DAO.DAOFactory;
+import main.java.DAO.UsuarioDAO;
 import main.java.comparadores.ComparadorAtraccion;
 import main.java.comparadores.ComparadorPromocion;
 import main.java.sugeribles.Atraccion;
@@ -17,8 +19,6 @@ import java.io.PrintWriter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import main.java.DAO.*;
 
 public class Sistema {
 	private final List<Usuario> usuarios;
@@ -130,7 +130,7 @@ public class Sistema {
 					if (promocion.getClass() == PromocionAxB.class) {
 						Atraccion atraccionAux = (Atraccion) promocion.retornarPromocion();
 						if (atraccionAux.hayEspacio()) {
-							valorTemporal = promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto();
+							valorTemporal = (int) (promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto());
 
 							if ((costoActual + valorTemporal <= user.getDineroDisponible()) && (tiempoActual
 									+ promocion.getAtraccionA().getTiempo() + promocion.getAtraccionB().getTiempo()
@@ -182,7 +182,7 @@ public class Sistema {
 					}
 				}
 				if (promocion.getClass() == PromocionAxB.class) {
-					valorTemporal = promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto();
+					valorTemporal = (int) (promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto());
 					Atraccion atraccionAux = (Atraccion) promocion.retornarPromocion();
 					if ((costoActual + valorTemporal <= user.getDineroDisponible()) && (tiempoActual
 							+ promocion.getAtraccionA().getTiempo() + promocion.getAtraccionB().getTiempo()
@@ -211,7 +211,8 @@ public class Sistema {
 			if ((atraccion != null) && !user.getAtracciones().contains(atraccion) && atraccion.hayEspacio()
 					&& (costoActual + atraccion.getCosto() <= user.getDineroDisponible())
 					&& (tiempoActual + atraccion.getTiempo() <= user.getTiempoDisponible())) {
-				user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, atraccion.getCosto()));
+				user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, (int) atraccion.getCosto()));
+				//user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, atraccion.getCosto())); //este es el antiguo
 			}
 		}
 
@@ -220,7 +221,8 @@ public class Sistema {
 			if ((atraccion != null) && !user.getAtracciones().contains(atraccion) && atraccion.hayEspacio()
 					&& (costoActual + atraccion.getCosto() <= user.getDineroDisponible())
 					&& (tiempoActual + atraccion.getTiempo() <= user.getTiempoDisponible())) {
-				user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, atraccion.getCosto()));
+				user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, (int) atraccion.getCosto()));
+				//user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, atraccion.getCosto())); //este es el antiguo
 			}
 		}
 	}

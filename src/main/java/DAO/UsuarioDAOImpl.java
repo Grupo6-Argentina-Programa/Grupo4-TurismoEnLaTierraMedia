@@ -62,11 +62,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int delete(Usuario user) {
 		try {
-			String sql = "DELETE FROM Users WHERE username = ?";
+			String sql = "DELETE FROM Users WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, user.getUsuario());
+			statement.setInt(1, user.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -140,13 +140,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public int findNextID() {
+	public int findMaxID() {
 		try {
 			String sql = "SELECT MAX(id) AS id FROM Users";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
-			System.out.println(resultados.getInt("id"));
 			return resultados.getInt("id");
 		} catch (Exception e) {
 			throw new MissingDataException(e);
