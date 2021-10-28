@@ -8,13 +8,12 @@ import main.java.enumeradores.ENUMTIPO;
 import main.java.jdbc.ConnectionProvider;
 import main.java.sugeribles.Atraccion;
 
-
 public class AtraccionDAOImpl implements AtraccionDAO {
-	
+
 	@Override
 	public int insert(Atraccion atraccion) {
 		try {
-			String sql = "INSERT INTO Atraccion (nombre, costo, tiempo, cupo, puestosOcupados, posicionX, posicionY) "
+			String sql = "INSERT INTO Attraction (attractionName, costInCoins, timeHs, capacityMax, capacity, positionX, positionY) "
 					+ "VALUES (?,?,?,?,?,?)";
 			Connection conn = ConnectionProvider.getConnection();
 
@@ -25,8 +24,8 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(4, atraccion.getCupo());
 			statement.setInt(5, atraccion.getPuestosOcupados());
 			statement.setInt(6, atraccion.getPosicionX());
-            statement.setInt(7, atraccion.getPosicionY());			
-            int rows = statement.executeUpdate();
+			statement.setInt(7, atraccion.getPosicionY());
+			int rows = statement.executeUpdate();
 
 			return rows;
 		} catch (Exception e) {
@@ -45,7 +44,6 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 
 	@Override
 	public int update(Atraccion t) {
