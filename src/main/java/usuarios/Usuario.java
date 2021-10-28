@@ -41,7 +41,7 @@ public class Usuario {
 		this.id = userDAO.findMaxID() + 1;
 	}
 
-	//Constructor unicamnete utilizado por el DB
+	//CONSTRUCTOR SOLO USADO POR DAO
 	public Usuario(int id, String usuario, String contraseña, double dineroDisponible, double tiempoDisponible,
 			int posicionX, int posicionY) {
 		this.id = id;
@@ -63,11 +63,6 @@ public class Usuario {
 		this.dineroDisponible = dineroInicial;
 		this.tiempoInicial = tiempoDisponible;
 		this.tiempoDisponible = tiempoDisponible;
-	}
-
-	public Usuario() {
-		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-		this.id = userDAO.findMaxID() + 1;
 	}
 
 ////////////////////////////////////////////////////////////////////////////////

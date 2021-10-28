@@ -17,7 +17,7 @@ public class Atraccion implements Comparable<Atraccion> {
     private int posicionX;
     private int posicionY;
 
-    //Consrtuctor que se usa
+  //Constructor por defecto
     public Atraccion(String nombre, double costo, double tiempo, int puestosOcupados, int cupoMaximo) {
     	this.nombre = nombre;
         this.costo = costo;
@@ -29,7 +29,7 @@ public class Atraccion implements Comparable<Atraccion> {
 		this.id = AttrDAO.findMaxID() + 1;
     }
     
-    //Solo usado por dao
+  //CONSTRUCTOR SOLO USADO POR DAO
     public Atraccion(int id, String nombre, double costo, double tiempo, int puestosOcupados, int cupoMaximo) {
     	this.id = id;
     	this.nombre = nombre;
