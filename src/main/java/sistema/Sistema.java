@@ -46,16 +46,55 @@ public class Sistema {
 		//Cuenta cantidad de usuarios cargados
 		System.out.println("Cantidad de Usuarios cargados = "+ userDAO.countAll()+".");
 		System.out.println("//---------------------------------------------//");
+		
+		System.out.println();
+		System.out.println("Encontrar a todos los Usuarios :");
 		System.out.println(userDAO.findAll());
 		System.out.println("//---------------------------------------------//");
-		System.out.println(userDAO.findByID_Usuario(1));
-		System.out.println(userDAO.findByID_Usuario(5));
+		
+		System.out.println();
+		System.out.println("Usuario de ID 1 : ");
+		System.out.println(userDAO.findById(1));
+		System.out.println("Usuario de ID 5 : ");
+		System.out.println(userDAO.findById(5));
 		System.out.println("//---------------------------------------------//");
-		Usuario usuario1 = userDAO.findByID_Usuario(2);
+		
+		System.out.println();
+		System.out.println("Crear un Usuario locar y asignarle el valor del Usuario ID2");
+		Usuario usuario1 = userDAO.findById(2);
 		System.out.println(usuario1);
 		System.out.println("//---------------------------------------------//");
-		Usuario usuario2 = userDAO.findByUsuario("hobbit3");
+		
+		System.out.println();
+		System.out.println("Busqueda del usuario de nombre hobbit3 : ");
+		Usuario usuario2 = userDAO.findByUsername("hobbit3");
 		System.out.println(usuario2);
+		System.out.println("//---------------------------------------------//");
+		
+		System.out.println();
+		System.out.println("Ingresar a DB el usuario Insert");
+		Usuario usuario3 = new Usuario (0, "Insert", "bbbb", 36, 12, 32, 32);
+		userDAO.insert(usuario3);
+		System.out.println(userDAO.findByUsername("Insert"));
+		System.out.println("//---------------------------------------------//");
+		
+		System.out.println();
+		int id = userDAO.findId("Insert", "bbbb");
+		System.out.println("Busca el Id del Usuario Insert = " + id);
+		System.out.println("//---------------------------------------------//");
+		
+		System.out.println();
+		System.out.println("asigna el Id del usuario y luego setea el nombre, finalizando actualiza el dato.");
+		usuario3.setDNI(id);
+		usuario3.setUsuario("Insert2");
+		userDAO.update(usuario3);
+		System.out.println(userDAO.findByUsername("Insert2"));
+		System.out.println("//---------------------------------------------//");
+		
+		System.out.println();
+		System.out.println("Elimina el Usuario anteriormente creado.");
+		userDAO.delete(usuario3);
+		System.out.println(userDAO.findByUsername("Insert2"));
 		System.out.println("//---------------------------------------------//");
 
 

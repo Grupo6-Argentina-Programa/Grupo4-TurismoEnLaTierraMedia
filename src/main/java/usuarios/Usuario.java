@@ -7,24 +7,25 @@ import main.java.enumeradores.ENUMTIPO;
 import java.util.*;
 
 public class Usuario {
-	
+
 	private int DNI;
-	//private final int DNI;
+	// private final int DNI;
 	private String usuario;
 	private String contraseña;
-	private double dineroInicial;	//combinar
+	private double dineroInicial; // combinar
 	private double dineroDisponible;
-	private double tiempoInicial;	//combinar
+	private double tiempoInicial; // combinar
 	private double tiempoDisponible;
-	
+
 	private int posicionX;
 	private int posicionY;
-	
+
 	private int costoTotal = 0;
 	private ENUMTIPO tipoFavorito = ENUMTIPO.SinDefinir;
 	private final List<Atraccion> atracciones = new ArrayList<>();
 
-	public Usuario(int ID_Usuario, String usuario, String contraseña, double dineroDisponible, double tiempoDisponible, int posicionX, int posicionY) {
+	public Usuario(int ID_Usuario, String usuario, String contraseña, double dineroDisponible, double tiempoDisponible,
+			int posicionX, int posicionY) {
 		this.DNI = ID_Usuario;
 		this.usuario = usuario;
 		this.contraseña = contraseña;
@@ -35,16 +36,16 @@ public class Usuario {
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
 	}
-	
+
 	public Usuario(int DNI, ENUMTIPO tipoFavorito, int dineroInicial, double tiempoDisponible) {
 		this.DNI = DNI;
 		this.tipoFavorito = tipoFavorito;
 		this.dineroInicial = dineroInicial;
 		this.dineroDisponible = dineroInicial;
 		this.tiempoInicial = tiempoDisponible;
-		this.tiempoDisponible = tiempoDisponible;	
+		this.tiempoDisponible = tiempoDisponible;
 	}
-	
+
 	public Usuario(int ID_Usuario, int dineroInicial, double tiempoDisponible) {
 		this.DNI = ID_Usuario;
 		this.dineroInicial = dineroInicial;
@@ -52,28 +53,19 @@ public class Usuario {
 		this.tiempoInicial = tiempoDisponible;
 		this.tiempoDisponible = tiempoDisponible;
 	}
-	
+
 	public Usuario() {
-		
+
 	}
-	
+
 	public int getDNI() {
 		return DNI;
 	}
 
-	public ENUMTIPO getTipoFavorito() {
-		return tipoFavorito;
+	public void setDNI(int dNI) {
+		DNI = dNI;
 	}
 
-	public double getDineroDisponible() {
-		return dineroDisponible;
-	}
-
-	public double getTiempoDisponible() {
-		return tiempoDisponible;
-	}
-
-	// Nuevos añadidos //
 	public String getUsuario() {
 		return usuario;
 	}
@@ -88,6 +80,38 @@ public class Usuario {
 
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
+	}
+
+	public double getDineroInicial() {
+		return dineroInicial;
+	}
+
+	public void setDineroInicial(double dineroInicial) {
+		this.dineroInicial = dineroInicial;
+	}
+
+	public double getDineroDisponible() {
+		return dineroDisponible;
+	}
+
+	public void setDineroDisponible(double dineroDisponible) {
+		this.dineroDisponible = dineroDisponible;
+	}
+
+	public double getTiempoInicial() {
+		return tiempoInicial;
+	}
+
+	public void setTiempoInicial(double tiempoInicial) {
+		this.tiempoInicial = tiempoInicial;
+	}
+
+	public double getTiempoDisponible() {
+		return tiempoDisponible;
+	}
+
+	public void setTiempoDisponible(double tiempoDisponible) {
+		this.tiempoDisponible = tiempoDisponible;
 	}
 
 	public int getPosicionX() {
@@ -106,13 +130,21 @@ public class Usuario {
 		this.posicionY = posicionY;
 	}
 
+	public int getCostoTotal() {
+		return costoTotal;
+	}
+
+	public void setCostoTotal(int costoTotal) {
+		this.costoTotal = costoTotal;
+	}
+
+	public ENUMTIPO getTipoFavorito() {
+		return tipoFavorito;
+	}
+
 	public void setTipoFavorito(ENUMTIPO tipoFavorito) {
 		this.tipoFavorito = tipoFavorito;
 	}
-
-	// fin Nuevos añadididos //
-	
-	
 
 	public void recibirSugerencia(Sugerencia sugerencia) {
 		System.out.println("\n\nSe ha hecho la siguiente sugerencia:\n");
@@ -147,8 +179,6 @@ public class Usuario {
 		}
 	}
 
-
-
 	private int calcularDifereciaMonedas(Sugerencia sugerencia) {
 		int valorOriginal = 0;
 		for (int i = 0; i < sugerencia.getAtracciones().length; i++) {
@@ -176,24 +206,12 @@ public class Usuario {
 		return Objects.hash(DNI);
 	}
 
-	public int getCostoTotal() {
-		return costoTotal;
-	}
-
-	public double getDineroInicial() {
-		return dineroInicial;
-	}
-
-	public double getTiempoInicial() {
-		return tiempoInicial;
-	}
-
 	private static String ingresarDatoStr() {
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		return scan.nextLine();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Usuario [DNI=" + DNI + ", usuario=" + usuario + ", contraseña=" + contraseña + ", dineroInicial="
