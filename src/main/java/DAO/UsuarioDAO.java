@@ -10,4 +10,6 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
 	
 	public abstract int findId (String username, String password);
 	
+	public abstract int findNextID();
+	
 }

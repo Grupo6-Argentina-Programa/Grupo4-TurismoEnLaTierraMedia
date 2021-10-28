@@ -50,7 +50,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.setDouble(4, user.getTiempoDisponible());
 			statement.setInt(5, user.getPosicionX());
 			statement.setInt(6, user.getPosicionY());
-			statement.setInt(7, user.getDNI());
+			statement.setInt(7, user.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -118,26 +118,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public List<Usuario> findAll() {
-		try {
-			String sql = "SELECT * FROM Users";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			ResultSet resultados = statement.executeQuery();
-
-			List<Usuario> usuarios = new LinkedList<Usuario>();
-			while (resultados.next()) {
-				usuarios.add(toUsuarios(resultados));
-			}
-
-			return usuarios;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
-	
-	@Override
-	public int findId (String username, String password) {
+	public int findId(String username, String password) {
 		try {
 			String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -152,7 +133,40 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				user = toUsuarios(resultados);
 			}
 
-			return user.getDNI();
+			return user.getId();
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public int findNextID() {
+		try {
+			String sql = "SELECT MAX(id) AS id FROM Users";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultados = statement.executeQuery();
+			System.out.println(resultados.getInt("id"));
+			return resultados.getInt("id");
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public List<Usuario> findAll() {
+		try {
+			String sql = "SELECT * FROM Users";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultados = statement.executeQuery();
+
+			List<Usuario> usuarios = new LinkedList<Usuario>();
+			while (resultados.next()) {
+				usuarios.add(toUsuarios(resultados));
+			}
+
+			return usuarios;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

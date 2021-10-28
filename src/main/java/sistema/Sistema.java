@@ -73,7 +73,7 @@ public class Sistema {
 		
 		System.out.println();
 		System.out.println("Ingresar a DB el usuario Insert");
-		Usuario usuario3 = new Usuario (0, "Insert", "bbbb", 36, 12, 32, 32);
+		Usuario usuario3 = new Usuario ("Insert", "bbbb", 36, 12, 32, 32);
 		userDAO.insert(usuario3);
 		System.out.println(userDAO.findByUsername("Insert"));
 		System.out.println("//---------------------------------------------//");
@@ -85,9 +85,9 @@ public class Sistema {
 		
 		System.out.println();
 		System.out.println("asigna el Id del usuario y luego setea el nombre, finalizando actualiza el dato.");
-		usuario3.setDNI(id);
 		usuario3.setUsuario("Insert2");
 		userDAO.update(usuario3);
+		System.out.println(usuario3);
 		System.out.println(userDAO.findByUsername("Insert2"));
 		System.out.println("//---------------------------------------------//");
 		
@@ -96,6 +96,8 @@ public class Sistema {
 		userDAO.delete(usuario3);
 		System.out.println(userDAO.findByUsername("Insert2"));
 		System.out.println("//---------------------------------------------//");
+		
+		userDAO.findNextID();
 
 
 	}
@@ -138,7 +140,7 @@ public class Sistema {
 			System.out.println("\n" + "----------------------------------------------------"
 					+ "----------------------------------------------------"
 					+ "----------------------------------------------------");
-			System.out.println("Usuario DNI numero: " + usuario.getDNI());
+			System.out.println("Usuario DNI numero: " + usuario.getId());
 			sugerirPromociones(usuario);
 			sugerirAtracciones(usuario);
 		}
@@ -290,7 +292,7 @@ public class Sistema {
 			System.out.println("\n" + "----------------------------------------------------"
 					+ "----------------------------------------------------"
 					+ "----------------------------------------------------");
-			System.out.println("Usuario DNI numero: " + user.getDNI());
+			System.out.println("Usuario DNI numero: " + user.getId());
 			sugerirPromociones(user);
 			sugerirAtracciones(user);
 			return true;
@@ -445,7 +447,7 @@ public class Sistema {
 			for (Atraccion atraccion : usuario.getAtracciones()) {
 				tiempoOcupado += atraccion.getTiempo();
 			}
-			printWriter.println("El usuario DNI: " + usuario.getDNI() + ", le gustan las atracciones del tipo de "
+			printWriter.println("El usuario DNI: " + usuario.getId() + ", le gustan las atracciones del tipo de "
 					+ usuario.getTipoFavorito().toString() + ", ingresó con " + usuario.getDineroInicial()
 					+ " monedas y " + usuario.getTiempoInicial() + " horas inicialmente, se retiró con "
 					+ usuario.getDineroDisponible() + " monedas disponibles y " + usuario.getTiempoDisponible()

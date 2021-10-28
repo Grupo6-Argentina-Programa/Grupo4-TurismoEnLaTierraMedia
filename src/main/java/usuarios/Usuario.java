@@ -2,14 +2,15 @@ package main.java.usuarios;
 
 import main.java.sugeribles.Sugerencia;
 import main.java.sugeribles.Atraccion;
+import main.java.DAO.DAOFactory;
+import main.java.DAO.UsuarioDAO;
 import main.java.enumeradores.ENUMTIPO;
 
 import java.util.*;
 
 public class Usuario {
 
-	private int DNI;
-	// private final int DNI;
+	private final int id;
 	private String usuario;
 	private String contraseña;
 	private double dineroInicial; // combinar
@@ -24,9 +25,26 @@ public class Usuario {
 	private ENUMTIPO tipoFavorito = ENUMTIPO.SinDefinir;
 	private final List<Atraccion> atracciones = new ArrayList<>();
 
-	public Usuario(int ID_Usuario, String usuario, String contraseña, double dineroDisponible, double tiempoDisponible,
+	//Constructor por defecto
+	public Usuario(String usuario, String contraseña, double dineroDisponible, double tiempoDisponible, int posicionX,
+			int posicionY) {
+		this.usuario = usuario;
+		this.contraseña = contraseña;
+		this.dineroInicial = dineroDisponible;
+		this.dineroDisponible = dineroDisponible;
+		this.tiempoInicial = tiempoDisponible;
+		this.tiempoDisponible = tiempoDisponible;
+		this.posicionX = posicionX;
+		this.posicionY = posicionY;
+
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+		this.id = userDAO.findNextID();
+	}
+
+	//Constructor unicamnete utilizado por el DB
+	public Usuario(int id, String usuario, String contraseña, double dineroDisponible, double tiempoDisponible,
 			int posicionX, int posicionY) {
-		this.DNI = ID_Usuario;
+		this.id = id;
 		this.usuario = usuario;
 		this.contraseña = contraseña;
 		this.dineroInicial = dineroDisponible;
@@ -37,17 +55,10 @@ public class Usuario {
 		this.posicionY = posicionY;
 	}
 
+	//DEPURAR
 	public Usuario(int DNI, ENUMTIPO tipoFavorito, int dineroInicial, double tiempoDisponible) {
-		this.DNI = DNI;
+		this.id = DNI;
 		this.tipoFavorito = tipoFavorito;
-		this.dineroInicial = dineroInicial;
-		this.dineroDisponible = dineroInicial;
-		this.tiempoInicial = tiempoDisponible;
-		this.tiempoDisponible = tiempoDisponible;
-	}
-
-	public Usuario(int ID_Usuario, int dineroInicial, double tiempoDisponible) {
-		this.DNI = ID_Usuario;
 		this.dineroInicial = dineroInicial;
 		this.dineroDisponible = dineroInicial;
 		this.tiempoInicial = tiempoDisponible;
@@ -55,96 +66,86 @@ public class Usuario {
 	}
 
 	public Usuario() {
-
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+		this.id = userDAO.findNextID();
 	}
 
-	public int getDNI() {
-		return DNI;
-	}
-
-	public void setDNI(int dNI) {
-		DNI = dNI;
+////////////////////////////////////////////////////////////////////////////////
+	public int getId() {
+		return id;
 	}
 
 	public String getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
 	public String getContraseña() {
 		return contraseña;
-	}
-
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
 	}
 
 	public double getDineroInicial() {
 		return dineroInicial;
 	}
 
-	public void setDineroInicial(double dineroInicial) {
-		this.dineroInicial = dineroInicial;
-	}
-
 	public double getDineroDisponible() {
 		return dineroDisponible;
-	}
-
-	public void setDineroDisponible(double dineroDisponible) {
-		this.dineroDisponible = dineroDisponible;
 	}
 
 	public double getTiempoInicial() {
 		return tiempoInicial;
 	}
 
-	public void setTiempoInicial(double tiempoInicial) {
-		this.tiempoInicial = tiempoInicial;
-	}
-
 	public double getTiempoDisponible() {
 		return tiempoDisponible;
-	}
-
-	public void setTiempoDisponible(double tiempoDisponible) {
-		this.tiempoDisponible = tiempoDisponible;
 	}
 
 	public int getPosicionX() {
 		return posicionX;
 	}
 
-	public void setPosicionX(int posicionX) {
-		this.posicionX = posicionX;
-	}
-
 	public int getPosicionY() {
 		return posicionY;
-	}
-
-	public void setPosicionY(int posicionY) {
-		this.posicionY = posicionY;
 	}
 
 	public int getCostoTotal() {
 		return costoTotal;
 	}
 
-	public void setCostoTotal(int costoTotal) {
-		this.costoTotal = costoTotal;
-	}
-
 	public ENUMTIPO getTipoFavorito() {
 		return tipoFavorito;
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
+	public void setDineroDisponible(double dineroDisponible) {
+		this.dineroDisponible = dineroDisponible;
+	}
+
+	public void setTiempoDisponible(double tiempoDisponible) {
+		this.tiempoDisponible = tiempoDisponible;
+	}
+
+	public void setPosicionX(int posicionX) {
+		this.posicionX = posicionX;
+	}
+
+	public void setPosicionY(int posicionY) {
+		this.posicionY = posicionY;
 	}
 
 	public void setTipoFavorito(ENUMTIPO tipoFavorito) {
 		this.tipoFavorito = tipoFavorito;
 	}
+
+////////////////////////////////////////////////////////////////////////////////
 
 	public void recibirSugerencia(Sugerencia sugerencia) {
 		System.out.println("\n\nSe ha hecho la siguiente sugerencia:\n");
@@ -198,12 +199,12 @@ public class Usuario {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Usuario usuario = (Usuario) o;
-		return DNI == usuario.DNI;
+		return id == usuario.id;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(DNI);
+		return Objects.hash(id);
 	}
 
 	private static String ingresarDatoStr() {
@@ -214,7 +215,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [DNI=" + DNI + ", usuario=" + usuario + ", contraseña=" + contraseña + ", dineroInicial="
+		return "Usuario [DNI=" + id + ", usuario=" + usuario + ", contraseña=" + contraseña + ", dineroInicial="
 				+ dineroInicial + ", dineroDisponible=" + dineroDisponible + ", tiempoInicial=" + tiempoInicial
 				+ ", tiempoDisponible=" + tiempoDisponible + ", posicionX=" + posicionX + ", posicionY=" + posicionY
 				+ ", costoTotal=" + costoTotal + ", tipoFavorito=" + tipoFavorito + ", atracciones=" + atracciones
