@@ -13,11 +13,6 @@ public abstract class Promocion implements Comparable<IPromocion>, IPromocion{
     private String porcentaje;
     private String totalp;
     
-    
-    
-    
-    
-    
     //CONSTRUCTOR SOLO USADO POR DAO
     public Promocion(int id,int tipo, Atraccion atraA, Atraccion atraB, int atraP, String porcentaje,String total) {
     	this.id = id;
@@ -28,9 +23,6 @@ public abstract class Promocion implements Comparable<IPromocion>, IPromocion{
 		this.porcentaje = porcentaje;
 		this.totalp=total;
     }
-    
-    
-    
     
     public Promocion(Atraccion atraccionA, Atraccion atraccionB) throws Exception {
         if (atraccionA.getTipo() != atraccionB.getTipo()){
@@ -104,41 +96,25 @@ public abstract class Promocion implements Comparable<IPromocion>, IPromocion{
         return Integer.compare(totalPromocionA, totalPromocionB);
     }
 
-
-
-
 	public int getId() {
 		// TODO Auto-generated method stub
 		return id;
 	}
-
-
-
 
 	public int getTipo() {
 		// TODO Auto-generated method stub
 		return tipo;
 	}
 
-
-
-
 	public int getAtraP() {
 		// TODO Auto-generated method stub
 		return atraP;
 	}
 
-
-
-
 	public String getPorcentaje() {
 		// TODO Auto-generated method stub
 		return porcentaje;
 	}
-
-
-
-
 	public String getTotal() {
 		// TODO Auto-generated method stub
 		return totalp;
