@@ -70,7 +70,7 @@ public class Usuario {
 		return id;
 	}
 
-	public String getUsuario() {
+	public  String getUsuario() {
 		return usuario;
 	}
 
