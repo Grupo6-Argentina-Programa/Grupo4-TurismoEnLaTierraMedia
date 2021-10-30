@@ -192,4 +192,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return new Usuario(resultados.getInt(1), resultados.getString(2), resultados.getString(3),
 				resultados.getDouble(4), resultados.getDouble(5), resultados.getInt(6), resultados.getInt(7));
 	}
+
+	@Override
+	public char[] update(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

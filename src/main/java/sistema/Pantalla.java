@@ -2,6 +2,7 @@ package main.java.sistema;
 
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Scanner;
 
 import main.java.DAO.AtraccionDAO;
 import main.java.DAO.DAOFactory;
@@ -51,12 +52,18 @@ public class Pantalla {
 		System.out.println("|| Programa finalizado... gracias por testear      ||");
 		System.out.println("||=================================================||");
 	}
-	public void mostrarLosUsuarios() {
-			
-			
+	
+	
+	
+	/*public void mostrarLosUsuarios() {
+		
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+		
+		
+		
 		System.out.println(userDAO.findAll());
-		}
+		
+		}*/
 		
 		
 		
@@ -73,6 +80,13 @@ public class Pantalla {
 			PromocionDAO promotionDAO = DAOFactory.getPromocionDAO();
 			
 			System.out.println(promotionDAO.findAll());
+			
+			
+		}
+		
+		
+		public void agregarDinero() { 
+			
 			
 			
 		}

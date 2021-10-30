@@ -46,6 +46,7 @@ public class Sistema {
 	public static void main(String[] args) throws Exception {
 
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+		Pantalla consola = new Pantalla();
 
 		int datoInt;
 		int idBuscado;
@@ -56,6 +57,7 @@ public class Sistema {
 		boolean salir = false;
 
 		System.out.println("Ingrese el Id de usuario correspondiente : ");
+	
 		System.out.println("Ingrese '0' para finalizar el programa. : ");
 
 		do {
@@ -97,12 +99,19 @@ public class Sistema {
 						salir = true;
 						break;
 					case 1:
+						
+						
+						System.out.println(userDAO.findById(datoInt));
 						break;
 					case 2:
-						break;
+						
+					 break;
 					case 3:
+						consola.mostrarLasAtracciones();
+						consola.mostrarLasPromociones();;
 						break;
 					case 4:
+						consola.agregarDinero();
 						break;
 					case 5:
 						break;
