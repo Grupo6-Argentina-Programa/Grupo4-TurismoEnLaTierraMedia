@@ -1,8 +1,8 @@
 package main.java.sugeribles.promociones;
 
-import main.java.sugeribles.Atraccion;
-
 import java.util.Objects;
+
+import main.java.sugeribles.Atraccion;
 
 public abstract class Promocion implements Comparable<IPromocion>, IPromocion{
     private final Atraccion atraccionA;
@@ -14,7 +14,10 @@ public abstract class Promocion implements Comparable<IPromocion>, IPromocion{
     private String totalp;
     
     //CONSTRUCTOR SOLO USADO POR DAO
-    public Promocion(int id,int tipo, Atraccion atraA, Atraccion atraB, int atraP, String porcentaje,String total) {
+    public Promocion(int id,int tipo, Atraccion atraA, Atraccion atraB, int atraP, String porcentaje,String total) throws Exception{
+        if (atraA.getTipo() != atraB.getTipo()){
+            throw new Exception("Las atracciones no son del mismo tipo.");
+        }
     	this.id = id;
     	this.tipo = tipo;
         this.atraccionA = atraA;
@@ -24,21 +27,21 @@ public abstract class Promocion implements Comparable<IPromocion>, IPromocion{
 		this.totalp=total;
     }
     
-    public Promocion(Atraccion atraccionA, Atraccion atraccionB) throws Exception {
+    /*public Promocion(Atraccion atraccionA, Atraccion atraccionB) throws Exception {
         if (atraccionA.getTipo() != atraccionB.getTipo()){
             throw new Exception("Las atracciones no son del mismo tipo.");
         }
         this.atraccionA = atraccionA;
         this.atraccionB = atraccionB;
-    }
+    }*/
 
     public Atraccion getAtraccionA() {
-        return atraccionA;
-    }
+		return atraccionA;
+	}
 
-    public Atraccion getAtraccionB() {
-        return atraccionB;
-    }
+	public Atraccion getAtraccionB() {
+		return atraccionB;
+	}
 
     @Override
     public String toString() {
@@ -48,7 +51,7 @@ public abstract class Promocion implements Comparable<IPromocion>, IPromocion{
                 ']';
     }
 
-    @Override
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

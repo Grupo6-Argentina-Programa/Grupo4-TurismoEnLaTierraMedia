@@ -3,14 +3,10 @@ package main.java.sugeribles.promociones;
 import main.java.sugeribles.Atraccion;
 
 public class PromocionAxB extends Promocion implements IPromocion {
-    private final Atraccion atraccionRegalo;
-
-    public PromocionAxB(Atraccion atraccionA, Atraccion atraccionB, Atraccion atraccionRegalo) throws Exception {
-        super(atraccionA, atraccionB);
-        if (atraccionRegalo.getTipo() != atraccionB.getTipo()){
-            throw new Exception("Las atracciones no son del mismo tipo.");
-        }
-        this.atraccionRegalo = atraccionRegalo;
+    private int atraccionRegalo;
+    
+    public PromocionAxB(int id, int tipo, Atraccion atraccionA, Atraccion atraccionB, int atraccionRegalo, String porcentaje, String total) throws Exception {
+		super(id, 2, atraccionA, atraccionB, atraccionRegalo, porcentaje, total);
     }
 
     @Override
