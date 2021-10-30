@@ -1,5 +1,10 @@
 package main.java.DAO;
 
-public interface ItinerarioDAO {
+import Itinerario.Itinerario;
+
+public interface ItinerarioDAO extends GenericDAO<Itinerario>{
+
+	public abstract Itinerario findByID (Integer id);
 
 }
+
