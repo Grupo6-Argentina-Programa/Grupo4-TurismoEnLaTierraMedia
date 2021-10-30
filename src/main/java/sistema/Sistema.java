@@ -21,7 +21,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import Aplicacion.Interface;
+import main.java.sistema.*;
 import Aplicacion.SugerenciaPorTiempo;
 
 public class Sistema {
@@ -42,12 +42,9 @@ public class Sistema {
 		int datoInt = scan.nextInt();
 		return datoInt;
 	}
-	
-
-
 
 	public static void main(String[] args) throws Exception {
-		
+
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
 
 		int datoInt;
@@ -66,7 +63,7 @@ public class Sistema {
 			datoInt = ingresarDatoInt();
 
 			if (datoInt == 0)
-				estado--;
+				break;
 
 			localUser = userDAO.findById(datoInt);
 			idBuscado = localUser.getId();
@@ -88,13 +85,15 @@ public class Sistema {
 				System.out.println("Ingrese 1 -> Para Ver estado");
 				System.out.println("Ingrese 2 -> Para Ver Itinerario");
 				System.out.println("Ingrese 3 -> Para Suguerir promociones y atracciones");
-				System.out.println("Ingrese 4 -> Para a�dir mas dinero.");
-				System.out.println("Ingrese 5 -> Para a�dir mas tiempo.");
+				System.out.println("Ingrese 4 -> Para añdir mas dinero.");
+				System.out.println("Ingrese 5 -> Para añdir mas tiempo.");
 				System.out.println("Ingrese 0 -> Para salir");
 				do {
 					datoInt = ingresarDatoInt();
 					switch (datoInt) {
 					case 0:
+						System.out.println("Ingrese el Id de usuario correspondiente : ");
+						System.out.println("Ingrese '0' para finalizar el programa. : ");
 						salir = true;
 						break;
 					case 1:
@@ -118,6 +117,7 @@ public class Sistema {
 			}
 
 		} while (!salir);
+		System.out.println("Programa finalizado, garcias por Testear.");
 	}
 
 	public Sistema(String directorioUsuariosCSV, String directorioAtraccionesCSV, String directorioPromocionesCSV)
@@ -469,16 +469,14 @@ public class Sistema {
 				tiempoOcupado += atraccion.getTiempo();
 			}
 			printWriter.println("El usuario DNI: " + usuario.getId() + ", le gustan las atracciones del tipo de "
-					+ usuario.getTipoFavorito().toString() + ", ingresó con " + usuario.getDineroInicial()
-					+ " monedas y " + usuario.getTiempoInicial() + " horas inicialmente, se retiró con "
+					+ usuario.getTipoFavorito().toString() + ", ingresÃ³ con " + usuario.getDineroInicial()
+					+ " monedas y " + usuario.getTiempoInicial() + " horas inicialmente, se retirÃ³ con "
 					+ usuario.getDineroDisponible() + " monedas disponibles y " + usuario.getTiempoDisponible()
-					+ " horas disponibles. Gastó " + usuario.getCostoTotal() + " monedas y estuvo " + tiempoOcupado
+					+ " horas disponibles. GastÃ³ " + usuario.getCostoTotal() + " monedas y estuvo " + tiempoOcupado
 					+ " horas en atracciones.");
 		}
 		printWriter.close();
 	}
-
-
 
 	public static void main2(String[] args) throws Exception {
 
