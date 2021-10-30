@@ -1,5 +1,6 @@
 package main.java.sistema;
 
+import main.java.DAO.AtraccionDAO;
 import main.java.DAO.DAOFactory;
 import main.java.DAO.UsuarioDAO;
 import main.java.comparadores.ComparadorAtraccion;
@@ -20,27 +21,33 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Aplicacion.Interface;
+import Aplicacion.SugerenciaPorTiempo;
+
 public class Sistema {
 	private final List<Usuario> usuarios;
 	private final List<Atraccion> atracciones;
 	private final List<IPromocion> promociones;
 
-	private static int ingresarDatoInt() {
-		@SuppressWarnings("resource")
-		Scanner scan = new Scanner(System.in);
-		return scan.nextInt();
-	}
-
+	@SuppressWarnings("resource")
 	private static String ingresarDatoStr() {
-		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
-		return scan.nextLine();
+		String datoStr = scan.nextLine();
+		return datoStr;
 	}
 
-////////////////////////////////////////////////////////////////////////////////
+	@SuppressWarnings("resource")
+	private static int ingresarDatoInt() {
+		Scanner scan = new Scanner(System.in);
+		int datoInt = scan.nextInt();
+		return datoInt;
+	}
+	
+
+
 
 	public static void main(String[] args) throws Exception {
-
+		
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
 
 		int datoInt;
@@ -81,8 +88,8 @@ public class Sistema {
 				System.out.println("Ingrese 1 -> Para Ver estado");
 				System.out.println("Ingrese 2 -> Para Ver Itinerario");
 				System.out.println("Ingrese 3 -> Para Suguerir promociones y atracciones");
-				System.out.println("Ingrese 4 -> Para añdir mas dinero.");
-				System.out.println("Ingrese 5 -> Para añdir mas tiempo.");
+				System.out.println("Ingrese 4 -> Para aï¿½dir mas dinero.");
+				System.out.println("Ingrese 5 -> Para aï¿½dir mas tiempo.");
 				System.out.println("Ingrese 0 -> Para salir");
 				do {
 					datoInt = ingresarDatoInt();
@@ -111,10 +118,7 @@ public class Sistema {
 			}
 
 		} while (!salir);
-
 	}
-
-////////////////////////////////////////////////////////////////////////////////
 
 	public Sistema(String directorioUsuariosCSV, String directorioAtraccionesCSV, String directorioPromocionesCSV)
 			throws Exception {
@@ -474,7 +478,7 @@ public class Sistema {
 		printWriter.close();
 	}
 
-//----------------------------------------------------------------------------//
+
 
 	public static void main2(String[] args) throws Exception {
 

@@ -111,7 +111,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public List<Atraccion> findAll() {
 		try {
-			String sql = "SELECT * FROM Attraction";
+			String sql = "SELECT * FROM Attractions";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();

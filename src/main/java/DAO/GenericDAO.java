@@ -9,6 +9,6 @@ public interface GenericDAO<T> {
 	public int delete(T t);
 	
 	public int findMaxID();
-	public List<T> findAll();
+	public  List<T> findAll(); 
 	public int countAll();
 }
