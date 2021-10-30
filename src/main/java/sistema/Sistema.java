@@ -48,49 +48,77 @@ public class Sistema {
 
 	public static void main(String[] args) throws Exception {
 		
-		int entradaI = 0;
-		boolean ejecutar = true;
-		Pantalla consola = new Pantalla();
-		
-		consola.inicio();
-		while (ejecutar) {
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
 
-			consola.menu();
-			try {
-				entradaI = ingresarDatoInt();
-			} catch (NumberFormatException e) {
-				System.err.println("dato invalido. Por favor ingrese un numero.");
+		int datoInt;
+		int idBuscado;
+		Usuario localUser;
+
+		int estado = 1;
+
+		boolean salir = false;
+
+		System.out.println("Ingrese el Id de usuario correspondiente : ");
+		System.out.println("Ingrese '0' para finalizar el programa. : ");
+
+		do {
+
+			datoInt = ingresarDatoInt();
+
+			if (datoInt == 0)
+				estado--;
+
+			localUser = userDAO.findById(datoInt);
+			idBuscado = localUser.getId();
+
+			if (datoInt == idBuscado) {
+				estado++;
 			}
 
-			switch (entradaI) {
+			switch (estado) {
+			case 0:
+				salir = true;
+				System.out.println("Programa finalizado, garcias por Testear.");
+				break;
 			case 1:
-				consola.mostrarLosUsuarios();
+				System.out.println("Id no encontrado, digite nuevamente, '0' para salir.");
 				break;
 			case 2:
-				
-				consola.mostrarLasAtracciones();
-				break;
-			case 3:
-				consola.mostrarLasPromociones();
-				break;
-			case 4:
-				
-					
-			case 9:
-				consola.salir();
-				ejecutar = false;
-				break;
-			default:
-				consola.noDisponible();
+				System.out.println("Bienvenido Usuario : " + localUser.getUsuario() + " .");
+				System.out.println("Ingrese 1 -> Para Ver estado");
+				System.out.println("Ingrese 2 -> Para Ver Itinerario");
+				System.out.println("Ingrese 3 -> Para Suguerir promociones y atracciones");
+				System.out.println("Ingrese 4 -> Para a�dir mas dinero.");
+				System.out.println("Ingrese 5 -> Para a�dir mas tiempo.");
+				System.out.println("Ingrese 0 -> Para salir");
+				do {
+					datoInt = ingresarDatoInt();
+					switch (datoInt) {
+					case 0:
+						salir = true;
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					case 4:
+						break;
+					case 5:
+						break;
+					default:
+						System.out.println("Opcion Ingresada Incorrecta, digite neuvamnete.");
+						break;
+					}
+
+				} while (!salir);
+				salir = false;
 				break;
 			}
-		}
+
+		} while (!salir);
 	}
-		
-		
-	
-
-
 
 	public Sistema(String directorioUsuariosCSV, String directorioAtraccionesCSV, String directorioPromocionesCSV)
 			throws Exception {
@@ -177,7 +205,8 @@ public class Sistema {
 					if (promocion.getClass() == PromocionAxB.class) {
 						Atraccion atraccionAux = (Atraccion) promocion.retornarPromocion();
 						if (atraccionAux.hayEspacio()) {
-							valorTemporal = (int) (promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto());
+							valorTemporal = (int) (promocion.getAtraccionA().getCosto()
+									+ promocion.getAtraccionB().getCosto());
 
 							if ((costoActual + valorTemporal <= user.getDineroDisponible()) && (tiempoActual
 									+ promocion.getAtraccionA().getTiempo() + promocion.getAtraccionB().getTiempo()
@@ -259,7 +288,8 @@ public class Sistema {
 					&& (costoActual + atraccion.getCosto() <= user.getDineroDisponible())
 					&& (tiempoActual + atraccion.getTiempo() <= user.getTiempoDisponible())) {
 				user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, (int) atraccion.getCosto()));
-				//user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, atraccion.getCosto())); //este es el antiguo
+				// user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null,
+				// atraccion.getCosto())); //este es el antiguo
 			}
 		}
 
@@ -269,7 +299,8 @@ public class Sistema {
 					&& (costoActual + atraccion.getCosto() <= user.getDineroDisponible())
 					&& (tiempoActual + atraccion.getTiempo() <= user.getTiempoDisponible())) {
 				user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, (int) atraccion.getCosto()));
-				//user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null, atraccion.getCosto())); //este es el antiguo
+				// user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null,
+				// atraccion.getCosto())); //este es el antiguo
 			}
 		}
 	}
