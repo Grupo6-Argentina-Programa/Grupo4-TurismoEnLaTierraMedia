@@ -22,7 +22,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import main.java.sistema.*;
-import Aplicacion.SugerenciaPorTiempo;
 
 public class Sistema {
 	private final List<Usuario> usuarios;
@@ -57,7 +56,7 @@ public class Sistema {
 		boolean salir = false;
 
 		System.out.println("Ingrese el Id de usuario correspondiente : ");
-	
+
 		System.out.println("Ingrese '0' para finalizar el programa. : ");
 
 		do {
@@ -99,16 +98,16 @@ public class Sistema {
 						salir = true;
 						break;
 					case 1:
-						
-						
+
 						System.out.println(userDAO.findById(datoInt));
 						break;
 					case 2:
-						
-					 break;
+
+						break;
 					case 3:
 						consola.mostrarLasAtracciones();
-						consola.mostrarLasPromociones();;
+						consola.mostrarLasPromociones();
+						;
 						break;
 					case 4:
 						consola.agregarDinero();
@@ -423,7 +422,8 @@ public class Sistema {
 					if (atraccionA == null || atraccionB == null) {
 						throw new Exception("Una de las atracciones brindadas en el CSV no existe.");
 					}
-					promociones.add(new PromocionAbsoluta(atraccionA, atraccionB, Integer.parseInt(matcher.group(4))));
+					// promociones.add(new PromocionAbsoluta(atraccionA, atraccionB,
+					// Integer.parseInt(matcher.group(4))));
 				} else {
 					if (!matcher.group(5).equals("0")) {
 						for (Atraccion atraccionTemp : atracciones) {
@@ -440,8 +440,8 @@ public class Sistema {
 						if (atraccionA == null || atraccionB == null) {
 							throw new Exception("Una de las atracciones brindadas en el CSV no existe");
 						}
-						promociones.add(
-								new PromocionPorcentaje(atraccionA, atraccionB, Integer.parseInt(matcher.group(5))));
+						// promociones.add(new PromocionPorcentaje(atraccionA, atraccionB,
+						// Integer.parseInt(matcher.group(5))));
 					} else {
 						Atraccion atraccionC = null;
 						for (Atraccion atraccionTemp : atracciones) {
@@ -461,7 +461,7 @@ public class Sistema {
 						if (atraccionA == null || atraccionB == null || atraccionC == null) {
 							throw new Exception("Una de las atracciones brindadas en el CSV no existe");
 						}
-						promociones.add(new PromocionAxB(atraccionA, atraccionB, atraccionC));
+						// promociones.add(new PromocionAxB(atraccionA, atraccionB, atraccionC));
 					}
 				}
 			}
