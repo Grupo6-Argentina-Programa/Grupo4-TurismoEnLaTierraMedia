@@ -17,6 +17,7 @@ import main.java.usuarios.Usuario;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,6 +51,7 @@ public class Sistema {
 		int datoInt;
 		int idBuscado;
 		Usuario localUser;
+		
 
 		int estado = 1;
 
@@ -98,8 +100,8 @@ public class Sistema {
 						salir = true;
 						break;
 					case 1:
-
-						System.out.println(userDAO.findById(datoInt));
+						Usuario r= userDAO.findById(datoInt);
+						System.out.println("El Usuario "+r.getUsuario()+" posee "+ r.getDineroDisponible()+" monedas. Y tiene "+r.getTiempoDisponible()+"horas de tiempo libre");
 						break;
 					case 2:
 
@@ -115,7 +117,7 @@ public class Sistema {
 					case 5:
 						break;
 					default:
-						System.out.println("Opcion Ingresada Incorrecta, digite neuvamnete.");
+						System.out.println("Opcion Ingresada Incorrecta, digite nuevamnete.");
 						break;
 					}
 

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -95,7 +96,7 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
-	public void colocacionCorrectaDeIdAlCrearUsuario() {
+	public void alCrearUnNuevoUsuarioLoPuedoBuscarPorSuId() {
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
 		System.out.println("ultimo ID añadido :" + userDAO.findMaxID());
 		System.out.println("//---------------------------------------------//");
@@ -108,7 +109,9 @@ public class UsuarioDAOTest {
 		System.out.println("Se Inserta en base de datos");
 		userDAO.insert(u);
 		System.out.println("//---------------------------------------------//");
-		
+		Usuario usuario=userDAO.findByUsername("usuario");
+		Assert.assertEquals(usuario.getContraseña(),"cmcmc");
+
 	}
 
 }

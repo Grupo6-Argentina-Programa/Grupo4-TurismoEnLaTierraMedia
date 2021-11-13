@@ -8,6 +8,7 @@ import main.java.DAO.AtraccionDAO;
 import main.java.DAO.DAOFactory;
 import main.java.DAO.PromocionDAO;
 import main.java.DAO.UsuarioDAO;
+import main.java.sugeribles.Atraccion;
 import main.java.usuarios.Usuario;
 
 
@@ -70,8 +71,8 @@ public class Pantalla {
 		public void mostrarLasAtracciones() {
 		
 			AtraccionDAO atracctionDAO = DAOFactory.getAtraccionDAO();
-			
-			System.out.println(atracctionDAO.findAll());
+		
+			System.out.println("Se sugiere la siguiente atraccion:"+atracctionDAO.findAll().get(1));
 			
 		}
 		
@@ -79,7 +80,9 @@ public class Pantalla {
 		public void mostrarLasPromociones() {
 			PromocionDAO promotionDAO = DAOFactory.getPromocionDAO();
 			
-			System.out.println(promotionDAO.findAll());
+			
+			
+			System.out.println("O puede optar por la g"+promotionDAO.findAll().get(1));
 			
 			
 		}

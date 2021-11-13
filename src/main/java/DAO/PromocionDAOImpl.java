@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import jdbc.ConecctionProvider;
 import main.java.jdbc.ConnectionProvider;
 import main.java.sugeribles.promociones.*;
+import modelo.Pelicula;
 
 public class PromocionDAOImpl implements PromocionDAO {
 
@@ -143,5 +146,25 @@ public class PromocionDAOImpl implements PromocionDAO {
 	public Promocion findByID(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	public List<Promocion> BuscarPromocion() throws Exception {
+		try {
+			String sql = "SELECT p.type FROM Promotions p JOIN atraccion a WHERE  ";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultados = statement.executeQuery();
+
+			List<Promocion> promocionn = new ArrayList<Promocion>();
+        
+			while(resultados.next()) {
+			
+				promocionn.add(toPromociones(resultados));
+			}
+			return promocionn;
+		} catch (Exception e) {
+			throw new Exception();
+		}
 	}
 }

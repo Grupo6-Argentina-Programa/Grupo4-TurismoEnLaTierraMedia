@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -148,4 +149,33 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		return new Atraccion(resultados.getInt(1), resultados.getString(2), resultados.getDouble(3),
 				resultados.getDouble(4), resultados.getInt(5), resultados.getInt(6));
 	}
+
+
+	public List<Atraccion> buscarAtraccion(int atra)throws Exception {
+		try {
+			String sql = "SELECT * FROM Attractions a JOIN Users u  ON WHERE CALIFICACION = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, atra);
+			ResultSet resultados = statement.executeQuery();
+
+			List<Atraccion> peliculas = new ArrayList<Atraccion>();
+        
+			while(resultados.next()) {
+			
+				peliculas.add(toAtracciones(resultados));
+			}
+			return peliculas;
+		} catch (Exception e) {
+			throw new Exception();
+		}
+	}
+
+
+
+
+
+
+
+
 }

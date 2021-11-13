@@ -13,3 +13,6 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
 	public abstract char[] update(int i);
 	
 }
+
+
+
