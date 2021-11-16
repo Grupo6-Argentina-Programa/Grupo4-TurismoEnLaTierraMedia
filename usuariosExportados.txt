@@ -1,4 +1,0 @@
-El usuario DNI: 41456213, le gustan las atracciones del tipo de Paisaje, ingresó con 7 monedas y 10.0 horas inicialmente, se retiró con 7 monedas disponibles y 10.0 horas disponibles. Gastó 0 monedas y estuvo 0.0 horas en atracciones.
-El usuario DNI: 41456214, le gustan las atracciones del tipo de Adventura, ingresó con 9 monedas y 15.0 horas inicialmente, se retiró con 9 monedas disponibles y 15.0 horas disponibles. Gastó 0 monedas y estuvo 0.0 horas en atracciones.
-El usuario DNI: 41456215, le gustan las atracciones del tipo de Paisaje, ingresó con 100 monedas y 123.0 horas inicialmente, se retiró con 100 monedas disponibles y 123.0 horas disponibles. Gastó 0 monedas y estuvo 0.0 horas en atracciones.
-El usuario DNI: 35712346, le gustan las atracciones del tipo de Degustacion, ingresó con 8 monedas y 15.0 horas inicialmente, se retiró con 8 monedas disponibles y 15.0 horas disponibles. Gastó 0 monedas y estuvo 0.0 horas en atracciones.
