@@ -15,19 +15,19 @@ import modelos.Usuario;
 public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Override
-	public int insert(Usuario user) {
+	public int insert(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO Users (username, password, coins, "
-					+ "timeHs, positionX, positionY) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Usuario (usuario, contraseña, dineroDisponible, "
+					+ "tiempoDisponible, posicionX, posicionY) VALUES (?, ?, ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, user.getUsuario());
-			statement.setString(2, user.getContraseña());
-			statement.setDouble(3, user.getDineroDisponible());
-			statement.setDouble(4, user.getTiempoDisponible());
-			statement.setInt(5, user.getPosicionX());
-			statement.setInt(6, user.getPosicionY());
+			statement.setString(1, usuario.getUsuario());
+			statement.setString(2, usuario.getContraseña());
+			statement.setDouble(3, usuario.getDineroDisponible());
+			statement.setDouble(4, usuario.getTiempoDisponible());
+			statement.setInt(5, usuario.getPosicionX());
+			statement.setInt(6, usuario.getPosicionY());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -37,20 +37,20 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public int update(Usuario user) {
+	public int update(Usuario usuario) {
 		try {
-			String sql = "UPDATE Users SET username = ?, password = ?, coins = ?,"
-					+ " timeHs = ?, positionX = ?, positionY = ? WHERE id = ?";
+			String sql = "UPDATE Usuario SET usuario = ?, contraseña = ?, dineroDisponible = ?,"
+					+ " tiempoDisponible = ?, posicionX = ?, posicionY = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, user.getUsuario());
-			statement.setString(2, user.getContraseña());
-			statement.setDouble(3, user.getDineroDisponible());
-			statement.setDouble(4, user.getTiempoDisponible());
-			statement.setInt(5, user.getPosicionX());
-			statement.setInt(6, user.getPosicionY());
-			statement.setInt(7, user.getId());
+			statement.setString(1, usuario.getUsuario());
+			statement.setString(2, usuario.getContraseña());
+			statement.setDouble(3, usuario.getDineroDisponible());
+			statement.setDouble(4, usuario.getTiempoDisponible());
+			statement.setInt(5, usuario.getPosicionX());
+			statement.setInt(6, usuario.getPosicionY());
+			statement.setInt(7, usuario.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -60,13 +60,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public int delete(Usuario user) {
+	public int delete(Usuario usuario) {
 		try {
-			String sql = "DELETE FROM Users WHERE id = ?";
+			String sql = "DELETE FROM Usuario WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, user.getId());
+			statement.setInt(1, usuario.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -78,62 +78,62 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findById(int id) {
 		try {
-			String sql = "SELECT * FROM Users WHERE id = ?";
+			String sql = "SELECT * FROM Usuario WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, id);
 			ResultSet resultados = statement.executeQuery();
 
-			Usuario user = null;
+			Usuario usuario = null;
 
 			if (resultados.next()) {
-				user = toUsuarios(resultados);
+				usuario = toUsuarios(resultados);
 			}
 
-			return user;
+			return usuario;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
 
 	@Override
-	public Usuario findByUsername(String username) {
+	public Usuario findByUsername(String usuario1) {
 		try {
-			String sql = "SELECT * FROM Users WHERE username = ?";
+			String sql = "SELECT * FROM Usuario WHERE usuario = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, username);
+			statement.setString(1, usuario1);
 			ResultSet resultados = statement.executeQuery();
 
-			Usuario user = null;
+			Usuario usuario = null;
 
 			if (resultados.next()) {
-				user = toUsuarios(resultados);
+				usuario = toUsuarios(resultados);
 			}
 
-			return user;
+			return usuario;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
 
 	@Override
-	public int findId(String username, String password) {
+	public int findId(String usuario, String contraseña) {
 		try {
-			String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
+			String sql = "SELECT * FROM Usuario WHERE usuario = ? AND contraseña = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, username);
-			statement.setString(2, password);
+			statement.setString(1, usuario);
+			statement.setString(2, contraseña);
 			ResultSet resultados = statement.executeQuery();
 
-			Usuario user = null;
+			Usuario usuario1 = null;
 
 			if (resultados.next()) {
-				user = toUsuarios(resultados);
+				usuario1 = toUsuarios(resultados);
 			}
 
-			return user.getId();
+			return usuario1.getId();
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -142,7 +142,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int findMaxID() {
 		try {
-			String sql = "SELECT MAX(id) AS id FROM Users";
+			String sql = "SELECT MAX(id) AS id FROM Usuario";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -155,7 +155,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public List<Usuario> findAll() {
 		try {
-			String sql = "SELECT * FROM Users";
+			String sql = "SELECT * FROM Usuario";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -174,7 +174,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int countAll() {
 		try {
-			String sql = "SELECT COUNT(1) AS TOTAL FROM Users";
+			String sql = "SELECT COUNT(1) AS TOTAL FROM Usuario";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();

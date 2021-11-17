@@ -21,7 +21,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	@Override
 	public int insert(Promocion promocion) {
 		try {
-			String sql = "INSERT INTO Promotions (type,numbreIdAttr1,numbreIdAttr2, numbreIdAttrPlus, porcentageDisc,totalCost) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Promocion (tipo,atraccionA,atraccionB, atraccionP, porcentaje,totalCosto) VALUES (?, ?, ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -44,8 +44,8 @@ public class PromocionDAOImpl implements PromocionDAO {
 	public int update(Promocion promocion) {
 
 		try {
-			String sql = "UPDATE Promotions SET type = ?, numbreIdAttr1 = ?,"
-					+ " numbreIdAttr2 = ?, numbreIdAttrPlus = ?, porcentageDisc = ?,totalCost=? WHERE id = ?";
+			String sql = "UPDATE Promocion SET tipo = ?, atraccionA = ?,"
+					+ " atraccionB = ?, atraccionP = ?, porcentaje = ?,totalCosto=? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, promocion.getTipo());
@@ -67,7 +67,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	@Override
 	public int delete(Promocion prom) {
 		try {
-			String sql = "DELETE FROM Promotions WHERE id = ?";
+			String sql = "DELETE FROM Promocion WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -89,7 +89,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	@Override
 	public List<Promocion> findAll() {
 		try {
-			String sql = "SELECT * FROM Promotions";
+			String sql = "SELECT * FROM Promocion";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -131,7 +131,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	@Override
 	public int countAll() {
 		try {
-			String sql = "SELECT COUNT(1) AS TOTAL FROM Promotions";
+			String sql = "SELECT COUNT(1) AS TOTAL FROM Promocion";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -153,7 +153,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	public List<Promocion> BuscarPromocion() throws Exception {
 		try {
-			String sql = "SELECT p.type FROM Promotions p JOIN atraccion a WHERE  ";
+			String sql = "SELECT p.tipo FROM Promocion p JOIN Atraccion a WHERE  ";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();

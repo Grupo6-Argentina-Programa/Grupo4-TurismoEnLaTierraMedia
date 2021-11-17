@@ -2,6 +2,8 @@ package DAO;
 
 import java.util.List;
 
+import modelos.Usuario;
+
 public interface GenericDAO<T> {
 
 	public int insert(T t);
@@ -11,4 +13,5 @@ public interface GenericDAO<T> {
 	public int findMaxID();
 	public  List<T> findAll(); 
 	public int countAll();
+	
 }

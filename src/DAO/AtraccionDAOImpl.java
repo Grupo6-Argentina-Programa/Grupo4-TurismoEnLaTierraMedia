@@ -16,7 +16,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int insert(Atraccion atraccion) {
 		try {
-			String sql = "INSERT INTO Attractions (attractionName, costInCoins, timeHs, capacityMax, capacity, positionX, positionY) "
+			String sql = "INSERT INTO Atraccion (nombre, costo, costoPorTiempoEnHoras, cupoMaximo, cupo, posicionX, posicionY) "
 					+ "VALUES (?,?,?,?,?,?)";
 			Connection conn = ConnectionProvider.getConnection();
 
@@ -37,19 +37,19 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	}
 
 	@Override
-	public int update(Atraccion attaction) {
+	public int update(Atraccion atraccion) {
 		try {
-			String sql = "UPDATE Atttractions SET attractioName = ?, costInCoins = ?,"
-					+ " costTimeInHs = ?, positionX = ?, positionY = ? WHERE id = ?";
+			String sql = "UPDATE Atraccion SET nombre = ?, costo = ?,"
+					+ " costoPorTiempoEnHoras = ?, posicionX = ?, posicionY = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, attaction.getNombre());
-			statement.setDouble(3, attaction.getCosto());
-			statement.setDouble(4, attaction.getTiempo());
-			statement.setInt(5, attaction.getPosicionX());
-			statement.setInt(6, attaction.getPosicionY());
-			statement.setInt(7, attaction.getId());
+			statement.setString(1, atraccion.getNombre());
+			statement.setDouble(3, atraccion.getCosto());
+			statement.setDouble(4, atraccion.getTiempo());
+			statement.setInt(5, atraccion.getPosicionX());
+			statement.setInt(6, atraccion.getPosicionY());
+			statement.setInt(7, atraccion.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -59,13 +59,13 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	}
 
 	@Override
-	public int delete(Atraccion attraction) {
+	public int delete(Atraccion atraccion) {
 		try {
-			String sql = "DELETE FROM Attractions WHERE id = ?";
+			String sql = "DELETE FROM Atraccion WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, attraction.getId());
+			statement.setInt(1, atraccion.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -77,19 +77,19 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public Atraccion findByID(Integer id) {
 		try {
-			String sql = "SELECT * FROM Attractions WHERE id = ?";
+			String sql = "SELECT * FROM Atraccion WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, id);
 			ResultSet resultados = statement.executeQuery();
 
-			Atraccion attraction = null;
+			Atraccion atraccion = null;
 
 			if (resultados.next()) {
-				attraction = toAtracciones(resultados);
+				atraccion = toAtracciones(resultados);
 			}
 
-			return attraction;
+			return atraccion;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -98,7 +98,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int findMaxID() {
 		try {
-			String sql = "SELECT MAX(id) AS id FROM Attractions";
+			String sql = "SELECT MAX(id) AS id FROM Atraccion";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -112,17 +112,17 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public List<Atraccion> findAll() {
 		try {
-			String sql = "SELECT * FROM Attractions";
+			String sql = "SELECT * FROM Atraccion";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
 
-			List<Atraccion> attractions = new LinkedList<Atraccion>();
+			List<Atraccion> atraccion = new LinkedList<Atraccion>();
 			while (resultados.next()) {
-				attractions.add(toAtracciones(resultados));
+				atraccion.add(toAtracciones(resultados));
 			}
 
-			return attractions;
+			return atraccion;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -131,7 +131,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int countAll() {
 		try {
-			String sql = "SELECT COUNT(1) AS TOTAL FROM Attractios";
+			String sql = "SELECT COUNT(1) AS TOTAL FROM Atraccion";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -153,7 +153,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 
 	public List<Atraccion> buscarAtraccion(int atra)throws Exception {
 		try {
-			String sql = "SELECT * FROM Attractions a JOIN Users u  ON WHERE CALIFICACION = ?";
+			String sql = "SELECT * FROM Atraccion a JOIN Usuario u  ON WHERE CALIFICACION = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, atra);
