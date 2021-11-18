@@ -40,92 +40,7 @@ public class Sistema {
 		return datoInt;
 	}
 
-	public static void main(String[] args) throws Exception {
 
-		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-		// Pantalla consola = new Pantalla();
-
-		int datoInt;
-		int idBuscado;
-		Usuario localUser;
-
-		int estado = 1;
-
-		boolean salir = false;
-
-		System.out.println("Ingrese el Id de usuario correspondiente : ");
-
-		System.out.println("Ingrese '0' para finalizar el programa. : ");
-
-		do {
-
-			datoInt = ingresarDatoInt();
-
-			if (datoInt == 0)
-				break;
-
-			localUser = userDAO.findById(datoInt);
-			idBuscado = localUser.getId();
-
-			if (datoInt == idBuscado) {
-				estado++;
-			}
-
-			switch (estado) {
-			case 0:
-				salir = true;
-				System.out.println("Programa finalizado, garcias por Testear.");
-				break;
-			case 1:
-				System.out.println("Id no encontrado, digite nuevamente, '0' para salir.");
-				break;
-			case 2:
-				System.out.println("Bienvenido Usuario : " + localUser.getUsuario() + " .");
-				System.out.println("Ingrese 1 -> Para Ver estado");
-				System.out.println("Ingrese 2 -> Para Ver Itinerario");
-				System.out.println("Ingrese 3 -> Para Suguerir promociones y atracciones");
-				System.out.println("Ingrese 4 -> Para añdir mas dinero.");
-				System.out.println("Ingrese 5 -> Para añdir mas tiempo.");
-				System.out.println("Ingrese 0 -> Para salir");
-				do {
-					datoInt = ingresarDatoInt();
-					switch (datoInt) {
-					case 0:
-						System.out.println("Ingrese el Id de usuario correspondiente : ");
-						System.out.println("Ingrese '0' para finalizar el programa. : ");
-						salir = true;
-						break;
-					case 1:
-						Usuario r = userDAO.findById(datoInt);
-						System.out.println("El Usuario " + r.getUsuario() + " posee " + r.getDineroDisponible()
-								+ " monedas. Y tiene " + r.getTiempoDisponible() + "horas de tiempo libre");
-						break;
-					case 2:
-
-						break;
-					case 3:
-						// consola.mostrarLasAtracciones();
-						// consola.mostrarLasPromociones();
-						;
-						break;
-					case 4:
-						// consola.agregarDinero();
-						break;
-					case 5:
-						break;
-					default:
-						System.out.println("Opcion Ingresada Incorrecta, digite nuevamnete.");
-						break;
-					}
-
-				} while (!salir);
-				salir = false;
-				break;
-			}
-
-		} while (!salir);
-		System.out.println("Programa finalizado, garcias por Testear.");
-	}
 
 	public Sistema(String directorioUsuariosCSV, String directorioAtraccionesCSV, String directorioPromocionesCSV)
 			throws Exception {
@@ -145,8 +60,8 @@ public class Sistema {
 		 * +"----------------------------------------------------"
 		 * +"----------------------------------------------------");
 		 * System.out.println("Usuario DNI numero: " + usuario.getDNI());
-		 * sugerirPromociones(usuario); sugerirAtracciones(usuario); }
-		 */
+		 * sugerirPromociones(usuario); sugerirAtracciones(usuario); }*/
+		 
 	}
 
 //----------------------------------------------------------------------------//
@@ -488,7 +403,7 @@ public class Sistema {
 		printWriter.close();
 	}
 
-	public static void main2(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 
 		Sistema sistema = new Sistema("src/resources/usuarios.csv", "src/resources/atracciones.csv",
 				"src/resources/promociones.csv");
