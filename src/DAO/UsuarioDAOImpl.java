@@ -17,13 +17,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int insert(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO Usuario (usuario, contraseña, dineroDisponible, "
+			String sql = "INSERT INTO Usuario (usuario, contrasenia, dineroDisponible, "
 					+ "tiempoDisponible, posicionX, posicionY) VALUES (?, ?, ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getUsuario());
-			statement.setString(2, usuario.getContraseña());
+			statement.setString(2, usuario.getContrasenia());
 			statement.setDouble(3, usuario.getDineroDisponible());
 			statement.setDouble(4, usuario.getTiempoDisponible());
 			statement.setInt(5, usuario.getPosicionX());
@@ -39,13 +39,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int update(Usuario usuario) {
 		try {
-			String sql = "UPDATE Usuario SET usuario = ?, contraseña = ?, dineroDisponible = ?,"
+			String sql = "UPDATE Usuario SET usuario = ?, contraseï¿½a = ?, dineroDisponible = ?,"
 					+ " tiempoDisponible = ?, posicionX = ?, posicionY = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getUsuario());
-			statement.setString(2, usuario.getContraseña());
+			statement.setString(2, usuario.getContrasenia());
 			statement.setDouble(3, usuario.getDineroDisponible());
 			statement.setDouble(4, usuario.getTiempoDisponible());
 			statement.setInt(5, usuario.getPosicionX());
@@ -118,13 +118,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public int findId(String usuario, String contraseña) {
+	public int findId(String usuario, String contrasenia) {
 		try {
-			String sql = "SELECT * FROM Usuario WHERE usuario = ? AND contraseña = ?";
+			String sql = "SELECT * FROM Usuario WHERE usuario = ? AND contraseï¿½a = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario);
-			statement.setString(2, contraseña);
+			statement.setString(2, contrasenia);
 			ResultSet resultados = statement.executeQuery();
 
 			Usuario usuario1 = null;

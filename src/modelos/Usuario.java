@@ -10,7 +10,7 @@ public class Usuario {
 
 	private final int id;
 	private String usuario;
-	private String contraseña;
+	private String contrasenia;
 	private double dineroInicial; // combinar
 	private double dineroDisponible;
 	private double tiempoInicial; // combinar
@@ -24,10 +24,10 @@ public class Usuario {
 	private final List<Atraccion> atracciones = new ArrayList<>();
 
 	//Constructor por defecto
-	public Usuario(String usuario, String contraseña, double dineroDisponible, double tiempoDisponible, int posicionX,
+	public Usuario(String usuario, String contrasenia, double dineroDisponible, double tiempoDisponible, int posicionX,
 			int posicionY) {
 		this.usuario = usuario;
-		this.contraseña = contraseña;
+		this.contrasenia = contrasenia;
 		this.dineroInicial = dineroDisponible;
 		this.dineroDisponible = dineroDisponible;
 		this.tiempoInicial = tiempoDisponible;
@@ -40,11 +40,11 @@ public class Usuario {
 	}
 
 	//CONSTRUCTOR SOLO USADO POR DAO
-	public Usuario(int id, String usuario, String contraseña, double dineroDisponible, double tiempoDisponible,
+	public Usuario(int id, String usuario, String contrasenia, double dineroDisponible, double tiempoDisponible,
 			int posicionX, int posicionY) {
 		this.id = id;
 		this.usuario = usuario;
-		this.contraseña = contraseña;
+		this.contrasenia = contrasenia;
 		this.dineroInicial = dineroDisponible;
 		this.dineroDisponible = dineroDisponible;
 		this.tiempoInicial = tiempoDisponible;
@@ -72,8 +72,8 @@ public class Usuario {
 		return usuario;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
 	public double getDineroInicial() {
@@ -114,8 +114,8 @@ public class Usuario {
 		this.usuario = usuario;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 
 	public void setDineroDisponible(double dineroDisponible) {
@@ -208,7 +208,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [DNI=" + id + ", usuario=" + usuario + ", contraseña=" + contraseña + ", dineroInicial="
+		return "Usuario [DNI=" + id + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", dineroInicial="
 				+ dineroInicial + ", dineroDisponible=" + dineroDisponible + ", tiempoInicial=" + tiempoInicial
 				+ ", tiempoDisponible=" + tiempoDisponible + ", posicionX=" + posicionX + ", posicionY=" + posicionY
 				+ ", costoTotal=" + costoTotal + ", tipoFavorito=" + tipoFavorito + ", atracciones=" + atracciones
