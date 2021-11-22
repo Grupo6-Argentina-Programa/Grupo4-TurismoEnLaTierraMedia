@@ -116,9 +116,31 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
+	
+	@Override
+	public Usuario findByUsernameAndPassword (String username, String password) {
+		try {
+			String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, username);
+			statement.setString(2, password);
+			ResultSet resultados = statement.executeQuery();
+
+			Usuario user = null;
+
+			if (resultados.next()) {
+				user = toUsuarios(resultados);
+			}
+
+			return user;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 
 	@Override
-	public int findId(String username, String password) {
+	public int findUserId(String username, String password) {
 		try {
 			String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
 			Connection conn = ConnectionProvider.getConnection();
