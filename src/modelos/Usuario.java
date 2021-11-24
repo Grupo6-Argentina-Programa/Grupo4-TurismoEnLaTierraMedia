@@ -36,7 +36,7 @@ public class Usuario {
 		this.posicionY = posicionY;
 
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-		this.id = userDAO.findMaxID() + 1;
+		this.id = userDAO.findLastID() + 1;
 	}
 
 	//CONSTRUCTOR SOLO USADO POR DAO

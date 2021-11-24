@@ -96,7 +96,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	}
 
 	@Override
-	public int findMaxID() {
+	public int findLastID() {
 		try {
 			String sql = "SELECT MAX(id) AS id FROM Atraccion";
 			Connection conn = ConnectionProvider.getConnection();

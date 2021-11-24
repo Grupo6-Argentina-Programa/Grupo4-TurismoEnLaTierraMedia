@@ -81,7 +81,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	@Override
-	public int findMaxID() {
+	public int findLastID() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

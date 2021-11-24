@@ -140,7 +140,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public int findMaxID() {
+	public int findLastID() {
 		try {
 			String sql = "SELECT MAX(id) AS id FROM Usuario";
 			Connection conn = ConnectionProvider.getConnection();

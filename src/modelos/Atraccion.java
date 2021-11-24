@@ -26,7 +26,7 @@ public class Atraccion implements Comparable<Atraccion> {
 		this.cupoMaximo = cupoMaximo;
 		
 		AtraccionDAO AttrDAO = DAOFactory.getAtraccionDAO();
-		this.id = AttrDAO.findMaxID() + 1;
+		this.id = AttrDAO.findLastID() + 1;
     }
     
   //CONSTRUCTOR SOLO USADO POR DAO

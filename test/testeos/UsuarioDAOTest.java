@@ -96,7 +96,7 @@ public class UsuarioDAOTest {
 	@Test
 	public void alCrearUnNuevoUsuarioLoPuedoBuscarPorSuId() {
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-		System.out.println("ultimo ID añadido :" + userDAO.findMaxID());
+		System.out.println("ultimo ID añadido :" + userDAO.findLastID());
 		System.out.println("//---------------------------------------------//");
 		
 		Usuario u = new Usuario("usuario", "cccc", 36, 12, 32, 32);
