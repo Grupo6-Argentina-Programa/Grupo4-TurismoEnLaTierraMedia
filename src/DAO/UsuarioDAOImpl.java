@@ -118,9 +118,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public int findId(String usuario, String contrasenia) {
+	public int findUserId(String usuario, String contrasenia) {
 		try {
-			String sql = "SELECT * FROM Usuario WHERE usuario = ? AND contrase�a = ?";
+			String sql = "SELECT * FROM Usuario WHERE usuario = ? AND contrasenia = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario);
@@ -193,9 +193,4 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				resultados.getDouble(4), resultados.getDouble(5), resultados.getInt(6), resultados.getInt(7));
 	}
 
-	@Override
-	public char[] update(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -65,8 +65,7 @@ public class Tests {
 		atraccionList.add(new Atraccion("Atraccion prueba 7", 10, 4, 7, ENUMTIPO.DEGUSTACION));
 		atraccionList.sort(new AtraccionComparador());
 
-		Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv",
-				"src/main/resources/promociones.csv");
+		//Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv","src/main/resources/promociones.csv");
 		assertEquals(atraccionList, sistema.getAtracciones());
 	}
 
@@ -89,16 +88,14 @@ public class Tests {
 		// promociones.add(new PromocionPorcentaje(atraccionList.get(5),
 		// atraccionList.get(6), 50));
 		promociones.sort(new PromocionComparador());
-		Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv",
-				"src/main/resources/promociones.csv");
+		Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv","src/main/resources/promociones.csv");
 		assertEquals(promociones, sistema.getPromociones());
 		sistema.exportarUsuarios();
 	}
 
 	@Test
 	public void testSistema() throws Exception {
-		Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv",
-				"src/main/resources/promociones.csv");
+		//Sistema sistema = new Sistema("src/main/resources/usuarios.csv", "src/main/resources/atracciones.csv","src/main/resources/promociones.csv");
 		sistema.getUsuarios().get(0).getAtracciones().forEach(System.out::println);
 		//assertEquals(1, sistema.getUsuarios().get(0).getDineroDisponible());
 		assertEquals(3.0, sistema.getUsuarios().get(0).getTiempoDisponible(), 0);

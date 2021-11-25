@@ -55,7 +55,7 @@ public class ItinerarioDAOImpl implements UsuarioDAO{
 	}
 
 	@Override
-	public int findId(String username, String password) {
+	public int findUserId(String username, String password) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

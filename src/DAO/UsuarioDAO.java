@@ -8,10 +8,8 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
 	
 	public abstract Usuario findByUsername(String username);
 	
-	public abstract int findId (String username, String password);
+	public abstract int findUserId (String username, String password);
 
-	public abstract char[] update(int i);
-	
 }
 
 

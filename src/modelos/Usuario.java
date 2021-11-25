@@ -8,7 +8,7 @@ import modelosEnum.ENUMTIPO;
 
 public class Usuario {
 
-	private final int id;
+	private int id;
 	private String usuario;
 	private String contrasenia;
 	private double dineroInicial; // combinar
@@ -23,7 +23,7 @@ public class Usuario {
 	private ENUMTIPO tipoFavorito = ENUMTIPO.SinDefinir;
 	private final List<Atraccion> atracciones = new ArrayList<>();
 
-	//Constructor por defecto
+	// Constructor por defecto
 	public Usuario(String usuario, String contrasenia, double dineroDisponible, double tiempoDisponible, int posicionX,
 			int posicionY) {
 		this.usuario = usuario;
@@ -39,7 +39,7 @@ public class Usuario {
 		this.id = userDAO.findLastID() + 1;
 	}
 
-	//CONSTRUCTOR SOLO USADO POR DAO
+	// CONSTRUCTOR SOLO USADO POR DAO
 	public Usuario(int id, String usuario, String contrasenia, double dineroDisponible, double tiempoDisponible,
 			int posicionX, int posicionY) {
 		this.id = id;
@@ -53,7 +53,7 @@ public class Usuario {
 		this.posicionY = posicionY;
 	}
 
-	//DEPURAR
+	// DEPURAR
 	public Usuario(int DNI, ENUMTIPO tipoFavorito, int dineroInicial, double tiempoDisponible) {
 		this.id = DNI;
 		this.tipoFavorito = tipoFavorito;
@@ -64,74 +64,89 @@ public class Usuario {
 	}
 
 ////////////////////////////////////////////////////////////////////////////////
+
 	public int getId() {
 		return id;
 	}
 
-	public  String getUsuario() {
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUsuario() {
 		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getContrasenia() {
 		return contrasenia;
 	}
 
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+
 	public double getDineroInicial() {
 		return dineroInicial;
+	}
+
+	public void setDineroInicial(double dineroInicial) {
+		this.dineroInicial = dineroInicial;
 	}
 
 	public double getDineroDisponible() {
 		return dineroDisponible;
 	}
 
+	public void setDineroDisponible(double dineroDisponible) {
+		this.dineroDisponible = dineroDisponible;
+	}
+
 	public double getTiempoInicial() {
 		return tiempoInicial;
+	}
+
+	public void setTiempoInicial(double tiempoInicial) {
+		this.tiempoInicial = tiempoInicial;
 	}
 
 	public double getTiempoDisponible() {
 		return tiempoDisponible;
 	}
 
-	public int getPosicionX() {
-		return posicionX;
-	}
-
-	public int getPosicionY() {
-		return posicionY;
-	}
-
-	public int getCostoTotal() {
-		return costoTotal;
-	}
-
-	public ENUMTIPO getTipoFavorito() {
-		return tipoFavorito;
-	}
-
-////////////////////////////////////////////////////////////////////////////////
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
-
-	public void setDineroDisponible(double dineroDisponible) {
-		this.dineroDisponible = dineroDisponible;
-	}
-
 	public void setTiempoDisponible(double tiempoDisponible) {
 		this.tiempoDisponible = tiempoDisponible;
+	}
+
+	public int getPosicionX() {
+		return posicionX;
 	}
 
 	public void setPosicionX(int posicionX) {
 		this.posicionX = posicionX;
 	}
 
+	public int getPosicionY() {
+		return posicionY;
+	}
+
 	public void setPosicionY(int posicionY) {
 		this.posicionY = posicionY;
+	}
+
+	public int getCostoTotal() {
+		return costoTotal;
+	}
+
+	public void setCostoTotal(int costoTotal) {
+		this.costoTotal = costoTotal;
+	}
+
+	public ENUMTIPO getTipoFavorito() {
+		return tipoFavorito;
 	}
 
 	public void setTipoFavorito(ENUMTIPO tipoFavorito) {
