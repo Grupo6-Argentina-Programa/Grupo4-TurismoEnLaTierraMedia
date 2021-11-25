@@ -1,18 +1,20 @@
 package modelos;
 
+import java.util.Objects;
+
 public class Itinerario {
 	private int Id = 0;
 	private int IdUsuario;
 	private int IdAtraccion;
 
-	//Constructor Standart
+	// Constructor Standard
 	public Itinerario(int IdUsuario, int IdAtraccion) {
 		super();
 		this.IdUsuario = IdUsuario;
 		this.IdAtraccion = IdAtraccion;
 	}
-	
-	//Constructor Utilizado por DAO
+
+	// Constructor Utilizado por DAO
 	public Itinerario(int Id, int IdUsuario, int IdAtraccion) {
 		super();
 		this.Id = Id;
@@ -36,6 +38,24 @@ public class Itinerario {
 		this.Id = Id;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(Id, IdAtraccion, IdUsuario);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Itinerario other = (Itinerario) obj;
+		return Id == other.Id && IdAtraccion == other.IdAtraccion && IdUsuario == other.IdUsuario;
+	}
+
 	// En el Sql la Id inicial es 1, por lo tnato si alguna Id de Itinerario ...
 	// ... es Igual a 0 quiere decir que no se actualizo.
+
 }
