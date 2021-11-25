@@ -51,6 +51,8 @@ public class Usuario {
 		this.tiempoDisponible = tiempoDisponible;
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
+		
+		
 	}
 
 	// DEPURAR

@@ -57,7 +57,7 @@ public class Sistema {
 		PromocionDAO promocionesDAO = DAOFactory.getPromocionDAO();
 		promociones = promocionesDAO.findAll();
 	}
-	
+
 	
 
 //----------------------------------------------------------------------------//
