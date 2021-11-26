@@ -3,6 +3,7 @@ package testeos;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -85,9 +86,7 @@ public class UsuarioDAOTest {
 		String password = "aaaa";
 
 		int idObtenida = userDAO.findUserId(username, password);
-		System.out.println(idObtenida);
 		int idEsperada = 1;
-		System.out.println(idEsperada);
 
 		assertEquals(idObtenida, idEsperada);
 	}
@@ -113,68 +112,63 @@ public class UsuarioDAOTest {
 
 		assertEquals(idUsuarioLocal, ultimaIdAniadida);
 
-		Usuario userBD = userDAO.findById(ultimaIdAniadida);
-		
-		assertTrue(userLocal.equals(userBD));
+		Usuario usuarioDB = userDAO.findById(ultimaIdAniadida);
 
+		assertTrue(userLocal.equals(usuarioDB));
+
+		userDAO.delete(usuarioDB);
 	}
 
-	/*
-	 * 
-	 * 
-	 * System.out.println(); System.out.
-	 * println("Crear un Usuario locar y asignarle el valor del Usuario ID2");
-	 * Usuario usuario1 = userDAO.findById(2); System.out.println(usuario1);
-	 * System.out.println("//---------------------------------------------//");
-	 * 
-	 * System.out.println();
-	 * System.out.println("Busqueda del usuario de nombre hobbit3 : "); Usuario
-	 * usuario2 = userDAO.findByUsername("hobbit3"); System.out.println(usuario2);
-	 * System.out.println("//---------------------------------------------//");
-	 * 
-	 * System.out.println(); System.out.println("Ingresar a DB el usuario Insert");
-	 * Usuario usuario3 = new Usuario ("Insert", "bbbb", 36, 12, 32, 32);
-	 * userDAO.insert(usuario3);
-	 * System.out.println(userDAO.findByUsername("Insert"));
-	 * System.out.println("//---------------------------------------------//");
-	 * 
-	 * System.out.println(); int id = userDAO.findId("Insert", "bbbb");
-	 * System.out.println("Busca el Id del Usuario Insert = " + id);
-	 * System.out.println("//---------------------------------------------//");
-	 * 
-	 * System.out.println();
-	 * System.out.println("Setea el nombre, finalizando actualiza el dato.");
-	 * usuario3.setUsuario("Insert2"); userDAO.update(usuario3);
-	 * System.out.println(usuario3);
-	 * System.out.println(userDAO.findById(usuario3.getId()));
-	 * System.out.println("//---------------------------------------------//");
-	 * 
-	 * System.out.println();
-	 * System.out.println("Elimina el Usuario anteriormente creado.");
-	 * userDAO.delete(usuario3);
-	 * System.out.println(userDAO.findByUsername("Insert2"));
-	 * System.out.println("//---------------------------------------------//");
-	 * 
-	 * System.out.println("ultimo ID añadido :" + userDAO.findMaxID()); }
-	 */
+	@Test
+	public void deletearUsuarioDBTest() {
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
 
-	/*
-	 * @Test public void alCrearUnNuevoUsuarioLoPuedoBuscarPorSuId() { UsuarioDAO
-	 * userDAO = DAOFactory.getUsuarioDAO();
-	 * System.out.println("ultimo ID añadido :" + userDAO.findLastID());
-	 * System.out.println("//---------------------------------------------//");
-	 * 
-	 * Usuario u = new Usuario("usuario", "cccc", 36, 12, 32, 32);
-	 * System.out.println("Crear Usuario local de ID" + u.getId());
-	 * System.out.println(u);
-	 * System.out.println("//---------------------------------------------//");
-	 * 
-	 * System.out.println("Se Inserta en base de datos"); userDAO.insert(u);
-	 * System.out.println("//---------------------------------------------//");
-	 * Usuario usuario = userDAO.findByUsername("usuario");
-	 * Assert.assertEquals(usuario.getContrasenia(), "cmcmc");
-	 * 
-	 * }
-	 */
+		Usuario usuarioLocal = new Usuario("UsuarioTest", "abcd", 0, 0, 0, 0);
+		userDAO.insert(usuarioLocal);
+		int cantidadUsuariosBDInicial = userDAO.countAll();
+
+		Usuario usuarioDB1 = userDAO.findByUsername("UsuarioTest");
+		assertNotNull(usuarioDB1);
+
+		userDAO.delete(usuarioDB1);
+		int cantidadUsuariosDBActual = userDAO.countAll();
+
+		assertNotEquals(cantidadUsuariosBDInicial, cantidadUsuariosDBActual);
+		assertEquals(cantidadUsuariosBDInicial - 1, cantidadUsuariosDBActual);
+
+		Usuario usuarioDB2 = userDAO.findByUsername("UsuarioTest");
+		assertNull(usuarioDB2);
+	}
+
+	@Test
+	public void actualizarUsuarioDBTest() {
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+		Usuario usuarioLocal = new Usuario("UsuarioTest", "abcd", 0, 0, 0, 0);
+		userDAO.insert(usuarioLocal);
+		
+		Usuario usuarioDB = userDAO.findByUsername("UsuarioTest");
+		double monedasLocales = 0;
+		double tiempoDisponibleLocal = 0;
+		double monedasDB = usuarioDB.getDineroDisponible();
+		double tiempoDisponibleDB = usuarioDB.getTiempoDisponible();
+		assertEquals(monedasLocales, monedasDB, 0);
+		assertEquals(tiempoDisponibleLocal, tiempoDisponibleDB, 0);
+		
+		usuarioLocal = usuarioDB;
+		assertNotEquals(usuarioLocal.getId(), 0);
+		usuarioLocal.setDineroDisponible(10);
+		usuarioLocal.setTiempoDisponible(10);
+		userDAO.update(usuarioLocal);
+		
+		usuarioDB = userDAO.findByUsername("UsuarioTest");
+		monedasLocales = 10;
+		tiempoDisponibleLocal = 10;
+		monedasDB = usuarioDB.getDineroDisponible();
+		tiempoDisponibleDB = usuarioDB.getTiempoDisponible();
+		assertEquals(monedasLocales, monedasDB, 0);
+		assertEquals(tiempoDisponibleLocal, tiempoDisponibleDB, 0);
+		
+		userDAO.delete(usuarioLocal);
+	}
 
 }
