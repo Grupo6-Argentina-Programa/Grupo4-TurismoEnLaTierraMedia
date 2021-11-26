@@ -2,50 +2,57 @@ package modelos;
 
 import java.util.Objects;
 
-import DAO.AtraccionDAO;
-import DAO.DAOFactory;
 import modelosEnum.ENUMTIPO;
 
 public class Atraccion implements Comparable<Atraccion> {
-	private int id;
-	private String nombre;
-	private double costo;
+
+	private final int id;
+	private final String nombre;
+	private final double costo;
 	private final double duracion;
+
+	private int cupoActual = 0;
 	private final int cupoMaximo;
-	private int cupoActual;
-	private ENUMTIPO tipo;
-	private int posicionX;
-	private int posicionY;
 
-	// Constructor por defecto
-	public Atraccion(String nombre, double costo, double duracion, int cupoActual, int cupoMaximo) {
-		this.nombre = nombre;
-		this.costo = costo;
-		this.duracion = duracion;
-		this.cupoActual = cupoActual;
-		this.cupoMaximo = cupoMaximo;
+	private final int posicionX;
+	private final int posicionY;
 
-		AtraccionDAO AttrDAO = DAOFactory.getAtraccionDAO();
-		this.id = AttrDAO.findLastID() + 1;
-	}
+	private ENUMTIPO tipo = ENUMTIPO.SinDefinir;
 
 	// CONSTRUCTOR SOLO USADO POR DAO
-	public Atraccion(int id, String nombre, double costo, double duracion, int cupoActual, int cupoMaximo) {
+	public Atraccion(int id, String nombre, double costo, double duracion, int cupoActual, int cupoMaximo,
+			int posicionX, int posicionY) {
 		this.id = id;
 		this.nombre = nombre;
 		this.costo = costo;
 		this.duracion = duracion;
 		this.cupoActual = cupoActual;
 		this.cupoMaximo = cupoMaximo;
+		this.posicionX = posicionX;
+		this.posicionY = posicionY;
+	}
+
+	// Constructor por defecto
+	public Atraccion(String nombre, double costo, double duracion, int cupoMaximo, int posicionX, int posicionY) {
+		this.id = 0;
+		this.nombre = nombre;
+		this.costo = costo;
+		this.duracion = duracion;
+		this.cupoMaximo = cupoMaximo;
+		this.posicionX = posicionX;
+		this.posicionY = posicionY;
 	}
 
 	// DEPURAR
 	public Atraccion(String nombre, int costo, double tiempo, int cupo, ENUMTIPO tipo) {
+		this.id = 0;
 		this.nombre = nombre;
 		this.costo = costo;
 		this.duracion = tiempo;
 		this.cupoMaximo = cupo;
 		this.tipo = tipo;
+		this.posicionX = 0;
+		this.posicionY = 0;
 		cupoActual = 0;
 	}
 
@@ -55,24 +62,12 @@ public class Atraccion implements Comparable<Atraccion> {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public double getCosto() {
 		return costo;
-	}
-
-	public void setCosto(double costo) {
-		this.costo = costo;
 	}
 
 	public int getCupoActual() {
@@ -95,16 +90,8 @@ public class Atraccion implements Comparable<Atraccion> {
 		return posicionX;
 	}
 
-	public void setPosicionX(int posicionX) {
-		this.posicionX = posicionX;
-	}
-
 	public int getPosicionY() {
 		return posicionY;
-	}
-
-	public void setPosicionY(int posicionY) {
-		this.posicionY = posicionY;
 	}
 
 	public double getDuracion() {
