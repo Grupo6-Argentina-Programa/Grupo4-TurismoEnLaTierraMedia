@@ -174,6 +174,9 @@ public class Sistema {
 
 //----------------------------------------------------------------------------//
 
+	
+	
+	
 	private void sugerirAtracciones(Usuario user) {
 		int costoActual = 0;
 		double tiempoActual = 0;
