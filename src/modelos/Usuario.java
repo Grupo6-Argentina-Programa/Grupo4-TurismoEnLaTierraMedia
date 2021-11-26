@@ -168,7 +168,7 @@ public class Usuario {
 				concatenado.append(atraccion).append("\n");
 			}
 			System.out.println(
-					"La promocion es de tipo: " + sugerencia.getPromocion().getClass().toString().split("\\.")[2]
+					"La promocion es de tipo: " + sugerencia.getPromocion().getClass().toString().split("\\.")[1]
 							+ "\nLas atracciones:\n" + concatenado + "\nTotal a pagar: " + sugerencia.getTotal()
 							+ " monedas." + "\nSe ahorra " + calcularDifereciaMonedas(sugerencia) + " monedas.");
 		}

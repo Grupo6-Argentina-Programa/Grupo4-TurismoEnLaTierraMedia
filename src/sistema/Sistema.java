@@ -19,6 +19,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Aplicacion.SugerenciaPorTiempo;
 import DAO.AtraccionDAO;
 import DAO.DAOFactory;
 import DAO.PromocionDAO;
@@ -28,6 +29,7 @@ public class Sistema {
 	private static List<Usuario> usuarios;
 	private static List<Atraccion> atracciones;
 	private static  List<Promocion> promociones;
+	private static Object swicth;
 
 	@SuppressWarnings("resource")
 	private static String ingresarDatoStr() {
@@ -62,7 +64,7 @@ public class Sistema {
 
 //----------------------------------------------------------------------------//
 
-	private void sugerirPromociones(Usuario user) {
+	/*private void sugerirPromociones(Usuario user) {
 		List<Atraccion> listaAtracciones = new ArrayList<>();
 		int valorTemporal;
 
@@ -170,14 +172,174 @@ public class Sistema {
 			}
 			listaAtracciones.clear();
 		}
-	}
+	}*/
 
 //----------------------------------------------------------------------------//
 
+	private void sugerirPromociones(Usuario user) {
+		
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		atracciones = atraccionDAO.findAll();
+		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
+		usuarios = usuarioDAO.findAll();
+		PromocionDAO promocionesDAO = DAOFactory.getPromocionDAO();
+		promociones = promocionesDAO.findAll();
+		
+		List<Atraccion> listaAtracciones = new ArrayList<>();
+		int valorTemporal;
+
+		for (Promocion promocion : promociones) {
+			if (promocion.getAtraccionA().hayEspacio() && promocion.getAtraccionB().hayEspacio()) {
+				int costoActual = 0;
+				double tiempoActual = 0;
+
+				if (promocion.getAtraccionA().getTipo() == user.getTipoFavorito()) {
+					if (promocion.getClass() == PromocionAbsoluta.class) {
+						if ((costoActual + (int) promocion.retornarPromocion() <= user.getDineroDisponible())
+								&& (tiempoActual + promocion.getAtraccionA().getTiempo()
+										+ promocion.getAtraccionB().getTiempo() <= user.getTiempoDisponible())) {
+							listaAtracciones.add(promocion.getAtraccionA());
+							listaAtracciones.add(promocion.getAtraccionB());
+							costoActual += (int) promocion.retornarPromocion();
+							user.recibirSugerencia(new AtraccionSugerida(listaAtracciones.toArray(new Atraccion[0]),
+									promocion, costoActual));
+						}
+					}
+					if (promocion.getClass() == PromocionPorcentaje.class) {
+						valorTemporal = (int) (promocion.getAtraccionA().getCosto()
+								+ promocion.getAtraccionB().getCosto()
+								- ((promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto())
+										* ((double) promocion.retornarPromocion() / 100)));
+						if ((costoActual + valorTemporal <= user.getDineroDisponible())
+								&& (tiempoActual + promocion.getAtraccionA().getTiempo()
+										+ promocion.getAtraccionB().getTiempo() <= user.getTiempoDisponible())) {
+							listaAtracciones.add(promocion.getAtraccionA());
+							listaAtracciones.add(promocion.getAtraccionB());
+							costoActual += valorTemporal;
+							user.recibirSugerencia(new AtraccionSugerida(listaAtracciones.toArray(new Atraccion[0]),
+									promocion, costoActual));
+						}
+					}
+					if (promocion.getClass() == PromocionAxB.class) {
+						Atraccion atraccionAux = (Atraccion) promocion.retornarPromocion();
+						if (atraccionAux.hayEspacio()) {
+							valorTemporal = (int) (promocion.getAtraccionA().getCosto()
+									+ promocion.getAtraccionB().getCosto());
+
+							if ((costoActual + valorTemporal <= user.getDineroDisponible()) && (tiempoActual
+									+ promocion.getAtraccionA().getTiempo() + promocion.getAtraccionB().getTiempo()
+									+ atraccionAux.getTiempo() <= user.getTiempoDisponible())) {
+								listaAtracciones.add(promocion.getAtraccionA());
+								listaAtracciones.add(promocion.getAtraccionB());
+								listaAtracciones.add(atraccionAux);
+								costoActual += valorTemporal;
+								user.recibirSugerencia(new AtraccionSugerida(listaAtracciones.toArray(new Atraccion[0]),
+										promocion, costoActual));
+							}
+						}
+					}
+				}
+			}
+			listaAtracciones.clear();
+		}
+
+		// Ofrezco promociones pero que no son del mismo tipo.
+
+		for (Promocion promocion : promociones) {
+			int costoActual = 0;
+			double tiempoActual = 0;
+
+			if (promocion.getAtraccionA().getTipo() != user.getTipoFavorito()) {
+				if (promocion.getClass() == PromocionAbsoluta.class) {
+					
+							if(tiempoActual + promocion.getAtraccionA().getTiempo()
+									+ promocion.getAtraccionB().getTiempo() <= user.getTiempoDisponible()) {
+						listaAtracciones.add(promocion.getAtraccionA());
+						listaAtracciones.add(promocion.getAtraccionB());
+						
+						user.recibirSugerencia(new AtraccionSugerida(listaAtracciones.toArray(new Atraccion[0]),
+								promocion, costoActual));
+					}
+				}
+				if (promocion.getClass() == PromocionPorcentaje.class) {
+					valorTemporal = (int) (promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto()
+							- ((promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto())
+									/ 100));
+					if ((costoActual + valorTemporal <= user.getDineroDisponible())
+							&& (tiempoActual + promocion.getAtraccionA().getTiempo()
+									+ promocion.getAtraccionB().getTiempo() <= user.getTiempoDisponible())) {
+						listaAtracciones.add(promocion.getAtraccionA());
+						listaAtracciones.add(promocion.getAtraccionB());
+						costoActual += valorTemporal;
+						
+						user.recibirSugerencia(new AtraccionSugerida(listaAtracciones.toArray(new Atraccion[0]),
+								promocion, costoActual));
+					}
+				}
+				if (promocion.getClass() == PromocionAxB.class) {
+					valorTemporal = (int) (promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto());
+				
+					if ((costoActual + valorTemporal <= user.getDineroDisponible()) && (tiempoActual
+							+ promocion.getAtraccionA().getTiempo() + promocion.getAtraccionB().getTiempo()
+							 <= user.getTiempoDisponible())) {
+						listaAtracciones.add(promocion.getAtraccionA());
+						listaAtracciones.add(promocion.getAtraccionB());
+						
+						costoActual += valorTemporal;
+						user.recibirSugerencia(new AtraccionSugerida(listaAtracciones.toArray(new Atraccion[0]),
+								promocion, costoActual));
+					}
+				}
+			}
+			listaAtracciones.clear();
+		}
+	}
+
 	
 	
+	/*private void sugerirAtracciones(Usuario user) {
+		
+		
+		int costoActual = 0;
+		double tiempoActual = 0;
+		Atraccion[] atraccionesTipo = obtenerAtraccionesTipo(user.getTipoFavorito());
+
+		for (Atraccion atraccion : atracciones) {
+			if ((atraccion != null) && !user.getAtracciones().contains(atraccion) && atraccion.hayEspacio()
+					&& (costoActual + atraccion.getCosto() <= user.getDineroDisponible())
+					&& (tiempoActual + atraccion.getTiempo() <= user.getTiempoDisponible())) {
+				user.recibirSugerencia(
+						new AtraccionSugerida(new Atraccion[] { atraccion }, null, (int) atraccion.getCosto()));
+				// user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null,
+				// atraccion.getCosto())); //este es el antiguo
+			}
+		}
+
+		// Incluyo las atracciones que no son del mismo tipo
+		for (Atraccion atraccion : atraccionesTipo) {
+			if ((atraccion != null) && !user.getAtracciones().contains(atraccion) && atraccion.hayEspacio()
+					&& (costoActual + atraccion.getCosto() <= user.getDineroDisponible())
+					&& (tiempoActual + atraccion.getTiempo() <= user.getTiempoDisponible())) {
+				user.recibirSugerencia(
+						new AtraccionSugerida(new Atraccion[] { atraccion }, null, (int) atraccion.getCosto()));
+				// user.recibirSugerencia(new Sugerencia(new Atraccion[] { atraccion }, null,
+				// atraccion.getCosto())); //este es el antiguo
+			}
+		}
+	}*/
+
 	
+//----------------------------------------------------------------------------//
+
+
 	private void sugerirAtracciones(Usuario user) {
+		
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		atracciones = atraccionDAO.findAll();
+		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
+		usuarios = usuarioDAO.findAll();
+		PromocionDAO promocionesDAO = DAOFactory.getPromocionDAO();
+		promociones = promocionesDAO.findAll();
 		int costoActual = 0;
 		double tiempoActual = 0;
 		Atraccion[] atraccionesTipo = obtenerAtraccionesTipo(user.getTipoFavorito());
@@ -194,7 +356,7 @@ public class Sistema {
 		}
 
 		// Incluyo las atracciones que no son del mismo tipo
-		for (Atraccion atraccion : atracciones) {
+		for (Atraccion atraccion : atraccionesTipo) {
 			if ((atraccion != null) && !user.getAtracciones().contains(atraccion) && atraccion.hayEspacio()
 					&& (costoActual + atraccion.getCosto() <= user.getDineroDisponible())
 					&& (tiempoActual + atraccion.getTiempo() <= user.getTiempoDisponible())) {
@@ -205,9 +367,6 @@ public class Sistema {
 			}
 		}
 	}
-
-//----------------------------------------------------------------------------//
-
 	public boolean agregarUsuario(Usuario user) {
 		if (!usuarios.contains(user)) {
 			usuarios.add(user);
@@ -236,13 +395,15 @@ public class Sistema {
 	}
 
 	private Atraccion[] obtenerAtraccionesTipo(ENUMTIPO tipo) {
-		List<Atraccion> listaAtraccion = new ArrayList<>();
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		atracciones = atraccionDAO.findAll();
+		
 		for (Atraccion atraccion : atracciones) {
 			if (atraccion.getTipo() == tipo) {
-				listaAtraccion.add(atraccion);
+				atracciones.add(atraccion);
 			}
 		}
-		return listaAtraccion.toArray(new Atraccion[0]);
+		return atracciones.toArray(new Atraccion[0]);
 	}
 
 	
@@ -254,13 +415,44 @@ public class Sistema {
 		System.out.println(usuarios);
 		System.out.println(atracciones);
 		System.out.println(promociones);
+	
 		
-		Usuario hobbit1 = new Usuario(10, ENUMTIPO.PAISAJE, 15, 6);
-		sistema.sugerirAtracciones(hobbit1);
+		Usuario hobbit3 = new Usuario(10, ENUMTIPO.PAISAJE, 15, 6);
 		
 		
 		
+		System.out.println("Ingrese un Numero");
+		System.out.println("1:Sugerir Atracciones");
+		System.out.println("2:Sugerir Promociones");
+		
+		int entradaI = 0;
+		
+			entradaI  = ingresarDatoInt();
+		
+		switch (entradaI) {
+		case 1:
+			sistema.sugerirAtracciones(hobbit3);
+			break;
+		case 2:
+			sistema.sugerirPromociones(hobbit3);
+			break;
+		case 3:
+			
+			break;
+		case 4:
+			
+				
+		case 9:
+			
+			break;
+		}
 	}
+		
+	
+
+		
+		
+	
 
 
 	public List<Usuario> getUsuarios() {
