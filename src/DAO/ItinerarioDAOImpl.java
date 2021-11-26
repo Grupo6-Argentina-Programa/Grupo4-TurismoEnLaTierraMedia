@@ -4,7 +4,7 @@ import java.util.List;
 
 import modelos.Usuario;
 
-public class ItinerarioDAOImpl implements UsuarioDAO{
+public class ItinerarioDAOImpl implements UsuarioDAO {
 
 	@Override
 	public int insert(Usuario t) {
@@ -58,12 +58,6 @@ public class ItinerarioDAOImpl implements UsuarioDAO{
 	public int findUserId(String username, String password) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public char[] update(int i) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

@@ -182,7 +182,7 @@ public class Usuario {
 		if (aceptar.equalsIgnoreCase("Si")) {
 			dineroDisponible -= sugerencia.getTotal();
 			for (Atraccion atraccion : sugerencia.getAtracciones()) {
-				tiempoDisponible -= atraccion.getTiempo();
+				tiempoDisponible -= atraccion.getDuracion();
 				atraccion.ocuparUnLugar();
 			}
 			costoTotal += sugerencia.getTotal();

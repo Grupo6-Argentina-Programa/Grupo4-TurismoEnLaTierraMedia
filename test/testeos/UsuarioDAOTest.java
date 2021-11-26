@@ -43,25 +43,6 @@ public class UsuarioDAOTest {
 	}
 
 	@Test
-	public void comprobarExisteciaDelPrimerUsuarioPorIdTest() {
-		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-
-		Usuario hobbit1 = userDAO.findById(1);
-
-		assertNotNull(hobbit1);
-	}
-
-	@Test
-	public void comprobarLosValoresCorrectosDelPrimerUsuarioTest() {
-		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-
-		Usuario hobbitBD = userDAO.findById(1);
-		Usuario hobbitLocal = new Usuario(1, "hobbit1", "aaaa", 12, 10, 1, 1);
-
-		assertTrue(hobbitBD.equals(hobbitLocal));
-	}
-
-	@Test
 	public void encontrarATodosLosUsuariosTest() {
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
 
@@ -76,6 +57,34 @@ public class UsuarioDAOTest {
 		int cantidadUsuariosEsperados = userDAO.countAll();
 
 		assertEquals(cantidadUsuariosObtenidos, cantidadUsuariosEsperados);
+	}
+
+	@Test
+	public void comprobarExisteciaDelPrimerUsuarioPorIdTest() {
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+
+		Usuario hobbit1 = userDAO.findById(1);
+
+		assertNotNull(hobbit1);
+	}
+	
+	@Test
+	public void comprobarExisteciaDelPrimerUsuarioPorUsernameTest() {
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+
+		Usuario hobbit1 = userDAO.findByUsername("hobbit1");
+
+		assertNotNull(hobbit1);
+	}
+
+	@Test
+	public void comprobarLosValoresCorrectosDelPrimerUsuarioTest() {
+		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
+
+		Usuario hobbitBD = userDAO.findById(1);
+		Usuario hobbitLocal = new Usuario(1, "hobbit1", "aaaa", 12, 10, 1, 1);
+
+		assertTrue(hobbitBD.equals(hobbitLocal));
 	}
 
 	@Test
@@ -145,7 +154,7 @@ public class UsuarioDAOTest {
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
 		Usuario usuarioLocal = new Usuario("UsuarioTest", "abcd", 0, 0, 0, 0);
 		userDAO.insert(usuarioLocal);
-		
+
 		Usuario usuarioDB = userDAO.findByUsername("UsuarioTest");
 		double monedasLocales = 0;
 		double tiempoDisponibleLocal = 0;
@@ -153,13 +162,13 @@ public class UsuarioDAOTest {
 		double tiempoDisponibleDB = usuarioDB.getTiempoDisponible();
 		assertEquals(monedasLocales, monedasDB, 0);
 		assertEquals(tiempoDisponibleLocal, tiempoDisponibleDB, 0);
-		
+
 		usuarioLocal = usuarioDB;
 		assertNotEquals(usuarioLocal.getId(), 0);
 		usuarioLocal.setDineroDisponible(10);
 		usuarioLocal.setTiempoDisponible(10);
 		userDAO.update(usuarioLocal);
-		
+
 		usuarioDB = userDAO.findByUsername("UsuarioTest");
 		monedasLocales = 10;
 		tiempoDisponibleLocal = 10;
@@ -167,7 +176,7 @@ public class UsuarioDAOTest {
 		tiempoDisponibleDB = usuarioDB.getTiempoDisponible();
 		assertEquals(monedasLocales, monedasDB, 0);
 		assertEquals(tiempoDisponibleLocal, tiempoDisponibleDB, 0);
-		
+
 		userDAO.delete(usuarioLocal);
 	}
 

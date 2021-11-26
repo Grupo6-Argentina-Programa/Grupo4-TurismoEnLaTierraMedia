@@ -92,7 +92,7 @@ public abstract class Promocion implements Comparable<PromocionInterface>, Promo
         }
 
         if (totalPromocionA == totalPromocionB){
-            return Double.compare(this.getAtraccionA().getTiempo() + this.getAtraccionB().getTiempo(), promocion.getAtraccionA().getTiempo() + promocion.getAtraccionB().getTiempo());
+            return Double.compare(this.getAtraccionA().getDuracion() + this.getAtraccionB().getDuracion(), promocion.getAtraccionA().getDuracion() + promocion.getAtraccionB().getDuracion());
         }
         return Integer.compare(totalPromocionA, totalPromocionB);
     }

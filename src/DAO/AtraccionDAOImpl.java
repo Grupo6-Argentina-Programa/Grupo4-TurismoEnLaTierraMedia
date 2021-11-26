@@ -23,9 +23,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, atraccion.getNombre());
 			statement.setDouble(2, atraccion.getCosto());
-			statement.setDouble(3, atraccion.getTiempo());
-			statement.setInt(4, atraccion.getCupo());
-			statement.setInt(5, atraccion.getPuestosOcupados());
+			statement.setDouble(3, atraccion.getDuracion());
+			statement.setInt(4, atraccion.getCupoMaximo());
+			statement.setInt(5, atraccion.getCupoActual());
 			statement.setInt(6, atraccion.getPosicionX());
 			statement.setInt(7, atraccion.getPosicionY());
 			int rows = statement.executeUpdate();
@@ -46,7 +46,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, atraccion.getNombre());
 			statement.setDouble(3, atraccion.getCosto());
-			statement.setDouble(4, atraccion.getTiempo());
+			statement.setDouble(4, atraccion.getDuracion());
 			statement.setInt(5, atraccion.getPosicionX());
 			statement.setInt(6, atraccion.getPosicionY());
 			statement.setInt(7, atraccion.getId());
@@ -150,8 +150,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 				resultados.getDouble(4), resultados.getInt(5), resultados.getInt(6));
 	}
 
-
-	public List<Atraccion> buscarAtraccion(int atra)throws Exception {
+	public List<Atraccion> buscarAtraccion(int atra) throws Exception {
 		try {
 			String sql = "SELECT * FROM Atraccion a JOIN Usuario u  ON WHERE CALIFICACION = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -160,9 +159,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			ResultSet resultados = statement.executeQuery();
 
 			List<Atraccion> peliculas = new ArrayList<Atraccion>();
-        
-			while(resultados.next()) {
-			
+
+			while (resultados.next()) {
+
 				peliculas.add(toAtracciones(resultados));
 			}
 			return peliculas;
@@ -171,11 +170,10 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 
-
-
-
-
-
-
+	@Override
+	public Atraccion findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
