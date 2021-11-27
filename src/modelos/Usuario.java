@@ -21,7 +21,11 @@ public class Usuario {
 
 	private int costoTotal = 0;
 	private ENUMTIPO tipoFavorito = ENUMTIPO.SinDefinir;
-	private final List<Atraccion> atracciones = new ArrayList<>();
+	private List<Atraccion> atracciones = new ArrayList<>();
+
+	public void setAtracciones(List<Atraccion> atracciones) {
+		this.atracciones = atracciones;
+	}
 
 	// Constructor por defecto
 	public Usuario(String usuario, String contrasenia, double dineroDisponible, double tiempoDisponible, int posicionX,
@@ -48,8 +52,7 @@ public class Usuario {
 		this.tiempoDisponible = tiempoDisponible;
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
-		
-		
+
 	}
 
 	// DEPURAR
@@ -151,8 +154,32 @@ public class Usuario {
 	public void setTipoFavorito(ENUMTIPO tipoFavorito) {
 		this.tipoFavorito = tipoFavorito;
 	}
+	
+	public List<Atraccion> getAtracciones() {
+		return atracciones;
+	}
 
 ////////////////////////////////////////////////////////////////////////////////
+
+	public void agregarAtraccion(Atraccion atraccion) {
+		this.atracciones.add(atraccion);
+	}
+
+	public void agregarAtracciones(List<Atraccion> atracciones) {
+		for (Atraccion i : atracciones) {
+			this.atracciones.add(i);
+		}
+	}
+
+	private static String ingresarDatoStr() {
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+		return scan.nextLine();
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+
 
 	public void recibirSugerencia(AtraccionSugerida sugerencia) {
 		System.out.println("\n\nSe ha hecho la siguiente sugerencia:\n");
@@ -195,10 +222,6 @@ public class Usuario {
 		return valorOriginal - sugerencia.getTotal();
 	}
 
-	public List<Atraccion> getAtracciones() {
-		return atracciones;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -212,12 +235,6 @@ public class Usuario {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
-	}
-
-	private static String ingresarDatoStr() {
-		@SuppressWarnings("resource")
-		Scanner scan = new Scanner(System.in);
-		return scan.nextLine();
 	}
 
 	@Override

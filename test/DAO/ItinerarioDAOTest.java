@@ -2,11 +2,14 @@ package DAO;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
+import modelos.Atraccion;
 import modelos.Itinerario;
+import modelos.Usuario;
 
 public class ItinerarioDAOTest {
 
@@ -84,6 +87,43 @@ public class ItinerarioDAOTest {
 		}
 
 		assertEquals(cantidadItinerariosEsperados, cantidadItinerariosObtenidos);
+	}
+
+	@Test
+	public void TraerElUsuarioYlaAtraccionCorrespondienteDelItinerarioTest() {
+		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
+
+		Itinerario itinerario = itinerarioDAO.findByID(1);
+		int idUsuario = itinerario.getIdUsuario();
+		int idAtraccion = itinerario.getIdAtraccion();
+		int cantidadDeAtraccionesEncontradas = 0;
+		int cantidadDeAtraccionesEnElUsuario = 0;
+
+		Usuario usuario = usuarioDAO.findById(idUsuario);
+		List<Atraccion> atracciones = new ArrayList<>();
+
+		List<Itinerario> itinerarios = itinerarioDAO.findAll();
+		for (Itinerario i : itinerarios) {
+			int id = i.getIdUsuario();
+			if (id == idUsuario) {
+				cantidadDeAtraccionesEncontradas++;
+				atracciones.add(atraccionDAO.findByID(idAtraccion));
+			}
+		}
+		usuario.agregarAtracciones(atracciones);
+
+		for (@SuppressWarnings("unused")
+		Atraccion i : usuario.getAtracciones()) {
+			cantidadDeAtraccionesEnElUsuario++;
+		}
+
+		assertNotNull(itinerario);
+		assertNotNull(usuario);
+		assertNotNull(atracciones);
+		assertTrue(cantidadDeAtraccionesEncontradas > 0);
+		assertEquals(cantidadDeAtraccionesEncontradas, cantidadDeAtraccionesEnElUsuario);
 	}
 
 }
