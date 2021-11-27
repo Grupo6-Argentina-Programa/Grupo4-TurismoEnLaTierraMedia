@@ -13,21 +13,44 @@ import modelos.Itinerario;
 public class ItinerarioDAOImpl implements ItinerarioDAO {
 
 	@Override
-	public int insert(Itinerario t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insert(Itinerario itinerario) {
+		try {
+			String sql = "INSERT INTO Itinerario (IdUsuario , IdAtraccion) VALUES (?,?)";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			statement.setInt(1, itinerario.getIdUsuario());
+			statement.setInt(2, itinerario.getIdAtraccion());
+
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
 	public int update(Itinerario t) {
-		// TODO Auto-generated method stub
+		// No es necesario, ya que los Id estan definidos como final
 		return 0;
 	}
 
 	@Override
-	public int delete(Itinerario t) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(Itinerario itinerario) {
+		try {
+			String sql = "DELETE FROM Itinerario WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			statement.setInt(1, itinerario.getId());
+
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override

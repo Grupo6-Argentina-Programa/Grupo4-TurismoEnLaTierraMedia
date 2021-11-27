@@ -90,12 +90,13 @@ public class ItinerarioDAOTest {
 	}
 
 	@Test
-	public void TraerElUsuarioYlaAtraccionCorrespondienteDelItinerarioTest() {
+	public void buscarLasAtracionesDeUnUsuarioYagregarlasTest() {
 		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
 
 		Itinerario itinerario = itinerarioDAO.findByID(1);
+
 		int idUsuario = itinerario.getIdUsuario();
 		int idAtraccion = itinerario.getIdAtraccion();
 		int cantidadDeAtraccionesEncontradas = 0;
@@ -126,4 +127,74 @@ public class ItinerarioDAOTest {
 		assertEquals(cantidadDeAtraccionesEncontradas, cantidadDeAtraccionesEnElUsuario);
 	}
 
+	@Test
+	public void insertarItinerarioTest() {
+		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
+
+		int cantidadDeAtraccionInicial = itinerarioDAO.countAll();
+
+		Itinerario itinerariolocal = new Itinerario(3, 3);
+		itinerarioDAO.insert(itinerariolocal);
+
+		int cantidadDeAtraccionesActual = itinerarioDAO.countAll();
+
+		assertNotEquals(cantidadDeAtraccionInicial, cantidadDeAtraccionesActual);
+		assertEquals(cantidadDeAtraccionInicial + 1, cantidadDeAtraccionesActual);
+
+		int idUsuario = 3;
+		int idAtraccion = 3;
+		boolean seEncuentraEnLaBaseDeDatos = false;
+		List<Itinerario> itinerarios = itinerarioDAO.findAll();
+
+		for (Itinerario i : itinerarios) {
+			if (i.getIdUsuario() == idUsuario) {
+				if (i.getIdAtraccion() == idAtraccion) {
+					seEncuentraEnLaBaseDeDatos = true;
+					itinerarioDAO.delete(i);
+				}
+			}
+		}
+
+		assertTrue(seEncuentraEnLaBaseDeDatos);
+	}
+
+	@Test
+	public void deletearItinerarioTest() {
+		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
+
+		int cantidadDeAtraccionInicial = itinerarioDAO.countAll();
+
+		Itinerario itinerariolocal = new Itinerario(3, 3);
+		itinerarioDAO.insert(itinerariolocal);
+
+		int cantidadDeAtraccionesActual = itinerarioDAO.countAll();
+
+		assertNotEquals(cantidadDeAtraccionInicial, cantidadDeAtraccionesActual);
+		assertEquals(cantidadDeAtraccionInicial + 1, cantidadDeAtraccionesActual);
+
+		int idUsuario = 3;
+		int idAtraccion = 3;
+		boolean seEncuentraEnLaBaseDeDatos = false;
+		List<Itinerario> itinerarios = itinerarioDAO.findAll();
+
+		for (Itinerario i : itinerarios) {
+			if (i.getIdUsuario() == idUsuario) {
+				if (i.getIdAtraccion() == idAtraccion) {
+					seEncuentraEnLaBaseDeDatos = true;
+				}
+			}
+		}
+		assertTrue(seEncuentraEnLaBaseDeDatos);
+
+		itinerarios = itinerarioDAO.findAll();
+		for (Itinerario i : itinerarios) {
+			if (i.getIdUsuario() == idUsuario) {
+				if (i.getIdAtraccion() == idAtraccion) {
+					seEncuentraEnLaBaseDeDatos = false;
+					itinerarioDAO.delete(i);
+				}
+			}
+		}
+		assertFalse(seEncuentraEnLaBaseDeDatos);
+	}
 }
