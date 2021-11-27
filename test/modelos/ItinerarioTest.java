@@ -7,8 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import modelos.Itinerario;
-
 public class ItinerarioTest {
 
 	@Test

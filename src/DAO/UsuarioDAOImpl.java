@@ -22,7 +22,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			//statement.setInt(1, usuario.getId());
+			// statement.setInt(1, usuario.getId());
 			statement.setString(1, usuario.getUsuario());
 			statement.setString(2, usuario.getContrasenia());
 			statement.setDouble(3, usuario.getDineroDisponible());
@@ -46,7 +46,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			
+
 			statement.setString(1, usuario.getUsuario());
 			statement.setString(2, usuario.getContrasenia());
 			statement.setDouble(3, usuario.getDineroDisponible());
@@ -55,7 +55,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.setInt(6, usuario.getPosicionY());
 			statement.setString(7, usuario.getTipoFavorito().toString());
 			statement.setInt(8, usuario.getId());
-			
+
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -139,19 +139,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 
 			return usuario1.getId();
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
-
-	@Override
-	public int findLastID() {
-		try {
-			String sql = "SELECT MAX(id) AS id FROM Usuario";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			ResultSet resultados = statement.executeQuery();
-			return resultados.getInt("id");
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

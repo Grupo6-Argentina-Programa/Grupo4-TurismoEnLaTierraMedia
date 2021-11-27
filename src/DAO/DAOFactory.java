@@ -19,7 +19,7 @@ public class DAOFactory {
 	 * 
 	 */
 
-	public static ItinerarioDAOImpl getItinerarioDAO() {
+	public static ItinerarioDAO getItinerarioDAO() {
 		return new ItinerarioDAOImpl();
 	}
 

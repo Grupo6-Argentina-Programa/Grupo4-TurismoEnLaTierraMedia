@@ -34,9 +34,6 @@ public class Usuario {
 		this.tiempoDisponible = tiempoDisponible;
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
-
-		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();
-		this.id = userDAO.findLastID() + 1;
 	}
 
 	// CONSTRUCTOR SOLO USADO POR DAO

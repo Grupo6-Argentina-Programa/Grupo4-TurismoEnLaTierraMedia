@@ -105,16 +105,9 @@ public class UsuarioDAOTest {
 		assertNotEquals(cantidadUsuariosBDInicial, cantidadUsuariosBDActual);
 		assertEquals(cantidadUsuariosBDInicial + 1, cantidadUsuariosBDActual);
 
-		userLocal.setId(userDAO.findUserId("UsuarioTest", "abcd"));
+		Usuario usuarioDB = userDAO.findByUsername("UsuarioTest");
 
-		int idUsuarioLocal = userLocal.getId();
-		int ultimaIdAniadida = userDAO.findLastID();
-
-		assertEquals(idUsuarioLocal, ultimaIdAniadida);
-
-		Usuario usuarioDB = userDAO.findById(ultimaIdAniadida);
-
-		assertTrue(userLocal.equals(usuarioDB));
+		assertNotNull(usuarioDB);
 
 		userDAO.delete(usuarioDB);
 	}

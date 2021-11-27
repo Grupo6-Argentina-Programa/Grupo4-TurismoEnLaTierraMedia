@@ -81,12 +81,6 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	@Override
-	public int findLastID() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public List<Promocion> findAll() {
 		try {
 			String sql = "SELECT * FROM Promocion";

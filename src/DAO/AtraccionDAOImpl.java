@@ -113,7 +113,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	@Override
 	public int findAttractionID(String name) {
 		try {
@@ -130,20 +130,6 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			}
 
 			return atraccion.getId();
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
-
-	@Override
-	public int findLastID() {
-		try {
-			String sql = "SELECT MAX(id) AS id FROM Atraccion";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			ResultSet resultados = statement.executeQuery();
-			System.out.println(resultados.getInt("id"));
-			return resultados.getInt("id");
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -211,7 +197,5 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			throw new Exception();
 		}
 	}
-
-
 
 }

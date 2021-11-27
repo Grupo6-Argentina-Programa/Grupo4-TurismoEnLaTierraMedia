@@ -14,6 +14,4 @@ public interface GenericDAO<T> {
 
 	public List<T> findAll();
 
-	public int findLastID();
-
 }

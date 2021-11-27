@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Itinerario {
 	private int Id = 0;
-	private int IdUsuario;
-	private int IdAtraccion;
+	private final int IdUsuario;
+	private final int IdAtraccion;
 
 	// Constructor Standard
 	public Itinerario(int IdUsuario, int IdAtraccion) {
