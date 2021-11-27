@@ -6,7 +6,7 @@ import modelosEnum.ENUMTIPO;
 
 public class Atraccion implements Comparable<Atraccion> {
 
-	private final int id;
+	private int id;
 	private final String nombre;
 	private final double costo;
 	private final double duracion;
@@ -60,6 +60,10 @@ public class Atraccion implements Comparable<Atraccion> {
 
 	public int getId() {
 		return id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {

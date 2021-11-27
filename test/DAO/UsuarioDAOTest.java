@@ -1,4 +1,7 @@
-package testeos;
+package DAO;
+
+import org.junit.Test;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -6,12 +9,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
-import org.junit.Test;
-
-import DAO.DAOFactory;
-import DAO.UsuarioDAO;
 import modelos.Usuario;
 
 public class UsuarioDAOTest {
@@ -48,15 +45,9 @@ public class UsuarioDAOTest {
 
 		List<Usuario> usuariosBD = userDAO.findAll();
 
-		int cantidadUsuariosObtenidos = 0;
-		for (@SuppressWarnings("unused")
-		Usuario i : usuariosBD) {
-			cantidadUsuariosObtenidos++;
+		for (Usuario i : usuariosBD) {
+			assertNotNull(i);
 		}
-
-		int cantidadUsuariosEsperados = userDAO.countAll();
-
-		assertEquals(cantidadUsuariosObtenidos, cantidadUsuariosEsperados);
 	}
 
 	@Test
@@ -67,7 +58,7 @@ public class UsuarioDAOTest {
 
 		assertNotNull(hobbit1);
 	}
-	
+
 	@Test
 	public void comprobarExisteciaDelPrimerUsuarioPorUsernameTest() {
 		UsuarioDAO userDAO = DAOFactory.getUsuarioDAO();

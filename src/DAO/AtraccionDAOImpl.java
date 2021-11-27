@@ -40,7 +40,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	public int update(Atraccion atraccion) {
 		// solo actuliza el cupo actual
 		try {
-			String sql = "UPDATE Atraccion SET cupoActual = ? = ? WHERE id = ?";
+			String sql = "UPDATE Atraccion SET cupoActual = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -96,7 +96,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public Atraccion findByName(String name) {
 		try {
-			String sql = "SELECT * FROM Atraccion WHERE id = ?";
+			String sql = "SELECT * FROM Atraccion WHERE nombre = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, name);
@@ -109,6 +109,27 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			}
 
 			return atraccion;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	@Override
+	public int findAttractionID(String name) {
+		try {
+			String sql = "SELECT * FROM Atraccion WHERE nombre = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, name);
+			ResultSet resultados = statement.executeQuery();
+
+			Atraccion atraccion = null;
+
+			if (resultados.next()) {
+				atraccion = toAtracciones(resultados);
+			}
+
+			return atraccion.getId();
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
@@ -190,5 +211,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			throw new Exception();
 		}
 	}
+
+
 
 }
