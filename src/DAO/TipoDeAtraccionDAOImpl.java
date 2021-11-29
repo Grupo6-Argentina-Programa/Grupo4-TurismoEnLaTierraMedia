@@ -1,28 +1,25 @@
 package DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 
-import jdbc.ConnectionProvider;
-import modelos.TIpoAtraccion;
+import modelos.TipoAtraccion;
 
 public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 
 	@Override
-	public int insert(TIpoAtraccion t) {
+	public int insert(TipoAtraccion t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int update(TIpoAtraccion t) {
+	public int update(TipoAtraccion t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int delete(TIpoAtraccion t) {
+	public int delete(TipoAtraccion t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -34,13 +31,13 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	}
 
 	@Override
-	public List<TIpoAtraccion> findAll() {
+	public List<TipoAtraccion> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public TIpoAtraccion findByID(int IdTipoAtraccion) {
+	public TipoAtraccion findByID(int IdTipoAtraccion) {
 		// TODO Auto-generated method stub
 		return null;
 	}
