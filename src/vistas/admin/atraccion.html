@@ -1,0 +1,204 @@
+f<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="estilo.css">
+    <title>Administracion</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img src="asset/nuevologo.png" alt="">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="atraccion.html" >ATRACCIONES </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="tipo.html">TIPO DE ATRACCIONES</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="promocion.html">PROMOCIONES </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="usuario.html">USUARIOS</a>
+                    </li>
+                    </ul>
+    
+                <ul align=right class="navbar-nav mr-auto">
+                    <li class="nav-item"><em>
+                        <script>
+                        var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+                            "Septiembre", "Octubre", "Noviembre", "Diciembre");
+                        var diasSemana = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes",
+                            "Sábado");
+                        var f = new Date();
+                        document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " +
+                            f.getFullYear());
+                        </script>
+    </em>
+                    </li>
+                    <li>
+    
+                    </li>
+                </ul> <br>
+                <br>
+
+                <a class="nav-link" class="btn btn-primary btn-lg" href="metodos/cerrar.php" onclick="return confirm('¿ Desea Cerrar Sesión ?');">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-door-closed-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                 <path fill-rule="evenodd" d="M4 1a1 1 0 0 0-1 1v13H1.5a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2a1 1 0 0 0-1-1H4zm2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                </svg>
+                <label for="">Cerrar Sesión</label>
+                
+             </a>
+            </div>
+    
+        </nav>
+
+
+        <div class="container grl">
+            <div class="">
+              <div class=>
+                 <form action="" method=POST>
+                 <h3 align="center"><b><u>GESTIÓN DE ATRACCIONES</u></b></h3>
+                 <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+Agregar  </button>
+  
+  <input id="filtrar" type="text" class="form-control" placeholder="Buscar Atraccion">
+          
+                    <section>
+              <table width="700" border="0" align=center  class="table" id="tabla"
+                     cellpadding="0" cellspacing="0">
+                <tr>
+          
+                      <th><u>ID</u></th>
+                      <th><u>NOMBRE</u></th>
+                      <th><u>LUGAR</u></th>
+                      <th><u>FECHA</u></th>
+                      <th><u>DESCRIPCIÓN</u></th>
+          
+          
+                </tr>
+                <tbody class="buscar">
+          
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>
+                          <a href=""  onclick="return confirm('¿ Deseas eliminar la actividad?');">
+                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                          <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                          </svg>
+                     </a>
+                      </td>
+                      <td>
+                      <a href="">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+                      <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+                      </svg>
+                      <td>
+                      <a href="" ><input class="" type='button' name='' id='' value='Participantes'></a>
+          
+                  </td>
+          
+                       </tr>
+                      </td>
+                </tr>
+ 
+                </tbody>
+              </table>
+          </section>
+          
+          
+                 </form>
+          
+                       </div>
+                     </div>
+                   </div>
+     
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Agregar Atraccion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+
+          <div class="form-group has-success">
+            <label for="actividad">Nombre</label>
+            <input type="text" class="form-control"id=nombre name="nombre" required  placeholder="Nombre de la actividad">
+            <span id="error" class="help-block"></span>
+            <div class="help-block"></div>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">DESCRIPCIÓN</label>
+            <textarea class="form-control" name="descripcion" id=descripcion placeholder="Descripción de la actividad" rows="3"></textarea>
+            <span id="error" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="lugar">LUGAR</label>
+            <input type="text" class="form-control" name="lugar"id=lugar required placeholder="Lugar de la actividad">
+            <span id="error" class="help-block"></span>
+        </div>
+        <div class="form-group">
+            <label for="fecha">FECHA</label>
+            <input type="date" class="form-control" name="fecha" min="2020-12-31"max="2025-12-31" id=fecha required placeholder="Fecha">
+            <span id="error" class="help-block"> LA FECHA NO PUEDE SER SUPERIOR A CINCO AÑOS</span>
+          </div>
+        <div align=center>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
