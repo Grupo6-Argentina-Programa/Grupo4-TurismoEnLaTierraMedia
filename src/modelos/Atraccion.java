@@ -17,7 +17,7 @@ public class Atraccion implements Comparable<Atraccion> {
 	private final int posicionX;
 	private final int posicionY;
 
-	private ENUMTIPO tipo = ENUMTIPO.SinDefinir;
+	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
 
 	// CONSTRUCTOR SOLO USADO POR DAO
 	public Atraccion(int id, String nombre, double costo, double duracion, int cupoActual, int cupoMaximo,
@@ -50,7 +50,7 @@ public class Atraccion implements Comparable<Atraccion> {
 		this.costo = costo;
 		this.duracion = tiempo;
 		this.cupoMaximo = cupo;
-		this.tipo = tipo;
+		this.preferencia = tipo;
 		this.posicionX = 0;
 		this.posicionY = 0;
 		cupoActual = 0;
@@ -83,11 +83,11 @@ public class Atraccion implements Comparable<Atraccion> {
 	}
 
 	public ENUMTIPO getTipo() {
-		return tipo;
+		return preferencia;
 	}
 
 	public void setTipo(ENUMTIPO tipo) {
-		this.tipo = tipo;
+		this.preferencia = tipo;
 	}
 
 	public int getPosicionX() {
@@ -133,12 +133,12 @@ public class Atraccion implements Comparable<Atraccion> {
 		Atraccion atraccion = (Atraccion) o;
 		return costo == atraccion.costo && Double.compare(atraccion.duracion, duracion) == 0
 				&& cupoMaximo == atraccion.cupoMaximo && Objects.equals(nombre, atraccion.nombre)
-				&& tipo == atraccion.tipo;
+				&& preferencia == atraccion.preferencia;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(nombre, costo, duracion, cupoMaximo, tipo);
+		return Objects.hash(nombre, costo, duracion, cupoMaximo, preferencia);
 	}
 
 	@Override

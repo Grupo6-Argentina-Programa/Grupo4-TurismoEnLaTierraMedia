@@ -20,7 +20,7 @@ public class Usuario {
 	private int posicionY;
 
 	private int costoTotal = 0;
-	private ENUMTIPO tipoFavorito = ENUMTIPO.SinDefinir;
+	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
 	private List<Atraccion> atracciones = new ArrayList<>();
 
 	public void setAtracciones(List<Atraccion> atracciones) {
@@ -58,7 +58,7 @@ public class Usuario {
 	// DEPURAR
 	public Usuario(int DNI, ENUMTIPO tipoFavorito, int dineroInicial, double tiempoDisponible) {
 		this.id = DNI;
-		this.tipoFavorito = tipoFavorito;
+		this.preferencia = tipoFavorito;
 		this.dineroInicial = dineroInicial;
 		this.dineroDisponible = dineroInicial;
 		this.tiempoInicial = tiempoDisponible;
@@ -148,11 +148,11 @@ public class Usuario {
 	}
 
 	public ENUMTIPO getTipoFavorito() {
-		return tipoFavorito;
+		return preferencia;
 	}
 
 	public void setTipoFavorito(ENUMTIPO tipoFavorito) {
-		this.tipoFavorito = tipoFavorito;
+		this.preferencia = tipoFavorito;
 	}
 	
 	public List<Atraccion> getAtracciones() {
@@ -242,7 +242,7 @@ public class Usuario {
 		return "Usuario [DNI=" + id + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", dineroInicial="
 				+ dineroInicial + ", dineroDisponible=" + dineroDisponible + ", tiempoInicial=" + tiempoInicial
 				+ ", tiempoDisponible=" + tiempoDisponible + ", posicionX=" + posicionX + ", posicionY=" + posicionY
-				+ ", costoTotal=" + costoTotal + ", tipoFavorito=" + tipoFavorito + ", atracciones=" + atracciones
+				+ ", costoTotal=" + costoTotal + ", tipoFavorito=" + preferencia + ", atracciones=" + atracciones
 				+ "]";
 	}
 }

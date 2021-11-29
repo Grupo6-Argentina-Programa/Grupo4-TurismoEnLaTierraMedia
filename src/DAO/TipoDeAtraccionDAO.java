@@ -1,6 +1,8 @@
 package DAO;
-import modelos.TIpoAtraccion;
+
+import modelos.TipoAtraccion;
+
 public interface TipoDeAtraccionDAO extends GenericDAO<TIpoAtraccion> {
-	public abstract TIpoAtraccion findByID(int IdTipoAtraccion);
-	public abstract TIpoAtraccion insert();
+
+	public abstract TipoAtraccion findByID(int IdTipoAtraccion);
 }
