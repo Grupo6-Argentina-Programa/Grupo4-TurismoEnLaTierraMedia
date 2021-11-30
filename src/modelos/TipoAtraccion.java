@@ -6,21 +6,21 @@ import modelosEnum.ENUMTIPO;
 
 public class TipoAtraccion {
 	private int Id = 0;
-	private final int IdReferencia;
+	private final int idReferencia;
 	private final String tipoDelObjeto;
 	private final String tipoFavorito;
 	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
 
 	public TipoAtraccion(int Id, int IdReferencia, String TipoDelObjeto, String TipoFavorito) {
 		this.Id = Id;
-		this.IdReferencia = IdReferencia;
+		this.idReferencia = IdReferencia;
 		this.tipoDelObjeto = TipoDelObjeto;
 		this.tipoFavorito = TipoFavorito;
 		asignarPreferencia(TipoFavorito);
 	}
 	
 	public TipoAtraccion(int IdReferencia, String TipoDelObjeto, String TipoFavorito) {
-		this.IdReferencia = IdReferencia;
+		this.idReferencia = IdReferencia;
 		this.tipoDelObjeto = TipoDelObjeto;
 		this.tipoFavorito = TipoFavorito;
 		asignarPreferencia(TipoFavorito);
@@ -43,7 +43,7 @@ public class TipoAtraccion {
 	}
 
 	public int getIdReferencia() {
-		return IdReferencia;
+		return idReferencia;
 	}
 
 	public String getTipoDelObjeto() {
@@ -68,14 +68,13 @@ public class TipoAtraccion {
 		if (preferencia.equals("Aventura")) {
 			this.preferencia = ENUMTIPO.AVENTURA;
 		}
-
 	}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Id, IdReferencia, preferencia, tipoDelObjeto, tipoFavorito);
+		return Objects.hash(Id, idReferencia, preferencia, tipoDelObjeto, tipoFavorito);
 	}
 
 	@Override
@@ -87,7 +86,7 @@ public class TipoAtraccion {
 		if (getClass() != obj.getClass())
 			return false;
 		TipoAtraccion other = (TipoAtraccion) obj;
-		return Id == other.Id && IdReferencia == other.IdReferencia && preferencia == other.preferencia
+		return Id == other.Id && idReferencia == other.idReferencia && preferencia == other.preferencia
 				&& Objects.equals(tipoDelObjeto, other.tipoDelObjeto)
 				&& Objects.equals(tipoFavorito, other.tipoFavorito);
 	}

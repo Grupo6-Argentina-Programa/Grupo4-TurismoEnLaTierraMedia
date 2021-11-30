@@ -171,13 +171,6 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 
-	private Atraccion toAtracciones(ResultSet resultados) throws SQLException {
-		return new Atraccion(resultados.getInt(1), resultados.getString(2), resultados.getDouble(3),
-				resultados.getDouble(4), resultados.getInt(5), resultados.getInt(6), resultados.getInt(7),
-				resultados.getInt(8));
-
-	}
-
 	public List<Atraccion> buscarAtraccion(int atra) throws Exception {
 		try {
 			String sql = "SELECT * FROM Atraccion a JOIN Atraccion u  ON WHERE CALIFICACION = ?";
@@ -196,6 +189,13 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		} catch (Exception e) {
 			throw new Exception();
 		}
+	}
+
+	private Atraccion toAtracciones(ResultSet resultados) throws SQLException {
+		return new Atraccion(resultados.getInt(1), resultados.getString(2), resultados.getDouble(3),
+				resultados.getDouble(4), resultados.getInt(5), resultados.getInt(6), resultados.getInt(7),
+				resultados.getInt(8));
+
 	}
 
 }
