@@ -9,7 +9,9 @@ public abstract class Promocion implements Comparable<PromocionInterface>, Promo
     private int tipo;
     private int atraP;
     private String porcentaje;
-    private String totalp;
+    
+	private String totalp;
+    
     
     //CONSTRUCTOR SOLO USADO POR DAO
     public Promocion(int id,int tipo, Atraccion atraA, Atraccion atraB, int atraP, String porcentaje,String total) throws Exception{
@@ -106,6 +108,10 @@ public abstract class Promocion implements Comparable<PromocionInterface>, Promo
 		// TODO Auto-generated method stub
 		return tipo;
 	}
+	public int setTipo(int tipo) {
+		return this.tipo = tipo;
+	}
+
 
 	public int getAtraP() {
 		// TODO Auto-generated method stub
@@ -120,4 +126,14 @@ public abstract class Promocion implements Comparable<PromocionInterface>, Promo
 		// TODO Auto-generated method stub
 		return totalp;
 	}
+
+	@Override
+	public Object retornarPromocion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+	
 }
