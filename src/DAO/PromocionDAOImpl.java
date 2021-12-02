@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
+import modelos.Itinerario;
 import modelos.Promocion;
 import modelos.PromocionAbsoluta;
 import modelos.PromocionAxB;
@@ -141,9 +142,27 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public Promocion findByID(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			String sql = "SELECT * FROM Promocion WHERE id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultados = statement.executeQuery();
+
+			Promocion promocion = null;
+
+			if (resultados.next()) {
+				promocion = toPromociones(resultados);
+			}
+
+			return promocion;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
+
+		
+	
 
 	public List<Promocion> BuscarPromocion() throws Exception {
 		try {
