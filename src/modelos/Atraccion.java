@@ -86,8 +86,8 @@ public class Atraccion implements Comparable<Atraccion> {
 		return preferencia;
 	}
 
-	public void setTipo(ENUMTIPO tipo) {
-		this.preferencia = tipo;
+	public void setPreferencia(ENUMTIPO tipoFavorito) {
+		this.preferencia = tipoFavorito;
 	}
 
 	public int getPosicionX() {

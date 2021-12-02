@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import modelos.TipoAtraccion;
+import modelos.TipoDeAtraccion;
 import jdbc.ConnectionProvider;
 
 public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 
 	@Override
-	public int insert(TipoAtraccion t) {
+	public int insert(TipoDeAtraccion t) {
 		try {
 			String sql = "INSERT INTO TipoAtraccion (idReferencia, tipoDelObjeto, tipoFavorito) VALUES (?,?,?)";
 			Connection conn = ConnectionProvider.getConnection();
@@ -32,13 +32,13 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	}
 
 	@Override
-	public int update(TipoAtraccion t) {
+	public int update(TipoDeAtraccion t) {
 		// No se utiliza
 		return 0;
 	}
 
 	@Override
-	public int delete(TipoAtraccion t) {
+	public int delete(TipoDeAtraccion t) {
 		try {
 			String sql = "DELETE FROM TipoAtraccion WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -72,14 +72,14 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	}
 
 	@Override
-	public List<TipoAtraccion> findAll() {
+	public List<TipoDeAtraccion> findAll() {
 		try {
 			String sql = "SELECT * FROM TipoAtraccion";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
 
-			List<TipoAtraccion> atraccionesT = new LinkedList<TipoAtraccion>();
+			List<TipoDeAtraccion> atraccionesT = new LinkedList<TipoDeAtraccion>();
 			while (resultados.next()) {
 				atraccionesT.add(toTypeA(resultados));
 			}
@@ -91,7 +91,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	}
 
 	@Override
-	public TipoAtraccion findByID(int IdTipoAtraccion) {
+	public TipoDeAtraccion findByID(int IdTipoAtraccion) {
 		try {
 			String sql = "SELECT * FROM TipoAtraccion WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -99,7 +99,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 			statement.setInt(1, IdTipoAtraccion);
 			ResultSet resultados = statement.executeQuery();
 
-			TipoAtraccion atraccionT = null;
+			TipoDeAtraccion atraccionT = null;
 
 			if (resultados.next()) {
 				atraccionT = toTypeA(resultados);
@@ -112,7 +112,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	}
 
 	@Override
-	public TipoAtraccion findByReferenceAndType(int reference, String type) {
+	public TipoDeAtraccion findByReferenceAndType(int reference, String type) {
 		try {
 			String sql = "SELECT * FROM TipoAtraccion WHERE idReferencia = ? AND tipoDelObjeto = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -121,7 +121,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 			statement.setString(2, type);
 			ResultSet resultados = statement.executeQuery();
 
-			TipoAtraccion atraccionT = null;
+			TipoDeAtraccion atraccionT = null;
 
 			if (resultados.next()) {
 				atraccionT = toTypeA(resultados);
@@ -133,8 +133,8 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 		}
 	}
 
-	private TipoAtraccion toTypeA(ResultSet resultados) throws SQLException {
-		return new TipoAtraccion(resultados.getInt(1), resultados.getInt(2), resultados.getString(3),
+	private TipoDeAtraccion toTypeA(ResultSet resultados) throws SQLException {
+		return new TipoDeAtraccion(resultados.getInt(1), resultados.getInt(2), resultados.getString(3),
 				resultados.getString(4));
 
 	}
@@ -158,7 +158,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 	}
 
 	@Override
-	public List<TipoAtraccion> findOnlyObjectsOfOneType(String objctType) {
+	public List<TipoDeAtraccion> findOnlyObjectsOfOneType(String objctType) {
 		try {
 			String sql = "SELECT * FROM TipoAtraccion WHERE tipoDelObjeto = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -166,7 +166,7 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 			statement.setString(1, objctType);
 			ResultSet resultados = statement.executeQuery();
 
-			List<TipoAtraccion> atraccionesT = new LinkedList<TipoAtraccion>();
+			List<TipoDeAtraccion> atraccionesT = new LinkedList<TipoDeAtraccion>();
 			while (resultados.next()) {
 				atraccionesT.add(toTypeA(resultados));
 			}

@@ -4,14 +4,14 @@ import java.util.Objects;
 
 import modelosEnum.ENUMTIPO;
 
-public class TipoAtraccion {
+public class TipoDeAtraccion {
 	private int Id = 0;
 	private final int idReferencia;
 	private final String tipoDelObjeto;
 	private final String tipoFavorito;
 	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
 
-	public TipoAtraccion(int Id, int IdReferencia, String TipoDelObjeto, String TipoFavorito) {
+	public TipoDeAtraccion(int Id, int IdReferencia, String TipoDelObjeto, String TipoFavorito) {
 		this.Id = Id;
 		this.idReferencia = IdReferencia;
 		this.tipoDelObjeto = TipoDelObjeto;
@@ -19,7 +19,7 @@ public class TipoAtraccion {
 		asignarPreferencia(TipoFavorito);
 	}
 	
-	public TipoAtraccion(int IdReferencia, String TipoDelObjeto, String TipoFavorito) {
+	public TipoDeAtraccion(int IdReferencia, String TipoDelObjeto, String TipoFavorito) {
 		this.idReferencia = IdReferencia;
 		this.tipoDelObjeto = TipoDelObjeto;
 		this.tipoFavorito = TipoFavorito;
@@ -85,7 +85,7 @@ public class TipoAtraccion {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoAtraccion other = (TipoAtraccion) obj;
+		TipoDeAtraccion other = (TipoDeAtraccion) obj;
 		return Id == other.Id && idReferencia == other.idReferencia && preferencia == other.preferencia
 				&& Objects.equals(tipoDelObjeto, other.tipoDelObjeto)
 				&& Objects.equals(tipoFavorito, other.tipoFavorito);

@@ -2,11 +2,13 @@ package sistema;
 
 import modelos.Atraccion;
 import modelos.AtraccionSugerida;
+import modelos.Itinerario;
 import modelos.Promocion;
 import modelos.PromocionInterface;
 import modelos.PromocionAbsoluta;
 import modelos.PromocionAxB;
 import modelos.PromocionPorcentaje;
+import modelos.TipoDeAtraccion;
 import modelos.Usuario;
 import modelosCmp.AtraccionComparador;
 import modelosCmp.PromocionComparador;
@@ -21,7 +23,10 @@ import java.util.regex.Pattern;
 
 import DAO.AtraccionDAO;
 import DAO.DAOFactory;
+import DAO.GenericDAO;
+import DAO.ItinerarioDAO;
 import DAO.PromocionDAO;
+import DAO.TipoDeAtraccionDAO;
 import DAO.UsuarioDAO;
 
 public class Sistema {
@@ -44,20 +49,81 @@ public class Sistema {
 		return datoInt;
 	}
 
-	public void cargarUsuario() {
-		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
-		usuarios = usuarioDAO.findAll();
-	}
-
 	public void cargarAtracciones() {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+
 		atracciones = atraccionDAO.findAll();
+		for (Atraccion i : atracciones) {
+			actualizarAtraccionTDA(i);
+		}
 	}
 
 	public void cargarPromociones() {
 		PromocionDAO promocionesDAO = DAOFactory.getPromocionDAO();
+
 		promociones = promocionesDAO.findAll();
+		// faltaria modificar para que se le cambie el tipo de atraccion
 	}
+
+	public void cargarUsuarios() {
+		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
+
+		usuarios = usuarioDAO.findAll();
+		for (Usuario i : usuarios) {
+			actualizarUsuarioTDA(i);
+			actualizarUsuarioItinerario(i);
+		}
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+	private void actualizarAtraccionTDA(Atraccion atraccion) {
+		TipoDeAtraccionDAO tdaDAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion auxTDA = tdaDAO.findByReferenceAndType(atraccion.getId(), "Atraccion");
+		atraccion.setPreferencia(auxTDA.getPreferencia());
+	}
+
+	private void actualizarUsuarioTDA(Usuario usuario) {
+		TipoDeAtraccionDAO tdaDAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion auxTDA = tdaDAO.findByReferenceAndType(usuario.getId(), "Usuario");
+		usuario.setPreferencia(auxTDA.getPreferencia());
+	}
+
+	private void actualizarUsuarioItinerario(Usuario usuario) {
+		int IdDelUsuario = usuario.getId();
+		List<Atraccion> atraccionesDelUsuarios = buscarAtraccionesDelItinerario(IdDelUsuario);
+		usuario.agregarAtracciones(atraccionesDelUsuarios);
+	}
+
+	private List<Atraccion> buscarAtraccionesDelItinerario(int IdDelUsuario) {
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
+
+		List<Atraccion> atraccionesBuscadas = new ArrayList<>();
+		List<Itinerario> itinerariosBuscados = itinerarioDAO.findAllAttractionsOfUser(IdDelUsuario);
+
+		for (Itinerario i : itinerariosBuscados) {
+			int IdDeLaAtraccion = i.getIdAtraccion();
+			atraccionesBuscadas.add(atraccionDAO.findByID(IdDeLaAtraccion));
+		}
+		return atraccionesBuscadas;
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public List<Atraccion> getAtracciones() {
+		return atracciones;
+	}
+
+	public List<Promocion> getPromociones() {
+		return promociones;
+	}
+
+////////////////////////////////////////////////////////////////////////////////
 
 //----------------------------------------------------------------------------//
 
@@ -374,7 +440,7 @@ public class Sistema {
 
 	public static void main(String[] args) {
 		Sistema sistema = new Sistema();
-		sistema.cargarUsuario();
+		sistema.cargarUsuarios();
 		sistema.cargarAtracciones();
 		sistema.cargarPromociones();
 		System.out.println(usuarios);
@@ -409,15 +475,4 @@ public class Sistema {
 		}
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public List<Atraccion> getAtracciones() {
-		return atracciones;
-	}
-
-	public List<Promocion> getPromociones() {
-		return promociones;
-	}
 }

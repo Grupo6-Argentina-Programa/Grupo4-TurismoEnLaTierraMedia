@@ -3,7 +3,7 @@ package DAO;
 import java.util.List;
 import org.junit.Test;
 
-import modelos.TipoAtraccion;
+import modelos.TipoDeAtraccion;
 
 import static org.junit.Assert.*;
 
@@ -20,8 +20,8 @@ public class TipoAtraccionDAOTest {
 
 	@Test
 	public void buscarlosATodosTest() {
-		List<TipoAtraccion> todos = buscarlosAtodos();
-		for (TipoAtraccion i : todos) {
+		List<TipoDeAtraccion> todos = buscarlosAtodos();
+		for (TipoDeAtraccion i : todos) {
 			assertNotNull(i);
 		}
 	}
@@ -40,8 +40,8 @@ public class TipoAtraccionDAOTest {
 		int cantidadEsperada = 0;
 		int cantidadObtenida = contarAtodosLosObjetosDeUnMismoTipo("Atraccion");
 
-		List<TipoAtraccion> todos = buscarlosAtodos();
-		for (TipoAtraccion i : todos) {
+		List<TipoDeAtraccion> todos = buscarlosAtodos();
+		for (TipoDeAtraccion i : todos) {
 			String aux = i.getTipoDelObjeto();
 			if (aux.equals("Atraccion"))
 				cantidadEsperada++;
@@ -52,26 +52,26 @@ public class TipoAtraccionDAOTest {
 	@Test
 	public void buscarElPrimerIdTest() {
 		TipoDeAtraccionDAO tdaDAO = DAOFactory.getTipoDeAtraccionDAO();
-		TipoAtraccion objeto1 = tdaDAO.findByID(1);
+		TipoDeAtraccion objeto1 = tdaDAO.findByID(1);
 		assertNotNull(objeto1);
 	}
 
 	@Test
 	public void buscarPorTipoDeObjetoYsuIdReferenciaTest() {
 		TipoDeAtraccionDAO tdaDAO = DAOFactory.getTipoDeAtraccionDAO();
-		TipoAtraccion objeto1 = tdaDAO.findByReferenceAndType(1, "Atraccion");
+		TipoDeAtraccion objeto1 = tdaDAO.findByReferenceAndType(1, "Atraccion");
 		assertNotNull(objeto1);
 	}
 
 	@Test
 	public void buscarTodosLosObjetosDeUnMismoTipoTest() {
 		TipoDeAtraccionDAO tdaDAO = DAOFactory.getTipoDeAtraccionDAO();
-		List<TipoAtraccion> todasLasAtraaciones = tdaDAO.findOnlyObjectsOfOneType("Atraccion");
+		List<TipoDeAtraccion> todasLasAtraaciones = tdaDAO.findOnlyObjectsOfOneType("Atraccion");
 
 		int cantidadEsperada = contarAtodosLosObjetosDeUnMismoTipo("Atraccion");
 
 		int cantidadObtenida = 0;
-		for (TipoAtraccion i : todasLasAtraaciones) {
+		for (TipoDeAtraccion i : todasLasAtraaciones) {
 			cantidadObtenida++;
 		}
 		assertEquals(cantidadEsperada, cantidadObtenida);
@@ -85,7 +85,7 @@ public class TipoAtraccionDAOTest {
 		String tipoFavoritoEsperado = "Paisaje";
 		String tipoDelObjetoEsperado = "Atraccion";
 
-		TipoAtraccion tdaImportado = tdaDAO.findByReferenceAndType(1, "Atraccion");
+		TipoDeAtraccion tdaImportado = tdaDAO.findByReferenceAndType(1, "Atraccion");
 		int referenciaEObtenido = tdaImportado.getIdReferencia();
 		String tipoFavoritoObtenido = tdaImportado.getTipoFavorito();
 		String tipoDelObjetoObtenido = tdaImportado.getTipoDelObjeto();
@@ -107,7 +107,7 @@ public class TipoAtraccionDAOTest {
 		aux++;
 		System.out.println(aux);
 
-		TipoAtraccion objeto = new TipoAtraccion(aux, "Atraccion", "Aventura");
+		TipoDeAtraccion objeto = new TipoDeAtraccion(aux, "Atraccion", "Aventura");
 
 		tdaDAO.insert(objeto);
 		objeto = tdaDAO.findByReferenceAndType(aux, "Atraccion");
@@ -123,9 +123,9 @@ public class TipoAtraccionDAOTest {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-	private List<TipoAtraccion> buscarlosAtodos() {
+	private List<TipoDeAtraccion> buscarlosAtodos() {
 		TipoDeAtraccionDAO tdaDAO = DAOFactory.getTipoDeAtraccionDAO();
-		List<TipoAtraccion> todos = tdaDAO.findAll();
+		List<TipoDeAtraccion> todos = tdaDAO.findAll();
 		return todos;
 	}
 
@@ -137,9 +137,9 @@ public class TipoAtraccionDAOTest {
 
 	private int contarlosAtodosLosEncontrados() {
 		TipoDeAtraccionDAO tdaDAO = DAOFactory.getTipoDeAtraccionDAO();
-		List<TipoAtraccion> todos = tdaDAO.findAll();
+		List<TipoDeAtraccion> todos = tdaDAO.findAll();
 		int cantidad = 0;
-		for (TipoAtraccion i : todos)
+		for (TipoDeAtraccion i : todos)
 			cantidad++;
 		return cantidad;
 	}
@@ -152,9 +152,9 @@ public class TipoAtraccionDAOTest {
 
 	private int ultimaIdReferenceDeUnObjeto(String objeto) {
 		TipoDeAtraccionDAO tdaDAO = DAOFactory.getTipoDeAtraccionDAO();
-		List<TipoAtraccion> resultados = tdaDAO.findOnlyObjectsOfOneType(objeto);
+		List<TipoDeAtraccion> resultados = tdaDAO.findOnlyObjectsOfOneType(objeto);
 		int ultimoId = 0;
-		for (TipoAtraccion i : resultados) {
+		for (TipoDeAtraccion i : resultados) {
 			int id = i.getIdReferencia();
 			if (id > ultimoId) {
 				ultimoId = id;

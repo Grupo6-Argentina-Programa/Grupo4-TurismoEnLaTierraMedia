@@ -2,8 +2,6 @@ package modelos;
 
 import java.util.*;
 
-import DAO.DAOFactory;
-import DAO.UsuarioDAO;
 import modelosEnum.ENUMTIPO;
 
 public class Usuario {
@@ -151,7 +149,7 @@ public class Usuario {
 		return preferencia;
 	}
 
-	public void setTipoFavorito(ENUMTIPO tipoFavorito) {
+	public void setPreferencia(ENUMTIPO tipoFavorito) {
 		this.preferencia = tipoFavorito;
 	}
 	
