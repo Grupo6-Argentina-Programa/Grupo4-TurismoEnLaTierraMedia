@@ -1,139 +1,187 @@
 package modelos;
 
+import java.util.List;
 import java.util.Objects;
 
-public abstract class Promocion implements Comparable<PromocionInterface>, PromocionInterface{
-    private final Atraccion atraccionA;
-    private final Atraccion atraccionB;
-    private int id;
-    private int tipo;
-    private int atraP;
-    private String porcentaje;
-    
-	private String totalp;
-    
-    
-    //CONSTRUCTOR SOLO USADO POR DAO
-    public Promocion(int id,int tipo, Atraccion atraA, Atraccion atraB, int atraP, String porcentaje,String total) throws Exception{
-        if (atraA.getTipo() != atraB.getTipo()){
-            throw new Exception("Las atracciones no son del mismo tipo.");
-        }
-    	this.id = id;
-    	this.tipo = tipo;
-        this.atraccionA = atraA;
-        this.atraccionB = atraB;
-        this.atraP = atraP;
-		this.porcentaje = porcentaje;
-		this.totalp=total;
-    }
-    
-    /*public Promocion(Atraccion atraccionA, Atraccion atraccionB) throws Exception {
-        if (atraccionA.getTipo() != atraccionB.getTipo()){
-            throw new Exception("Las atracciones no son del mismo tipo.");
-        }
-        this.atraccionA = atraccionA;
-        this.atraccionB = atraccionB;
-    }*/
+import java.util.ArrayList;
+import modelosEnum.ENUMTIPO;
 
-    public Atraccion getAtraccionA() {
-		return atraccionA;
+public class Promocion {
+
+	private final int Id;
+	private final String nombre;
+	private final int tipoDePromocion;
+	private final int descuentoPorcentual;
+
+	private double costoTotal;
+	private double duracionTotal;
+
+	List<Atraccion> atracciones = new ArrayList<>();
+	private ENUMTIPO preferencia = ENUMTIPO.SinDefinir;
+
+	// TIPO DE PROMOCION 1)PAbsoluta, 2)PPorcentual, 3) PAxB
+
+	// EL ID SOLO SE UTILIZA POR DAO
+	public Promocion(int Id, String nombre, int tipoDePromocion, double costo, int descuentoPorcentual,
+			List<Atraccion> atracciones) {
+
+		this.Id = Id;
+		this.nombre = nombre;
+		this.tipoDePromocion = tipoDePromocion;
+		this.descuentoPorcentual = descuentoPorcentual;
+
+		this.atracciones = atracciones;
+		System.out.println(atracciones);
+
+		calcularDuracion();
+		buscarPreferencia();
+		calcularCosto(costo);
 	}
 
-	public Atraccion getAtraccionB() {
-		return atraccionB;
+	public Promocion() {
+		this.Id = 0;
+		this.tipoDePromocion = 0;
+		this.nombre = "SinNombre";
+		this.descuentoPorcentual = 0;
 	}
 
-    @Override
-    public String toString() {
-        return this.getClass().toString() + "[" +
-                "atraccionA: " + atraccionA +
-                ", atraccionB: " + atraccionB +
-                ']';
-    }
-
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Promocion promocion = (Promocion) o;
-        return Objects.equals(atraccionA, promocion.atraccionA) && Objects.equals(atraccionB, promocion.atraccionB);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(atraccionA, atraccionB);
-    }
-
-    @Override
-    public int compareTo(PromocionInterface promocion){
-        int totalPromocionA = 0;
-        if (this.getClass() == PromocionAbsoluta.class) {
-            totalPromocionA = (int) this.retornarPromocion();
-        }
-
-        if (this.getClass() == PromocionPorcentaje.class) {
-            totalPromocionA = (int) (this.getAtraccionA().getCosto() + this.getAtraccionB().getCosto() - ((this.getAtraccionA().getCosto() + this.getAtraccionB().getCosto()) * ((double)this.retornarPromocion() / 100)));
-        }
-
-        if (this.getClass() == PromocionAxB.class) {
-            totalPromocionA = (int) (this.getAtraccionA().getCosto() + this.getAtraccionB().getCosto());
-        }
-
-
-        int totalPromocionB = 0;
-        if (promocion.getClass() == PromocionAbsoluta.class) {
-            totalPromocionB = (int) promocion.retornarPromocion();
-        }
-
-        if (promocion.getClass() == PromocionPorcentaje.class) {
-            totalPromocionB = (int) (promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto() - ((promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto()) * ((double)promocion.retornarPromocion() / 100)));
-        }
-
-        if (promocion.getClass() == PromocionAxB.class) {
-            totalPromocionB = (int) (promocion.getAtraccionA().getCosto() + promocion.getAtraccionB().getCosto());
-        }
-
-        if (totalPromocionA == totalPromocionB){
-            return Double.compare(this.getAtraccionA().getDuracion() + this.getAtraccionB().getDuracion(), promocion.getAtraccionA().getDuracion() + promocion.getAtraccionB().getDuracion());
-        }
-        return Integer.compare(totalPromocionA, totalPromocionB);
-    }
+////////////////////////////////////////////////////////////////////////////////
 
 	public int getId() {
-		// TODO Auto-generated method stub
-		return id;
+		return Id;
 	}
 
-	public int getTipo() {
-		// TODO Auto-generated method stub
-		return tipo;
-	}
-	public int setTipo(int tipo) {
-		return this.tipo = tipo;
+	public String getNombre() {
+		return nombre;
 	}
 
-
-	public int getAtraP() {
-		// TODO Auto-generated method stub
-		return atraP;
+	public int getTipoDePromocion() {
+		return tipoDePromocion;
 	}
 
-	public String getPorcentaje() {
-		// TODO Auto-generated method stub
-		return porcentaje;
+	public int getDescuentoPorcentual() {
+		return descuentoPorcentual;
 	}
-	public String getTotal() {
-		// TODO Auto-generated method stub
-		return totalp;
+
+	public double getCosto() {
+		return costoTotal;
+	}
+
+	public void setCosto(double costo) {
+		this.costoTotal = costo;
+	}
+
+	public double getDuracion() {
+		return duracionTotal;
+	}
+
+	public void setDuracion(double duracion) {
+		this.duracionTotal = duracion;
+	}
+
+	public List<Atraccion> getAtracciones() {
+		return atracciones;
+	}
+
+	public ENUMTIPO getPreferencia() {
+		return preferencia;
+	}
+
+	public void setPreferencia(ENUMTIPO preferencia) {
+		this.preferencia = preferencia;
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+	public void agregarAtracciones(List<Atraccion> atracciones) {
+		this.atracciones = atracciones;
+		calcularDuracion();
+		buscarPreferencia();
+		calcularCosto(costoTotal);
+	}
+
+	private void calcularCosto(double costo) {
+
+		double costoTotal = 0;
+		double bonificacion = 0;
+
+		switch (this.tipoDePromocion) {
+		case 1:
+			this.costoTotal = costo;
+			break;
+
+		case 2:
+			for (Atraccion i : this.atracciones) {
+				costoTotal += i.getCosto();
+			}
+			bonificacion = (this.descuentoPorcentual * costoTotal) / 100;
+			this.costoTotal = costoTotal - bonificacion;
+			break;
+
+		case 3:
+			for (Atraccion i : this.atracciones) {
+				costoTotal += i.getCosto();
+				bonificacion = i.getCosto();
+			}
+			this.costoTotal = costoTotal - bonificacion;
+			break;
+
+		default:
+			throw new Error("Entrada Invalida.");
+		}
+	}
+
+	private void calcularDuracion() {
+		double duracionTotal = 0;
+		for (Atraccion atraccion : this.atracciones) {
+			duracionTotal += atraccion.getDuracion();
+		}
+		this.duracionTotal = duracionTotal;
+	}
+
+	private void buscarPreferencia() {
+		boolean first = true;
+		for (Atraccion atraccion : this.atracciones) {
+			if (first) {
+				this.preferencia = atraccion.getTipo();
+				first = false;
+			}
+			if (this.preferencia != atraccion.getTipo()) {
+				throw new Error("Los Tipos De las Atracciones no coinciden");
+			}
+		}
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(Id, atracciones, costoTotal, descuentoPorcentual, duracionTotal, nombre, preferencia,
+				tipoDePromocion);
 	}
 
 	@Override
-	public Object retornarPromocion() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Promocion other = (Promocion) obj;
+		return Id == other.Id && Objects.equals(atracciones, other.atracciones)
+				&& Double.doubleToLongBits(costoTotal) == Double.doubleToLongBits(other.costoTotal)
+				&& descuentoPorcentual == other.descuentoPorcentual
+				&& Double.doubleToLongBits(duracionTotal) == Double.doubleToLongBits(other.duracionTotal)
+				&& Objects.equals(nombre, other.nombre) && preferencia == other.preferencia
+				&& tipoDePromocion == other.tipoDePromocion;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Promocion2 [Id=" + Id + ", nombre=" + nombre + ", tipoDePromocion=" + tipoDePromocion
+				+ ", descuentoPorcentual=" + descuentoPorcentual + ", costo=" + costoTotal + ", duracion=" + duracionTotal
+				+ ", atracciones=" + atracciones + ", preferencia=" + preferencia + "]";
+	}
 
-	
 }

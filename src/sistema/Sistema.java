@@ -3,7 +3,7 @@ package sistema;
 import modelos.Atraccion;
 import modelos.AtraccionSugerida;
 import modelos.Itinerario;
-import modelos.Promocion;
+import modelos.PromocionDepurar;
 import modelos.PromocionInterface;
 import modelos.PromocionAbsoluta;
 import modelos.PromocionAxB;
@@ -32,7 +32,7 @@ import DAO.UsuarioDAO;
 public class Sistema {
 	private static List<Usuario> usuarios;
 	private static List<Atraccion> atracciones;
-	private static List<Promocion> promociones;
+	private static List<PromocionDepurar> promociones;
 	private static Object swicth;
 
 	@SuppressWarnings("resource")
@@ -116,7 +116,7 @@ public class Sistema {
 		return atracciones;
 	}
 
-	public List<Promocion> getPromociones() {
+	public List<PromocionDepurar> getPromociones() {
 		return promociones;
 	}
 
@@ -225,7 +225,7 @@ public class Sistema {
 		List<Atraccion> listaAtracciones = new ArrayList<>();
 		int valorTemporal;
 
-		for (Promocion promocion : promociones) {
+		for (PromocionDepurar promocion : promociones) {
 			if (promocion.getAtraccionA().hayEspacio() && promocion.getAtraccionB().hayEspacio()) {
 				int costoActual = 0;
 				double tiempoActual = 0;
@@ -282,7 +282,7 @@ public class Sistema {
 
 		// Ofrezco promociones pero que no son del mismo tipo.
 
-		for (Promocion promocion : promociones) {
+		for (PromocionDepurar promocion : promociones) {
 			int costoActual = 0;
 			double tiempoActual = 0;
 

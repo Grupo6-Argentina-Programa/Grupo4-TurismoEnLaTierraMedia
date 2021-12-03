@@ -1,6 +1,6 @@
 package modelos;
 
-public class PromocionAbsoluta extends Promocion implements PromocionInterface {
+public class PromocionAbsoluta extends PromocionDepurar implements PromocionInterface {
 	private final String precioFinal;
 
 	public PromocionAbsoluta(int id, int tipo, Atraccion atraccionA, Atraccion atraccionB, int atraccionRegalo,

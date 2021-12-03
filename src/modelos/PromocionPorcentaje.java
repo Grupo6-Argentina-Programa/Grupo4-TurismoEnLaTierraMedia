@@ -1,6 +1,6 @@
 package modelos;
 
-public class PromocionPorcentaje extends Promocion implements PromocionInterface {
+public class PromocionPorcentaje extends PromocionDepurar implements PromocionInterface {
     private final String porcentaje;
 
     public PromocionPorcentaje(int id,int tipo, Atraccion atraA, Atraccion atraB, int atraP, String porcentaje,String total) throws Exception {

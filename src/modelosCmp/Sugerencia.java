@@ -2,7 +2,7 @@ package modelosCmp;
 
 import modelos.Usuario;
 import modelos.Atraccion;
-import modelos.Promocion;
+import modelos.PromocionDepurar;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -11,9 +11,9 @@ public class Sugerencia {
 
 	private final Usuario usuario;
 	private List<Atraccion> atracciones = new ArrayList<>();
-	private List<Promocion> promociones = new ArrayList<>();
+	private List<PromocionDepurar> promociones = new ArrayList<>();
 
-	public Sugerencia(Usuario usuario, List<Atraccion> atracciones, List<Promocion> promociones) {
+	public Sugerencia(Usuario usuario, List<Atraccion> atracciones, List<PromocionDepurar> promociones) {
 		this.usuario = usuario;
 		this.atracciones = atracciones;
 		this.promociones = promociones;
@@ -53,7 +53,7 @@ public class Sugerencia {
 	private int cantidadDePromociones() {
 		int cantidad = 0;
 		for (@SuppressWarnings("unused")
-		Promocion i : promociones) {
+		PromocionDepurar i : promociones) {
 			cantidad++;
 		}
 		return cantidad;

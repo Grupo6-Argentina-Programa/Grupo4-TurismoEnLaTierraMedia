@@ -138,6 +138,8 @@ public class TipoDeAtraccionDAOImpl implements TipoDeAtraccionDAO {
 				resultados.getString(4));
 
 	}
+	
+////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public int countOnlyObjectsOfOneType(String objctType) {

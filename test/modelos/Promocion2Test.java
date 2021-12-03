@@ -13,7 +13,7 @@ public class Promocion2Test {
 
 	@Test
 	public void creacionTest() {
-		Promocion2 promo1 = new Promocion2();
+		Promocion promo1 = new Promocion();
 		assertNotNull(promo1);
 
 		Atraccion atraccion1 = new Atraccion(1, "Atraccion1", 20, 2, 1, 20, 0, 0);
@@ -24,7 +24,7 @@ public class Promocion2Test {
 		atracciones.add(atraccion1);
 		atracciones.add(atraccion2);
 
-		Promocion2 promo2 = new Promocion2(2, "promo2", 1, 30, 0, atracciones);
+		Promocion promo2 = new Promocion(2, "promo2", 1, 30, 0, atracciones);
 		assertNotNull(promo2);
 	}
 
@@ -42,7 +42,7 @@ public class Promocion2Test {
 		atracciones.add(atraccion1);
 		atracciones.add(atraccion2);
 
-		Promocion2 promoA = new Promocion2(99, "promoAbsoluta", 1, 30, 0, atracciones);
+		Promocion promoA = new Promocion(99, "promoAbsoluta", 1, 30, 0, atracciones);
 		assertNotNull(promoA);
 
 		int tipoDePormocionEsperado = 1;
@@ -80,7 +80,7 @@ public class Promocion2Test {
 		atracciones.add(atraccion1);
 		atracciones.add(atraccion2);
 
-		Promocion2 promoP = new Promocion2(99, "promoPorcentual", 2, 0, 5, atracciones);
+		Promocion promoP = new Promocion(99, "promoPorcentual", 2, 0, 5, atracciones);
 		assertNotNull(promoP);
 
 		int tipoDePormocionEsperado = 2;
@@ -122,7 +122,7 @@ public class Promocion2Test {
 		atracciones.add(atraccion2);
 		atracciones.add(atraccion3);
 
-		Promocion2 promoP = new Promocion2(99, "promoAB", 3, 0, 0, atracciones);
+		Promocion promoP = new Promocion(99, "promoAB", 3, 0, 0, atracciones);
 		assertNotNull(promoP);
 
 		int tipoDePormocionEsperado = 3;
