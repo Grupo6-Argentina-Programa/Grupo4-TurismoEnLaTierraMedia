@@ -51,7 +51,6 @@ public class Sistema {
 
 	public void cargarAtracciones() {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-
 		atracciones = atraccionDAO.findAll();
 		for (Atraccion i : atracciones) {
 			actualizarAtraccionTDA(i);
@@ -60,14 +59,12 @@ public class Sistema {
 
 	public void cargarPromociones() {
 		PromocionDAO promocionesDAO = DAOFactory.getPromocionDAO();
-
 		promociones = promocionesDAO.findAll();
 		// faltaria modificar para que se le cambie el tipo de atraccion
 	}
 
 	public void cargarUsuarios() {
 		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
-
 		usuarios = usuarioDAO.findAll();
 		for (Usuario i : usuarios) {
 			actualizarUsuarioTDA(i);

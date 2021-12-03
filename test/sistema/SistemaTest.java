@@ -4,17 +4,30 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.Before;
 import org.junit.Test;
 
+import modelos.Atraccion;
 import modelos.Usuario;
 
 public class SistemaTest {
 
-	@Before
-	public void setUp() throws Exception {
+	@Test
+	public void cargarAtraccionesTest() {
+		Sistema sistema = new Sistema();
+		List<Atraccion> atracciones = new ArrayList<>();
 
+		int cantidadDeAtraccionesInicial = cantidadDeAtracciones(atracciones);
+
+		sistema.cargarAtracciones();
+		atracciones = sistema.getAtracciones();
+
+		int cantidadDeAtraccionesActual = cantidadDeAtracciones(atracciones);
+		assertNotEquals(cantidadDeAtraccionesInicial, cantidadDeAtraccionesActual);
+
+		for (Atraccion i : atracciones) {
+			assertNotNull(i);
+			System.out.println(i.toString());
+		}
 	}
 
 	@Test
@@ -37,6 +50,14 @@ public class SistemaTest {
 	}
 
 ////////////////////////////////////////////////////////////////////////////////
+
+	private int cantidadDeAtracciones(List<Atraccion> atracciones) {
+		int cantidad = 0;
+		for (Atraccion i : atracciones) {
+			cantidad++;
+		}
+		return cantidad;
+	}
 
 	private int cantidadDeUsuarios(List<Usuario> usuarios) {
 		int cantidad = 0;

@@ -43,25 +43,12 @@ public class Atraccion implements Comparable<Atraccion> {
 		this.posicionY = posicionY;
 	}
 
-	// DEPURAR
-	public Atraccion(String nombre, int costo, double tiempo, int cupo, ENUMTIPO tipo) {
-		this.id = 0;
-		this.nombre = nombre;
-		this.costo = costo;
-		this.duracion = tiempo;
-		this.cupoMaximo = cupo;
-		this.preferencia = tipo;
-		this.posicionX = 0;
-		this.posicionY = 0;
-		cupoActual = 0;
-	}
-
 ////////////////////////////////////////////////////////////////////////////////
 
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setID(int id) {
 		this.id = id;
 	}
