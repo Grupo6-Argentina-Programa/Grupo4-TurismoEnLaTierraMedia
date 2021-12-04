@@ -31,7 +31,6 @@ public class Promocion {
 		this.descuentoPorcentual = descuentoPorcentual;
 
 		this.atracciones = atracciones;
-		System.out.println(atracciones);
 
 		calcularDuracion();
 		buscarPreferencia();
@@ -180,8 +179,8 @@ public class Promocion {
 	@Override
 	public String toString() {
 		return "Promocion2 [Id=" + Id + ", nombre=" + nombre + ", tipoDePromocion=" + tipoDePromocion
-				+ ", descuentoPorcentual=" + descuentoPorcentual + ", costo=" + costoTotal + ", duracion=" + duracionTotal
-				+ ", atracciones=" + atracciones + ", preferencia=" + preferencia + "]";
+				+ ", descuentoPorcentual=" + descuentoPorcentual + ", costo=" + costoTotal + ", duracion="
+				+ duracionTotal + ", atracciones=" + atracciones + ", preferencia=" + preferencia + "]";
 	}
 
 }

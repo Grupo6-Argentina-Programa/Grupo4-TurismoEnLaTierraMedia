@@ -3,6 +3,7 @@ package sistema;
 import modelos.Atraccion;
 import modelos.AtraccionSugerida;
 import modelos.Itinerario;
+import modelos.Promocion;
 import modelos.PromocionDepurar;
 import modelos.PromocionInterface;
 import modelos.PromocionAbsoluta;
@@ -32,7 +33,7 @@ import DAO.UsuarioDAO;
 public class Sistema {
 	private static List<Usuario> usuarios;
 	private static List<Atraccion> atracciones;
-	private static List<PromocionDepurar> promociones;
+	private static List<Promocion> promociones;
 	private static Object swicth;
 
 	@SuppressWarnings("resource")
@@ -116,7 +117,7 @@ public class Sistema {
 		return atracciones;
 	}
 
-	public List<PromocionDepurar> getPromociones() {
+	public List<Promocion> getPromociones() {
 		return promociones;
 	}
 

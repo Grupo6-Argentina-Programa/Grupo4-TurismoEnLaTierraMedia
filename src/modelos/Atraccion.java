@@ -136,4 +136,11 @@ public class Atraccion implements Comparable<Atraccion> {
 		return Double.compare(this.costo, atraccion.getCosto());
 	}
 
+	@Override
+	public String toString() {
+		return "Atraccion [id=" + id + ", nombre=" + nombre + ", costo=" + costo + ", duracion=" + duracion
+				+ ", cupoActual=" + cupoActual + ", cupoMaximo=" + cupoMaximo + ", posicionX=" + posicionX
+				+ ", posicionY=" + posicionY + ", preferencia=" + preferencia + "]";
+	}
+
 }
