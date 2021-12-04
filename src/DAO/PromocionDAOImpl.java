@@ -10,13 +10,7 @@ import java.util.List;
 
 import jdbc.ConnectionProvider;
 import modelos.Atraccion;
-import modelos.Itinerario;
-import modelos.PromocionDepurar;
 import modelos.Promocion;
-import modelos.PromocionAbsoluta;
-import modelos.PromocionAxB;
-import modelos.PromocionPorcentaje;
-import modelos.TipoDeAtraccion;
 
 public class PromocionDAOImpl implements PromocionDAO {
 

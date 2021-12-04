@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.ArrayList;
 import modelosEnum.ENUMTIPO;
 
-public class Promocion {
+public class Promocion implements Comparable<Promocion> {
 
 	private final int Id;
 	private final String nombre;
@@ -181,6 +181,14 @@ public class Promocion {
 		return "Promocion2 [Id=" + Id + ", nombre=" + nombre + ", tipoDePromocion=" + tipoDePromocion
 				+ ", descuentoPorcentual=" + descuentoPorcentual + ", costo=" + costoTotal + ", duracion="
 				+ duracionTotal + ", atracciones=" + atracciones + ", preferencia=" + preferencia + "]";
+	}
+
+	@Override
+	public int compareTo(Promocion o) {
+		if (this.costoTotal == o.getCosto()) {
+			return Double.compare(this.duracionTotal, o.getDuracion());
+		}
+		return Double.compare(this.costoTotal, o.getCosto());
 	}
 
 }

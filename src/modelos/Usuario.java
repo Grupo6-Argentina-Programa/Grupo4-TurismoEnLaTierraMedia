@@ -152,7 +152,7 @@ public class Usuario {
 	public void setPreferencia(ENUMTIPO tipoFavorito) {
 		this.preferencia = tipoFavorito;
 	}
-	
+
 	public List<Atraccion> getAtracciones() {
 		return atracciones;
 	}
@@ -169,6 +169,7 @@ public class Usuario {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private static String ingresarDatoStr() {
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -177,48 +178,34 @@ public class Usuario {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
-	public void recibirSugerencia(AtraccionSugerida sugerencia) {
-		System.out.println("\n\nSe ha hecho la siguiente sugerencia:\n");
-		if (sugerencia.getPromocion() == null) {
-			System.out.println("La atraccion:\n" + sugerencia.getAtracciones()[0] + "\nTotal a pagar: "
-					+ sugerencia.getTotal() + " monedas");
-		} else {
-			StringBuilder concatenado = new StringBuilder();
-			for (Atraccion atraccion : sugerencia.getAtracciones()) {
-				concatenado.append(atraccion).append("\n");
-			}
-			System.out.println(
-					"La promocion es de tipo: " + sugerencia.getPromocion().getClass().toString().split("\\.")[1]
-							+ "\nLas atracciones:\n" + concatenado + "\nTotal a pagar: " + sugerencia.getTotal()
-							+ " monedas." + "\nSe ahorra " + calcularDifereciaMonedas(sugerencia) + " monedas.");
-		}
-		String aceptar;
-		do {
-			System.out.println(
-					"\n¿Desea aceptar la sugerencia?\nIngrese \"Si\" para aceptar, de lo contrario ingrese \"No\" para rechazarlo.");
-			aceptar = ingresarDatoStr();
-			// aceptar = in.nextLine();
-		} while (!aceptar.equalsIgnoreCase("Si") && !aceptar.equalsIgnoreCase("No"));
-		if (aceptar.equalsIgnoreCase("Si")) {
-			dineroDisponible -= sugerencia.getTotal();
-			for (Atraccion atraccion : sugerencia.getAtracciones()) {
-				tiempoDisponible -= atraccion.getDuracion();
-				atraccion.ocuparUnLugar();
-			}
-			costoTotal += sugerencia.getTotal();
-			Collections.addAll(atracciones, sugerencia.getAtracciones());
-		}
-	}
-
-	private int calcularDifereciaMonedas(AtraccionSugerida sugerencia) {
-		int valorOriginal = 0;
-		for (int i = 0; i < sugerencia.getAtracciones().length; i++) {
-			valorOriginal += sugerencia.getAtracciones()[i].getCosto();
-		}
-		return valorOriginal - sugerencia.getTotal();
-	}
+	/*
+	 * public void recibirSugerencia(AtraccionSugerida sugerencia) {
+	 * System.out.println("\n\nSe ha hecho la siguiente sugerencia:\n"); if
+	 * (sugerencia.getPromocion() == null) { System.out.println("La atraccion:\n" +
+	 * sugerencia.getAtracciones()[0] + "\nTotal a pagar: " + sugerencia.getTotal()
+	 * + " monedas"); } else { StringBuilder concatenado = new StringBuilder(); for
+	 * (Atraccion atraccion : sugerencia.getAtracciones()) {
+	 * concatenado.append(atraccion).append("\n"); } System.out.println(
+	 * "La promocion es de tipo: " +
+	 * sugerencia.getPromocion().getClass().toString().split("\\.")[1] +
+	 * "\nLas atracciones:\n" + concatenado + "\nTotal a pagar: " +
+	 * sugerencia.getTotal() + " monedas." + "\nSe ahorra " +
+	 * calcularDifereciaMonedas(sugerencia) + " monedas."); } String aceptar; do {
+	 * System.out.println(
+	 * "\n¿Desea aceptar la sugerencia?\nIngrese \"Si\" para aceptar, de lo contrario ingrese \"No\" para rechazarlo."
+	 * ); aceptar = ingresarDatoStr(); // aceptar = in.nextLine(); } while
+	 * (!aceptar.equalsIgnoreCase("Si") && !aceptar.equalsIgnoreCase("No")); if
+	 * (aceptar.equalsIgnoreCase("Si")) { dineroDisponible -= sugerencia.getTotal();
+	 * for (Atraccion atraccion : sugerencia.getAtracciones()) { tiempoDisponible -=
+	 * atraccion.getDuracion(); atraccion.ocuparUnLugar(); } costoTotal +=
+	 * sugerencia.getTotal(); Collections.addAll(atracciones,
+	 * sugerencia.getAtracciones()); } }
+	 * 
+	 * private int calcularDifereciaMonedas(AtraccionSugerida sugerencia) { int
+	 * valorOriginal = 0; for (int i = 0; i < sugerencia.getAtracciones().length;
+	 * i++) { valorOriginal += sugerencia.getAtracciones()[i].getCosto(); } return
+	 * valorOriginal - sugerencia.getTotal(); }
+	 */
 
 	@Override
 	public boolean equals(Object o) {
@@ -240,7 +227,6 @@ public class Usuario {
 		return "Usuario [DNI=" + id + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", dineroInicial="
 				+ dineroInicial + ", dineroDisponible=" + dineroDisponible + ", tiempoInicial=" + tiempoInicial
 				+ ", tiempoDisponible=" + tiempoDisponible + ", posicionX=" + posicionX + ", posicionY=" + posicionY
-				+ ", costoTotal=" + costoTotal + ", tipoFavorito=" + preferencia + ", atracciones=" + atracciones
-				+ "]";
+				+ ", costoTotal=" + costoTotal + ", tipoFavorito=" + preferencia + ", atracciones=" + atracciones + "]";
 	}
 }
